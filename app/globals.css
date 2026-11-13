@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+/*
+ * Tailwind theme: maps the semantic tokens from styles/tokens.css onto
+ * utilities (bg-surface, text-ink, text-accent-text, rounded-card ...).
+ * Do not put raw colours here; change them in tokens.css.
+ */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-sunken: var(--surface-sunken);
+  --color-ink: var(--ink);
+  --color-strong: var(--ink-strong);
+  --color-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-lime: var(--brand-lime);
+
+  --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, "SFMono-Regular", monospace;
+
+  --radius-card: var(--shape-card);
+  --radius-media: var(--shape-media);
+  --radius-control: var(--shape-control);
+
+  --shadow-card: var(--elevation-card);
+  --ease-brand: var(--motion-ease-out);
+
+  --animate-marquee: marquee var(--marquee-duration) linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--ink-strong);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Lenis smooth scrolling */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Centred page column with the shared gutter. */
+@utility container-page {
+  margin-inline: auto;
+  max-width: var(--container-max);
+  padding-inline: var(--container-gutter);
+  width: 100%;
+}
+
+/* Vertical rhythm shared by every section. */
+@utility section-y {
+  padding-block: var(--space-section);
+}
+
+/* A dashed "running stitch" line in the current colour. */
+@utility stitch-x {
+  background-image: repeating-linear-gradient(90deg, currentColor 0 10px, transparent 10px 18px);
+  height: 2px;
+}
+
+@utility stitch-y {
+  background-image: repeating-linear-gradient(180deg, currentColor 0 10px, transparent 10px 18px);
+  width: 2px;
+}
+
+/* Link underline that sews in from the left on hover/focus. */
+@utility link-stitch {
+  position: relative;
+
+  &::after {
+    background-image: repeating-linear-gradient(90deg, currentColor 0 6px, transparent 6px 10px);
+    bottom: -0.2em;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--motion-ease-out);
+    width: 100%;
+  }
+
+  &:hover::after,
+  &:focus-visible::after,
+  &[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Faint pixel grid used behind heroes and placeholders. */
+@utility pixel-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@utility bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
+
+@utility bg-spectrum {
+  background-image: var(--gradient-spectrum);
+}
+
+@utility bg-wash-gradient {
+  background-image: var(--gradient-wash);
+}
