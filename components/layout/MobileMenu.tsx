@@ -33,7 +33,8 @@ export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
       {open ? (
         <motion.div
           id={id}
-          className="fixed inset-x-0 top-(--header-height) bottom-0 overflow-y-auto bg-surface lg:hidden"
+          data-surface="light"
+          className="fixed inset-x-0 top-(--header-height) bottom-0 z-40 overflow-y-auto lg:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: DURATION.fast } }}
           exit={{ opacity: 0, transition: { duration: DURATION.fast, ease: EASE.inOut } }}
