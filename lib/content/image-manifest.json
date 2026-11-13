@@ -1,0 +1,296 @@
+{
+  "home-slide-embroidery": {
+    "remote": "1226-e39189a8/Mask group (16).webp",
+    "file": "home-slide-embroidery.webp",
+    "width": 724,
+    "height": 780,
+    "alt": "Spools of embroidery thread"
+  },
+  "home-slide-coloreel": {
+    "remote": "1802-c36407a5/Mask group (27).webp",
+    "file": "home-slide-coloreel.webp",
+    "width": 723,
+    "height": 780,
+    "alt": "Coloreel embroidery and digitizing services"
+  },
+  "home-slide-vector": {
+    "remote": "1804-f5ffb8ab/Mask group (28).webp",
+    "file": "home-slide-vector.webp",
+    "width": 723,
+    "height": 780,
+    "alt": "Vector art conversion"
+  },
+  "home-intro": {
+    "remote": "1224-f7a62d82/Mask group (17).webp",
+    "file": "home-intro.webp",
+    "width": 690,
+    "height": 795,
+    "alt": "Logo digitizing on screen at BitsNPixs"
+  },
+  "service-embroidery-card": {
+    "remote": "1233-6f845e4a/Mask group (18).webp",
+    "file": "service-embroidery-card.webp",
+    "width": 486,
+    "height": 275,
+    "alt": "Embroidery digitizing"
+  },
+  "service-vector-card": {
+    "remote": "1947-b803c498/vector-artwork-conversion.webp",
+    "file": "service-vector-card.webp",
+    "width": 487,
+    "height": 275,
+    "alt": "Vector artwork conversion"
+  },
+  "service-coloreel-card": {
+    "remote": "1231-b08d02cd/Mask group (20).webp",
+    "file": "service-coloreel-card.webp",
+    "width": 487,
+    "height": 275,
+    "alt": "Coloreel embroidery digitizing"
+  },
+  "about-team": {
+    "remote": "1948-1fc4ac1d/Mask group - 2025-09-18T093904.909.webp",
+    "file": "about-team.webp",
+    "width": 694,
+    "height": 801,
+    "alt": "Expert digitizers at BitsNPixs"
+  },
+  "embroidery-hero": {
+    "remote": "1328-9e17ac34/Mask group - 2025-09-18T104835.405.webp",
+    "file": "embroidery-hero.webp",
+    "width": 690,
+    "height": 796,
+    "alt": "Embroidery digitizing service"
+  },
+  "embroidery-files": {
+    "remote": "1331-34baf07e/Mask group - 2025-09-18T112926.597.webp",
+    "file": "embroidery-files.webp",
+    "width": 690,
+    "height": 796,
+    "alt": "Embroidery file digitizing"
+  },
+  "coloreel-hero": {
+    "remote": "1371-936d3be3/Mask group - 2025-09-19T105245.803.webp",
+    "file": "coloreel-hero.webp",
+    "width": 690,
+    "height": 796,
+    "alt": "Coloreel thread colouring unit"
+  },
+  "coloreel-works": {
+    "remote": "1375-159c4e08/Mask group - 2025-09-19T105604.341.webp",
+    "file": "coloreel-works.webp",
+    "width": 690,
+    "height": 796,
+    "alt": "Coloreel embroidery works"
+  },
+  "coloreel-working": {
+    "remote": "1378-05bfa0a9/Mask group - 2025-09-19T105645.816.webp",
+    "file": "coloreel-working.webp",
+    "width": 690,
+    "height": 254,
+    "alt": "Coloreel embroidery in production"
+  },
+  "coloreel-multicolor": {
+    "remote": "1381-8279e555/Mask group - 2025-09-19T105937.903.webp",
+    "file": "coloreel-multicolor.webp",
+    "width": 690,
+    "height": 796,
+    "alt": "Coloreel multi-colour embroidery"
+  },
+  "vector-hero": {
+    "remote": "1355-393039d3/Mask group - 2025-09-19T092821.082.webp",
+    "file": "vector-hero.webp",
+    "width": 690,
+    "height": 796,
+    "alt": "Vector art conversion"
+  },
+  "software-hero": {
+    "remote": "1611-14673ff6/Software Development.webp",
+    "file": "software-hero.webp",
+    "width": 690,
+    "height": 690,
+    "alt": "Software development"
+  },
+  "career-workplace": {
+    "remote": "1385-18795cb7/Mask group - 2025-09-19T110836.505.webp",
+    "file": "career-workplace.webp",
+    "width": 568,
+    "height": 737,
+    "alt": "BitsNPixs working infrastructure"
+  },
+  "contact-office": {
+    "remote": "1400-c575aa90/Mask group - 2025-09-19T115357.971.webp",
+    "file": "contact-office.webp",
+    "width": 730,
+    "height": 624,
+    "alt": "BitsNPixs Technologies office"
+  },
+  "portfolio-coloreel-1-before": {
+    "remote": "1893-ebbfcfa0/coloreel-emb1.webp",
+    "file": "portfolio-coloreel-1-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Coloreel embroidery sample 1: original artwork"
+  },
+  "portfolio-coloreel-1-after": {
+    "remote": "1888-4de96b2f/coloreel-emb01.webp",
+    "file": "portfolio-coloreel-1-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Coloreel embroidery sample 1: stitched result"
+  },
+  "portfolio-coloreel-2-before": {
+    "remote": "1251-1815acb2/1-before.webp",
+    "file": "portfolio-coloreel-2-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Coloreel embroidery sample 2: original artwork"
+  },
+  "portfolio-coloreel-2-after": {
+    "remote": "1249-09b5e550/1-after.webp",
+    "file": "portfolio-coloreel-2-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Coloreel embroidery sample 2: stitched result"
+  },
+  "portfolio-coloreel-3-before": {
+    "remote": "1250-700919e0/2-before.webp",
+    "file": "portfolio-coloreel-3-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Coloreel embroidery sample 3: original artwork"
+  },
+  "portfolio-coloreel-3-after": {
+    "remote": "1248-cb37118d/2-after.webp",
+    "file": "portfolio-coloreel-3-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Coloreel embroidery sample 3: stitched result"
+  },
+  "portfolio-embroidery-1-before": {
+    "remote": "2710-39a7bb02/emb-new-01-before.webp",
+    "file": "portfolio-embroidery-1-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 1: original artwork"
+  },
+  "portfolio-embroidery-1-after": {
+    "remote": "2729-cd57cc41/emb-new-01-after.webp",
+    "file": "portfolio-embroidery-1-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 1: stitched result"
+  },
+  "portfolio-embroidery-2-before": {
+    "remote": "2722-b9d31763/emb-new-04-before.webp",
+    "file": "portfolio-embroidery-2-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 2: original artwork"
+  },
+  "portfolio-embroidery-2-after": {
+    "remote": "2730-03969528/emb-new-04-after.webp",
+    "file": "portfolio-embroidery-2-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 2: stitched result"
+  },
+  "portfolio-embroidery-3-before": {
+    "remote": "2714-631e1c1e/emb-new-08-before.webp",
+    "file": "portfolio-embroidery-3-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 3: original artwork"
+  },
+  "portfolio-embroidery-3-after": {
+    "remote": "2723-43491576/emb-new-08-after.webp",
+    "file": "portfolio-embroidery-3-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 3: stitched result"
+  },
+  "portfolio-embroidery-4-before": {
+    "remote": "2720-2ffc4ebd/emb-new-03-before.webp",
+    "file": "portfolio-embroidery-4-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 4: original artwork"
+  },
+  "portfolio-embroidery-4-after": {
+    "remote": "2724-e7960f8c/emb-new-03-after.webp",
+    "file": "portfolio-embroidery-4-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 4: stitched result"
+  },
+  "portfolio-embroidery-5-before": {
+    "remote": "2721-6d6208bd/emb-new-05-before.webp",
+    "file": "portfolio-embroidery-5-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 5: original artwork"
+  },
+  "portfolio-embroidery-5-after": {
+    "remote": "2727-b34d572f/emb-new-05-after.webp",
+    "file": "portfolio-embroidery-5-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 5: stitched result"
+  },
+  "portfolio-embroidery-6-before": {
+    "remote": "2717-a51c5797/emb-new-07-before.webp",
+    "file": "portfolio-embroidery-6-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 6: original artwork"
+  },
+  "portfolio-embroidery-6-after": {
+    "remote": "2725-f5909053/emb-new-07-after.webp",
+    "file": "portfolio-embroidery-6-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Embroidery digitizing sample 6: stitched result"
+  },
+  "portfolio-vector-1-before": {
+    "remote": "1359-0b47dcb5/1-before (2).webp",
+    "file": "portfolio-vector-1-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Vector conversion sample 1: original artwork"
+  },
+  "portfolio-vector-1-after": {
+    "remote": "1361-0065bd07/1-after (2).webp",
+    "file": "portfolio-vector-1-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Vector conversion sample 1: vector result"
+  },
+  "portfolio-vector-2-before": {
+    "remote": "1363-d9440d0e/2-before (2).webp",
+    "file": "portfolio-vector-2-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Vector conversion sample 2: original artwork"
+  },
+  "portfolio-vector-2-after": {
+    "remote": "1365-88d3b77c/2-after (2).webp",
+    "file": "portfolio-vector-2-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Vector conversion sample 2: vector result"
+  },
+  "portfolio-vector-3-before": {
+    "remote": "1367-73ddb053/3-before (1).webp",
+    "file": "portfolio-vector-3-before.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Vector conversion sample 3: original artwork"
+  },
+  "portfolio-vector-3-after": {
+    "remote": "1369-35bf8b5e/3-after (1).webp",
+    "file": "portfolio-vector-3-after.webp",
+    "width": 578,
+    "height": 578,
+    "alt": "Vector conversion sample 3: vector result"
+  }
+}
