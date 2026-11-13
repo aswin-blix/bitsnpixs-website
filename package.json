@@ -10,7 +10,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "assets:pull": "node scripts/pull-assets.mjs",
-    "verify": "npm run typecheck && npm run lint && npm run test -- --passWithNoTests && npm run build"
+    "verify": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -35,5 +35,8 @@
     "tailwindcss": "4.3.3",
     "typescript": "^5",
     "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=20.19"
   }
 }

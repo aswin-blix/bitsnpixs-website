@@ -6,7 +6,7 @@ import { RouteCurtain } from "@/components/layout/RouteCurtain";
 import { ScrollThread } from "@/components/layout/ScrollThread";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { fontVariables } from "@/lib/fonts";
-import { rootMetadata } from "@/lib/seo";
+import { organizationJsonLd, rootMetadata } from "@/lib/seo";
 import { brand } from "@/lib/theme";
 import "./globals.css";
 
@@ -26,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main">{children}</main>
           <Footer />
         </Providers>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />
       </body>
     </html>
   );

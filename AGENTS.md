@@ -7,3 +7,24 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Project rules (bitsnpixs-website)
+
+Read `README.md` (structure, theming, how pages are built) and `DESIGN_NOTES.md`
+(concept and palette) before changing anything.
+
+- **Content is data.** All copy lives in `lib/content/` and is imported only through
+  `@/lib/content`. Never hard-code site copy in a component. Use only content from
+  the client's site; do not invent copy, stats or testimonials.
+- **Layers.** `components/ui` (primitives) → `components/sections` (compose primitives,
+  take a content block as props) → `app/*` (routes only render `PageView`).
+  New page sections are registered in `components/sections/BlockRenderer.tsx`.
+- **Theme by variables.** Colours, radii, spacing and motion tokens live in
+  `app/styles/tokens.css`. Components use the semantic utilities (`bg-surface`,
+  `text-ink`, `text-accent-text` ...), never raw hex values.
+- **Motion.** Animate only transform and opacity. Framer variants and timings come from
+  `lib/motion.ts`; GSAP goes through `useGsap`; scroll reveals through `Reveal`.
+  Server HTML must stay visible without JavaScript. Respect `useMotionProfile`.
+- **Reuse first.** Check `components/ui` and `lib/hooks` before adding anything.
+- **Before every commit:** `npm run verify` (typecheck, lint, tests, build), update
+  README/DESIGN_NOTES if behaviour or structure changed, and review the full diff.

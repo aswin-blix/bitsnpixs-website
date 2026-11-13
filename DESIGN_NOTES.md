@@ -101,8 +101,10 @@ through `next/font/local`:
   `lib/hooks/*` (`useGsap` with `gsap.context()` + `revert()`, `useMagnetic`,
   media/reduced-motion hooks). No section re-implements animation plumbing.
 - **Performance.** Only transform/opacity are animated; the Three.js canvas is a
-  dynamically imported client chunk (`ssr: false`), mounts when visible, caps DPR at
-  1.5 and is replaced by a static pixel grid for reduced-motion users. Pinned
+  dynamically imported client chunk (`ssr: false`) that starts when the browser is idle
+  (desktop) or on first interaction (phones), caps DPR at 1.5, pauses off screen and is
+  replaced by a static pixel grid for reduced-motion users. Server HTML is always
+  visible: hero entrances are CSS and scroll reveals only hide below-the-fold content. Pinned
   chapters fall back to plain lists on small screens and with reduced motion.
 
 ## 6. Content decisions and gaps

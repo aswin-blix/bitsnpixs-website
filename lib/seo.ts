@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site, type PageMeta } from "@/lib/content";
+import { site, studios, type PageMeta } from "@/lib/content";
 
 /** Site-wide defaults, applied once in the root layout. */
 export const rootMetadata: Metadata = {
@@ -11,6 +11,28 @@ export const rootMetadata: Metadata = {
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
+
+/** schema.org Organization data for the JSON-LD script in the root layout. */
+export function organizationJsonLd(): Record<string, unknown> {
+  const [office] = studios;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.legalName,
+    alternateName: site.name,
+    url: site.url,
+    email: site.email,
+    description: site.description,
+    foundingDate: "2011",
+    address: { "@type": "PostalAddress", streetAddress: office.address, addressLocality: office.city, addressCountry: "IN" },
+    contactPoint: site.phones.map((phone) => ({
+      "@type": "ContactPoint",
+      telephone: phone.display,
+      contactType: "customer support",
+      areaServed: phone.region,
+    })),
+  };
+}
 
 /** Per-page metadata built from the page's content entry. */
 export function buildMetadata(meta: PageMeta): Metadata {
