@@ -25,7 +25,7 @@ export function HeroCanvas({ progress, className }: HeroCanvasProps) {
   const everInView = useInView(ref, { once: true, margin: "200px" });
 
   return (
-    <div ref={ref} aria-hidden="true" className={cn("pointer-events-none absolute inset-0", className)}>
+    <div ref={ref} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 opacity-60 lg:opacity-100", className)}>
       <div className="pixel-grid absolute inset-0 opacity-70" />
       {!reduced && everInView ? <HeroScene progress={progress} rich={rich} active={inView} /> : null}
     </div>
