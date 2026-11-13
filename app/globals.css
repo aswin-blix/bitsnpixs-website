@@ -18,7 +18,6 @@
   --color-on-accent: var(--on-accent);
   --color-accent-text: var(--accent-text);
   --color-accent-soft: var(--accent-soft);
-  --color-lime: var(--brand-lime);
 
   --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
@@ -32,10 +31,34 @@
   --ease-brand: var(--motion-ease-out);
 
   --animate-marquee: marquee var(--marquee-duration) linear infinite;
+  /* Above-the-fold entrances are pure CSS, so they start at first paint without waiting for JavaScript. */
+  --animate-rise: rise 0.9s var(--motion-ease-out) both;
+  --animate-slide: slide-up 0.9s var(--motion-ease-out) both;
+  --animate-word: word-rise 1.1s var(--motion-ease-out) both;
 
   @keyframes marquee {
     to {
       transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+    }
+  }
+
+  /* No fade: the element is visible from the first frame, so it can count as the LCP. */
+  @keyframes slide-up {
+    from {
+      transform: translate3d(0, 28px, 0);
+    }
+  }
+
+  @keyframes word-rise {
+    from {
+      transform: translate3d(0, 110%, 0);
     }
   }
 }
@@ -105,6 +128,11 @@
       transition-duration: 0.01ms !important;
     }
   }
+}
+
+/* Staggers a CSS entrance: set --stagger-index on each sibling. */
+@utility stagger-delay {
+  animation-delay: calc(var(--stagger-index, 0) * var(--stagger-step, 90ms));
 }
 
 /* Centred page column with the shared gutter. */
@@ -183,6 +211,3 @@
   background-image: var(--gradient-spectrum);
 }
 
-@utility bg-wash-gradient {
-  background-image: var(--gradient-wash);
-}

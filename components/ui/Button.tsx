@@ -11,7 +11,6 @@ import { SmartLink } from "./SmartLink";
 const variants = {
   primary: "bg-accent text-on-accent hover:shadow-card",
   secondary: "border border-line bg-surface text-strong hover:border-accent",
-  inverse: "bg-strong text-surface hover:shadow-card",
 } as const;
 
 const sizes = {

@@ -79,12 +79,12 @@ export function Footer() {
         </SmartLink>
       </div>
 
-      <p
+      {/* Decorative wordmark, drawn as generated content so it is not exposed as text. */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none -mb-[5vw] text-center font-display text-[19vw] leading-none font-bold tracking-tighter text-raised select-none"
-      >
-        bitsnpixs
-      </p>
+        data-text="bitsnpixs"
+        className="pointer-events-none -mb-[5vw] text-center font-display text-[19vw] leading-none font-bold tracking-tighter text-raised select-none before:content-[attr(data-text)]"
+      />
     </footer>
   );
 }

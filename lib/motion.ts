@@ -13,29 +13,21 @@ export const DURATION = { fast: 0.3, base: 0.7, slow: 1.1 } as const;
 
 export const STAGGER = 0.08;
 
-/** When an element counts as "in view" for scroll reveals. */
-export const VIEWPORT = { once: true, margin: "0px 0px -12% 0px" } as const;
+/** When an element counts as "in view" for scroll reveals (IntersectionObserver rootMargin). */
+export const VIEWPORT = { margin: "0px 0px -12% 0px" } as const;
 
 export const baseTransition: Transition = { duration: DURATION.base, ease: EASE.out };
 
+/** Hiding is instant (it only ever happens off screen); showing is animated. */
+const instant: Transition = { duration: 0 };
+
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 32, transition: instant },
   visible: { opacity: 1, y: 0, transition: baseTransition },
 };
 
-export const fade: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: baseTransition },
-};
-
-/** Word that rises out of a clipped line (hero headlines). */
-export const riseWord: Variants = {
-  hidden: { y: "110%" },
-  visible: { y: "0%", transition: { duration: DURATION.slow, ease: EASE.out } },
-};
-
 export const staggerContainer = (stagger: number = STAGGER, delay = 0): Variants => ({
-  hidden: {},
+  hidden: { transition: instant },
   visible: { transition: { staggerChildren: stagger, delayChildren: delay } },
 });
 

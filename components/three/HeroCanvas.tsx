@@ -3,6 +3,7 @@
 import { useInView, type MotionValue } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useRef } from "react";
+import { useDeferredReady } from "@/lib/hooks/use-deferred-ready";
 import { useMotionProfile } from "@/lib/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 
@@ -23,11 +24,13 @@ export function HeroCanvas({ progress, className }: HeroCanvasProps) {
   const { reduced, rich } = useMotionProfile();
   const inView = useInView(ref, { margin: "200px" });
   const everInView = useInView(ref, { once: true, margin: "200px" });
+  // Desktop starts the scene when the browser is idle; phones wait for the first interaction.
+  const ready = useDeferredReady(rich ? "idle" : "interaction");
 
   return (
     <div ref={ref} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 opacity-60 lg:opacity-100", className)}>
       <div className="pixel-grid absolute inset-0 opacity-70" />
-      {!reduced && everInView ? <HeroScene progress={progress} rich={rich} active={inView} /> : null}
+      {!reduced && everInView && ready ? <HeroScene progress={progress} rich={rich} active={inView} /> : null}
     </div>
   );
 }

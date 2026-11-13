@@ -27,9 +27,4 @@ export function image(id: ImageId): ImageRef {
   return { src: resolveSrc(id), alt, width, height };
 }
 
-/** For slots the old site has no asset for: always renders an ImagePlaceholder. */
-export function placeholder(alt: string, width: number, height: number): ImageRef {
-  return { alt, width, height };
-}
-
 export const imageIds = Object.keys(manifest) as ImageId[];

@@ -20,7 +20,8 @@ export function StatementSection({ block }: { block: StatementBlock }) {
       if (reduced) return;
       gsap.fromTo(
         ".js-word",
-        { opacity: 0.14 },
+        // 0.5 keeps the un-inked words above 3:1 contrast for large text.
+        { opacity: 0.5 },
         {
           opacity: 1,
           ease: "none",

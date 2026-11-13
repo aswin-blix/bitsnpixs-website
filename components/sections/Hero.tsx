@@ -5,9 +5,9 @@ import { useRef } from "react";
 import { HeroCanvas } from "@/components/three/HeroCanvas";
 import { ActionRow } from "@/components/ui/ActionRow";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Rise } from "@/components/ui/Rise";
 import { SplitText } from "@/components/ui/SplitText";
 import type { PageHeroContent } from "@/lib/content";
-import { fadeUp, staggerContainer } from "@/lib/motion";
 
 /** Home hero: staggered headline over the 3D pixel-to-stitch field. */
 export function Hero({ hero }: { hero: PageHeroContent }) {
@@ -24,24 +24,24 @@ export function Hero({ hero }: { hero: PageHeroContent }) {
       />
 
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="container-page relative py-20">
-        <motion.div variants={staggerContainer(0.12, 0.15)} initial="hidden" animate="visible" className="flex max-w-5xl flex-col items-start gap-8">
+        <div className="flex max-w-5xl flex-col items-start gap-8">
           {hero.eyebrow ? (
-            <motion.div variants={fadeUp}>
+            <Rise>
               <Eyebrow>{hero.eyebrow}</Eyebrow>
-            </motion.div>
+            </Rise>
           ) : null}
           <h1 className="text-[clamp(2.9rem,8.4vw,7.5rem)] leading-[0.95] font-semibold tracking-[-0.035em]">
-            <SplitText text={hero.title} delay={0.2} />
+            <SplitText text={hero.title} />
           </h1>
           {hero.lead ? (
-            <motion.p variants={fadeUp} className="max-w-xl text-lg text-ink sm:text-xl">
-              {hero.lead}
-            </motion.p>
+            <Rise index={3} solid>
+              <p className="max-w-xl text-lg text-ink sm:text-xl">{hero.lead}</p>
+            </Rise>
           ) : null}
-          <motion.div variants={fadeUp}>
+          <Rise index={5}>
             <ActionRow actions={hero.actions} />
-          </motion.div>
-        </motion.div>
+          </Rise>
+        </div>
       </motion.div>
 
       <div aria-hidden="true" className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[0.65rem] tracking-[0.3em] text-accent-text uppercase md:flex">

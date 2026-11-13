@@ -73,7 +73,7 @@ export function StudioMap({ studios }: { studios: Studio[] }) {
                 <span className="flex flex-col gap-1">
                   <span className="font-mono text-[0.65rem] tracking-widest text-accent-text uppercase">{studio.kind}</span>
                   <span className="font-display text-xl font-semibold text-strong">{studio.city}</span>
-                  <span className="text-sm text-muted">{studio.address}</span>
+                  <span className="text-sm text-ink">{studio.address}</span>
                 </span>
               </button>
             </li>

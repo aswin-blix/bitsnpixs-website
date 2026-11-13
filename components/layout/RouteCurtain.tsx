@@ -9,7 +9,11 @@ import { MEDIA, useMediaQuery } from "@/lib/hooks/use-media-query";
 /**
  * Page transition. When the route changes, a curtain covers the new page in the
  * same render (no flash of content) and then lifts away, trailing a stitched
- * thread along its lower edge. AnimatePresence plays the exit.
+ * thread along its lower edge. AnimatePresence plays the exit, and the new
+ * page's hero runs its CSS entrance underneath as the curtain lifts.
+ *
+ * Page content itself is never wrapped in an opacity animation: server-rendered
+ * HTML must be visible before JavaScript loads (first paint, LCP, no-JS).
  */
 export function RouteCurtain() {
   const pathname = usePathname();

@@ -23,8 +23,6 @@ export const routes = {
   shop: "/shop",
 } as const;
 
-export type RouteKey = keyof typeof routes;
-
 export const site = {
   name: "BitsNPixs",
   legalName: "BitsNPixs Technologies Private Limited",

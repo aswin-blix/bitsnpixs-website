@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
-import { fadeUp, staggerContainer, VIEWPORT } from "@/lib/motion";
+import { useRef, type ReactNode } from "react";
+import { useRevealPhase } from "@/lib/hooks/use-reveal-phase";
+import { fadeUp, staggerContainer } from "@/lib/motion";
 
 const tags = { div: motion.div, li: motion.li, article: motion.article, ul: motion.ul, ol: motion.ol } as const;
 
@@ -12,18 +13,22 @@ interface RevealProps {
   as?: keyof typeof tags;
 }
 
+/**
+ * Shared wiring for scroll reveals. `initial={false}` keeps the server HTML
+ * visible; the phase from useRevealPhase then drives the hidden/visible variants.
+ */
+function useReveal() {
+  const ref = useRef<HTMLElement>(null);
+  const phase = useRevealPhase(ref);
+  // The motion tag varies with `as`; every option renders an HTMLElement, so one cast covers them.
+  return { ref: ref as never, initial: false, animate: phase === "hidden" ? "hidden" : "visible" } as const;
+}
+
 /** Fades and slides a single element up when it scrolls into view. */
-export function Reveal({ children, className, as = "div", delay = 0 }: RevealProps & { delay?: number }) {
+export function Reveal({ children, className, as = "div" }: RevealProps) {
   const Tag = tags[as];
   return (
-    <Tag
-      className={className}
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={VIEWPORT}
-      transition={{ delay }}
-    >
+    <Tag className={className} variants={fadeUp} {...useReveal()}>
       {children}
     </Tag>
   );
@@ -33,13 +38,7 @@ export function Reveal({ children, className, as = "div", delay = 0 }: RevealPro
 export function RevealGroup({ children, className, as = "div", stagger }: RevealProps & { stagger?: number }) {
   const Tag = tags[as];
   return (
-    <Tag
-      className={className}
-      variants={staggerContainer(stagger)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={VIEWPORT}
-    >
+    <Tag className={className} variants={staggerContainer(stagger)} {...useReveal()}>
       {children}
     </Tag>
   );
