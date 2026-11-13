@@ -14,6 +14,7 @@ export const aboutPage: PageContent = {
     variant: "page",
     eyebrow: "Who we are",
     title: "Expert digitizers that you can trust.",
+    breadcrumb: "About Us",
     lead: "BitsNPixs has been providing embroidery digitizing, vector conversion and software development services since 2011.",
     image: image("about-team"),
   },

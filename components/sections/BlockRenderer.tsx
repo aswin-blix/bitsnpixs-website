@@ -1,14 +1,19 @@
 import type { ComponentType } from "react";
 import type { Block, BlockType } from "@/lib/content";
 import { CTA } from "./CTA";
+import { FaqSection } from "./FaqSection";
 import { FeaturesSection } from "./FeaturesSection";
+import { FormatsSection } from "./FormatsSection";
 import { MarqueeSection } from "./MarqueeSection";
 import { PortfolioSection } from "./PortfolioSection";
+import { ProseSection } from "./ProseSection";
 import { ServicesSection } from "./ServicesSection";
+import { SpecialtiesSection } from "./SpecialtiesSection";
 import { StatementSection } from "./StatementSection";
 import { StatsSection } from "./StatsSection";
 import { StorySection } from "./StorySection";
 import { TestimonialsSection } from "./TestimonialsSection";
+import { TurnaroundSection } from "./TurnaroundSection";
 
 type SectionComponent<T extends BlockType> = ComponentType<{ block: Extract<Block, { type: T }> }>;
 
@@ -19,6 +24,7 @@ type SectionComponent<T extends BlockType> = ComponentType<{ block: Extract<Bloc
  */
 const registry: { [T in BlockType]?: SectionComponent<T> } = {
   statement: StatementSection,
+  prose: ProseSection,
   services: ServicesSection,
   marquee: MarqueeSection,
   story: StorySection,
@@ -26,6 +32,10 @@ const registry: { [T in BlockType]?: SectionComponent<T> } = {
   stats: StatsSection,
   portfolio: PortfolioSection,
   testimonials: TestimonialsSection,
+  formats: FormatsSection,
+  specialties: SpecialtiesSection,
+  turnaround: TurnaroundSection,
+  faq: FaqSection,
   cta: CTA,
 };
 

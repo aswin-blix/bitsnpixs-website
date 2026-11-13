@@ -56,7 +56,7 @@ export const turnaroundBlock: TurnaroundBlock = {
   type: "turnaround",
   surface: "tint",
   eyebrow: "Fast Turnaround",
-  title: "Faster turnaround, when you need it.",
+  title: "Faster turnaround time",
   lead: "The turnaround time is based on the complexity of the image you send us. If you let us know your emergency, top priority will be given to your job.",
   options: turnaroundOptions,
 };

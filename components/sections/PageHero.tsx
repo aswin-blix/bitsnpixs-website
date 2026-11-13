@@ -26,7 +26,7 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
               </li>
               <li aria-hidden="true">/</li>
               <li aria-current="page" className="text-accent-text">
-                {hero.eyebrow ?? hero.title}
+                {hero.breadcrumb ?? hero.title}
               </li>
             </ol>
           </motion.nav>

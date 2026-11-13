@@ -128,6 +128,8 @@ export interface PageHeroContent {
   variant: "immersive" | "page";
   eyebrow?: string;
   title: string;
+  /** Short page name for the breadcrumb. Defaults to the title. */
+  breadcrumb?: string;
   lead?: string;
   image?: ImageRef;
   actions?: LinkRef[];

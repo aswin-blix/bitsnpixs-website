@@ -14,6 +14,7 @@ export const portfolioPage: PageContent = {
     variant: "page",
     eyebrow: "Portfolio",
     title: "We create beautiful design that makes a difference.",
+    breadcrumb: "Portfolio",
   },
   blocks: [{ type: "portfolio", grouped: true }, digitizeCtaBlock],
 };
@@ -29,6 +30,7 @@ export const careerPage: PageContent = {
     variant: "page",
     eyebrow: "Career",
     title: "Intellectuals wanted!",
+    breadcrumb: "Career",
     lead: 'At BitsNPixs, we ensure that our team always works with pleasure and not under pressure. We believe the office is anyone\'s second home, and we always believe in our motto: "let\'s grow together".',
     image: image("career-workplace"),
     actions: [{ label: "Apply Now", href: routes.contact }],
@@ -90,6 +92,7 @@ export const contactPage: PageContent = {
     variant: "page",
     eyebrow: "Contact Us",
     title: "Reach out and we will get back to you.",
+    breadcrumb: "Contact Us",
     lead: "Our dedicated team is available 24/7 to assist with any inquiries or issues.",
   },
   blocks: [
@@ -115,6 +118,7 @@ export const blogPage: PageContent = {
     variant: "page",
     eyebrow: "Blogs",
     title: "Our latest posts",
+    breadcrumb: "Blogs",
   },
   blocks: [
     {
@@ -197,6 +201,7 @@ export const shopPage: PageContent = {
     variant: "page",
     eyebrow: "Shop",
     title: "All products",
+    breadcrumb: "Shop",
     lead: "Sign up, fill in your embroidery requirements, upload your design at checkout, and make a quick, secure payment to get your digitizing journey started.",
   },
   blocks: [
