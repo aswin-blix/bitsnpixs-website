@@ -104,7 +104,10 @@
   --elevation-card: 0 24px 60px -30px rgb(0 0 0 / 0.7);
 }
 
-[data-surface] {
-  background-color: var(--surface);
-  color: var(--ink);
+/* In the base layer so Tailwind utilities (bg-transparent, bg-surface/80 ...) can override it. */
+@layer base {
+  [data-surface] {
+    background-color: var(--surface);
+    color: var(--ink);
+  }
 }

@@ -1,0 +1,97 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useCallback, useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { Logo } from "@/components/ui/Logo";
+import { SmartLink } from "@/components/ui/SmartLink";
+import { navigation, routes, site } from "@/lib/content";
+import { useScrolled } from "@/lib/hooks/use-scrolled";
+import { cn } from "@/lib/utils";
+import { MobileMenu } from "./MobileMenu";
+import { NavLink } from "./NavLink";
+
+const MOBILE_MENU_ID = "mobile-menu";
+
+/** Fixed site header: transparent at the top of the page, frosted once scrolled. */
+export function Header() {
+  const pathname = usePathname();
+  const scrolled = useScrolled();
+  // Storing the path the menu was opened on closes it automatically on navigation.
+  const [menuPath, setMenuPath] = useState<string | null>(null);
+  const menuOpen = menuPath === pathname;
+  const closeMenu = useCallback(() => setMenuPath(null), []);
+
+  return (
+    <header
+      data-surface="light"
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent transition-[background-color,border-color] duration-300",
+        (scrolled || menuOpen) && "border-line bg-surface/85 backdrop-blur-md",
+      )}
+    >
+      <div className="container-page flex h-(--header-height) items-center justify-between gap-6">
+        <SmartLink href={routes.home} className="shrink-0 rounded-control">
+          <Logo />
+        </SmartLink>
+
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-9 text-[0.95rem] font-medium text-strong">
+            {navigation.main.map((item) => (
+              <li key={item.label} className="group/nav relative">
+                <span className="inline-flex items-center gap-1.5">
+                  <NavLink href={item.href}>{item.label}</NavLink>
+                  {item.children ? (
+                    <Icon name="chevron" size={14} className="transition-transform duration-300 group-hover/nav:rotate-180" />
+                  ) : null}
+                </span>
+                {item.children ? (
+                  <div className="invisible absolute top-full left-1/2 w-80 -translate-x-1/2 translate-y-2 pt-5 opacity-0 transition-[opacity,transform,visibility] duration-300 ease-brand group-focus-within/nav:visible group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100 group-hover/nav:visible group-hover/nav:translate-y-0 group-hover/nav:opacity-100">
+                    <ul className="rounded-card border border-line bg-surface p-2.5 shadow-card">
+                      {item.children.map((child, index) => (
+                        <li key={child.href}>
+                          <SmartLink
+                            href={child.href}
+                            aria-current={pathname === child.href ? "page" : undefined}
+                            className="flex items-center justify-between gap-4 rounded-2xl px-4 py-3 transition-colors duration-200 hover:bg-accent-soft aria-[current=page]:bg-accent-soft"
+                          >
+                            <span>{child.label}</span>
+                            <span aria-hidden="true" className="font-mono text-xs text-muted">
+                              0{index + 1}
+                            </span>
+                          </SmartLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <SmartLink href={site.signIn.href} className="link-stitch hidden text-[0.95rem] font-medium text-strong lg:inline-block">
+            {site.signIn.label}
+          </SmartLink>
+          <Button href={navigation.primaryAction.href} size="sm" className="hidden sm:inline-flex">
+            {navigation.primaryAction.label}
+          </Button>
+          <button
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls={MOBILE_MENU_ID}
+            onClick={() => setMenuPath(menuOpen ? null : pathname)}
+            className="grid size-11 place-items-center rounded-control border border-line bg-surface text-strong lg:hidden"
+          >
+            <Icon name={menuOpen ? "cross" : "menu"} />
+            <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+          </button>
+        </div>
+      </div>
+
+      <MobileMenu id={MOBILE_MENU_ID} open={menuOpen} onClose={closeMenu} />
+    </header>
+  );
+}
