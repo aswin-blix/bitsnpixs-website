@@ -22,7 +22,7 @@ export function ImagePlaceholder({ alt, ratio = 4 / 3, fill, showLabel = true, c
       aria-label={alt}
       style={fill ? undefined : { aspectRatio: ratio }}
       className={cn(
-        "bg-wash-gradient pixel-grid flex items-end overflow-hidden rounded-media text-accent-text",
+        "placeholder-surface flex items-end overflow-hidden rounded-media text-accent-text",
         fill ? "absolute inset-0" : "relative w-full",
         className,
       )}

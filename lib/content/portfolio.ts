@@ -37,7 +37,22 @@ function buildItems(category: PortfolioCategoryId): PortfolioItem[] {
 
 export const portfolioItems: PortfolioItem[] = portfolioCategories.flatMap(({ id }) => buildItems(id));
 
+/**
+ * Items for a category, or for all categories. A limited selection across all
+ * categories is interleaved (one from each in turn) so previews show variety.
+ */
 export function getPortfolioItems(category?: PortfolioCategoryId, limit?: number): PortfolioItem[] {
-  const items = category ? portfolioItems.filter((item) => item.category === category) : portfolioItems;
-  return limit ? items.slice(0, limit) : items;
+  if (category) {
+    const items = portfolioItems.filter((item) => item.category === category);
+    return limit ? items.slice(0, limit) : items;
+  }
+  if (!limit) return portfolioItems;
+
+  const byCategory = portfolioCategories.map(({ id }) => portfolioItems.filter((item) => item.category === id));
+  const longest = Math.max(...byCategory.map((items) => items.length));
+  const interleaved: PortfolioItem[] = [];
+  for (let index = 0; index < longest; index += 1) {
+    for (const items of byCategory) if (items[index]) interleaved.push(items[index]);
+  }
+  return interleaved.slice(0, limit);
 }

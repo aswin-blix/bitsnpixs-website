@@ -163,6 +163,18 @@
   background-size: 28px 28px;
 }
 
+/* Image placeholder fill: pixel grid over the brand wash (layered, so sizes do not clash). */
+@utility placeholder-surface {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px),
+    var(--gradient-wash);
+  background-size:
+    28px 28px,
+    28px 28px,
+    100% 100%;
+}
+
 @utility bg-brand-gradient {
   background-image: var(--gradient-brand);
 }

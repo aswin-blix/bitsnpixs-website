@@ -82,6 +82,10 @@ describe("portfolio", () => {
   it("filters and limits", () => {
     expect(getPortfolioItems("vector").every((item) => item.category === "vector")).toBe(true);
     expect(getPortfolioItems(undefined, 3)).toHaveLength(3);
+    expect(getPortfolioItems("embroidery", 2)).toHaveLength(2);
+    // A limited preview across categories shows one sample from each.
+    expect(new Set(getPortfolioItems(undefined, 3).map((item) => item.category)).size).toBe(3);
+    expect(getPortfolioItems(undefined, 999)).toHaveLength(portfolioItems.length);
     expect(getPortfolioItems()).toHaveLength(portfolioItems.length);
   });
 });

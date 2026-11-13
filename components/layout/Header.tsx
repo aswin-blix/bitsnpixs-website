@@ -27,8 +27,8 @@ export function Header() {
     <header
       data-surface="light"
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent transition-[background-color,border-color] duration-300",
-        (scrolled || menuOpen) && "border-line bg-surface/85 backdrop-blur-md",
+        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-300",
+        scrolled || menuOpen ? "border-line bg-surface/90 backdrop-blur-md" : "border-transparent bg-transparent",
       )}
     >
       <div className="container-page flex h-(--header-height) items-center justify-between gap-6">

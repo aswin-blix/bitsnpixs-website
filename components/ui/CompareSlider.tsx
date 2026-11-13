@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import type { ImageRef } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { Icon } from "./Icon";
 import { SiteImage } from "./SiteImage";
 
 interface CompareSliderProps {
@@ -30,8 +31,9 @@ export function CompareSlider({ before, after, label, sizes, className }: Compar
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-surface" style={{ left: `${position}%` }}>
-        <span className="absolute top-1/2 left-1/2 grid size-11 -translate-1/2 place-items-center rounded-control bg-surface text-strong shadow-card transition-transform duration-300 ease-brand group-hover/compare:scale-110 group-has-focus-visible/compare:scale-110 group-has-focus-visible/compare:outline-2 group-has-focus-visible/compare:outline-(--focus-ring)">
-          <span className="stitch-x w-5" />
+        <span className="absolute top-1/2 left-1/2 flex size-11 -translate-1/2 items-center justify-center rounded-control bg-surface text-strong shadow-card transition-transform duration-300 ease-brand group-hover/compare:scale-110 group-has-focus-visible/compare:scale-110 group-has-focus-visible/compare:outline-2 group-has-focus-visible/compare:outline-(--focus-ring)">
+          <Icon name="chevron" size={14} className="rotate-90" />
+          <Icon name="chevron" size={14} className="-rotate-90" />
         </span>
       </div>
 
