@@ -4,6 +4,8 @@
  * Adding a page or reordering sections is a data change, not a component change.
  */
 
+import type { StitchKind } from "../stitch/engine";
+
 export type Surface = "light" | "tint" | "dark";
 
 export interface ImageRef {
@@ -123,6 +125,18 @@ export interface TurnaroundOption {
   body: string;
 }
 
+/** Labels and options for the live digitizer (components/sections/StitchPad). */
+export interface DigitizerContent {
+  defaultText: string;
+  inputLabel: string;
+  kindLabel: string;
+  threadLabel: string;
+  countLabel: string;
+  replayLabel: string;
+  note: string;
+  kinds: { id: StitchKind; label: string }[];
+}
+
 export interface PageHeroContent {
   /** "immersive" is the home hero with the 3D field; "page" is the inner-page hero. */
   variant: "immersive" | "page";
@@ -133,6 +147,8 @@ export interface PageHeroContent {
   lead?: string;
   image?: ImageRef;
   actions?: LinkRef[];
+  /** Shows the live digitizer beside the headline (immersive hero only). */
+  digitizer?: DigitizerContent;
 }
 
 interface BlockBase {
@@ -243,6 +259,11 @@ export interface PostsBlock extends BlockBase {
   posts: Post[];
 }
 
+export interface StitchLabBlock extends BlockBase {
+  type: "stitchLab";
+  digitizer: DigitizerContent;
+}
+
 export interface CtaBlock extends BlockBase {
   type: "cta";
   actions: LinkRef[];
@@ -265,6 +286,7 @@ export type Block =
   | ContactBlock
   | PricingBlock
   | PostsBlock
+  | StitchLabBlock
   | CtaBlock;
 
 export type BlockType = Block["type"];

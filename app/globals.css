@@ -183,6 +183,13 @@
   }
 }
 
+/* Woven-fabric texture for embroidery surfaces (the digitizer's hoop). */
+@utility fabric-weave {
+  background-image:
+    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 4px);
+}
+
 /* Faint pixel grid used behind heroes and placeholders. */
 @utility pixel-grid {
   background-image:

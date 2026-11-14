@@ -21,6 +21,7 @@ export const routes = {
   contact: "/contact-us",
   blog: "/blog",
   shop: "/shop",
+  stitchLab: "/stitch-lab",
 } as const;
 
 export const site = {

@@ -1,5 +1,5 @@
 import { image } from "../images";
-import { digitizeCtaBlock, embroideryFormats, whyBitsNPixsBlock } from "../shared";
+import { digitizeCtaBlock, digitizerContent, embroideryFormats, whyBitsNPixsBlock } from "../shared";
 import { routes } from "../site";
 import type { PageContent } from "../types";
 
@@ -19,6 +19,7 @@ export const homePage: PageContent = {
       { label: "Digitize Your Design", href: routes.shop },
       { label: "Portfolio", href: routes.portfolio },
     ],
+    digitizer: digitizerContent,
   },
   blocks: [
     {

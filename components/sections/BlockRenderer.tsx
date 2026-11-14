@@ -14,6 +14,7 @@ import { ServicesSection } from "./ServicesSection";
 import { SpecialtiesSection } from "./SpecialtiesSection";
 import { StatementSection } from "./StatementSection";
 import { StatsSection } from "./StatsSection";
+import { StitchLabSection } from "./StitchLabSection";
 import { StorySection } from "./StorySection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { TurnaroundSection } from "./TurnaroundSection";
@@ -42,6 +43,7 @@ const registry: { [T in BlockType]: SectionComponent<T> } = {
   contact: ContactSection,
   pricing: PricingSection,
   posts: PostsSection,
+  stitchLab: StitchLabSection,
   cta: CTA,
 };
 

@@ -1,6 +1,7 @@
 import { routes } from "./site";
 import type {
   CtaBlock,
+  DigitizerContent,
   Faq,
   FaqBlock,
   FeaturesBlock,
@@ -9,6 +10,21 @@ import type {
 } from "./types";
 
 /** Content that appears on more than one page lives here, once. */
+
+export const digitizerContent: DigitizerContent = {
+  defaultText: "BitsNPixs",
+  inputLabel: "Type a word and watch it stitch",
+  kindLabel: "Stitch type",
+  threadLabel: "Thread colour",
+  countLabel: "Stitches",
+  replayLabel: "Replay",
+  note: "A playful simulation. Your real files are digitized by hand by our in-house digitizers and test-stitched before delivery.",
+  kinds: [
+    { id: "satin", label: "Satin" },
+    { id: "fill", label: "Fill" },
+    { id: "run", label: "Run" },
+  ],
+};
 
 export const embroideryFormats = [
   "DST",
