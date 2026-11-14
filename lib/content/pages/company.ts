@@ -16,7 +16,10 @@ export const portfolioPage: PageContent = {
     title: "We create beautiful design that makes a difference.",
     breadcrumb: "Portfolio",
   },
-  blocks: [{ type: "portfolio", grouped: true }, digitizeCtaBlock],
+  blocks: [
+    { type: "portfolio", surface: "light", explorer: { allLabel: "All", filterLabel: "Filter samples" } },
+    digitizeCtaBlock,
+  ],
 };
 
 export const careerPage: PageContent = {

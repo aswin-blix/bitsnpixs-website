@@ -1,0 +1,7 @@
+[
+  { "id": "india", "country": "India", "city": "Bengaluru", "timeZone": "Asia/Kolkata", "lat": 12.97, "lng": 77.59, "hq": true },
+  { "id": "usa", "country": "U.S.A", "city": "New York", "timeZone": "America/New_York", "lat": 40.71, "lng": -74.01 },
+  { "id": "canada", "country": "Canada", "city": "Toronto", "timeZone": "America/Toronto", "lat": 43.65, "lng": -79.38 },
+  { "id": "uk", "country": "U.K", "city": "London", "timeZone": "Europe/London", "lat": 51.51, "lng": -0.13 },
+  { "id": "australia", "country": "Australia", "city": "Sydney", "timeZone": "Australia/Sydney", "lat": -33.87, "lng": 151.21 }
+]

@@ -1,7 +1,12 @@
 import { routes } from "./site";
+import markets from "./markets.json";
 import type {
   CtaBlock,
   DigitizerContent,
+  FormatsBlock,
+  GlobalBlock,
+  MachineFormats,
+  Market,
   Faq,
   FaqBlock,
   FeaturesBlock,
@@ -51,6 +56,69 @@ export const embroideryFormats = [
   "CSD",
 ];
 
+/**
+ * Which machine families read which of the formats above. General industry
+ * reference (Wilcom / Embird format tables), not a BitsNPixs claim.
+ */
+export const machineFormats: MachineFormats[] = [
+  { brand: "Tajima", formats: ["DST", "T01"] },
+  { brand: "Barudan", formats: ["DSB", "T03"] },
+  { brand: "Brother / Baby Lock", formats: ["PES", "PEC"] },
+  { brand: "Melco", formats: ["EXP", "CND"] },
+  { brand: "ZSK", formats: ["DSZ", "T05"] },
+  { brand: "Janome / Elna", formats: ["JEF", "SEW"] },
+  { brand: "Husqvarna Viking", formats: ["HUS"] },
+  { brand: "Pfaff", formats: ["PCS", "PCD", "PCQ", "KSM"] },
+  { brand: "Happy", formats: ["TAP"] },
+  { brand: "Singer / Poem", formats: ["CSD"] },
+  { brand: "Zangs", formats: ["T04"] },
+  { brand: "Wilcom software", formats: ["EMB"] },
+];
+
+export const embroideryFormatsBlock: FormatsBlock = {
+  type: "formats",
+  surface: "tint",
+  eyebrow: "File formats",
+  title: "Which machine do you run?",
+  lead: "Our standard file format is DST, but if you require any other format for the digitized file, we are compatible with all of these and can provide them.",
+  standard: "DST",
+  formats: embroideryFormats,
+  finder: {
+    prompt: "Pick your machine",
+    allLabel: "All formats",
+    resultLabel: "We can send",
+    note: "Most commercial machines also read DST. Not sure? Tell us your machine and we will send the right file.",
+    machines: machineFormats,
+  },
+};
+
+export const trustFacts = [
+  "Since 2011",
+  "4.7/5 rating",
+  "5,000+ clients",
+  "24/7 support",
+  "Free quotes in 2 to 24 hours",
+  "Free edits within 30 days",
+  "24 hours standard turnaround",
+  "Rush jobs in 2 to 12 hours",
+];
+
+export const audienceBlock: FeaturesBlock = {
+  type: "features",
+  layout: "chips",
+  eyebrow: "Who we work with",
+  title: "Trusted by decorators and distributors worldwide.",
+  lead: "We work with promotional product firms, renowned sign-makers, label makers, embroidery shops and apparel decorators.",
+  items: [
+    { title: "Embroidery shops" },
+    { title: "Promotional product firms" },
+    { title: "Apparel decorators" },
+    { title: "Sign-makers" },
+    { title: "Label makers" },
+    { title: "Distributors" },
+  ],
+};
+
 export const vectorFormats = ["AI (Adobe Illustrator)", "CDR (CorelDraw)", "PDF", "EPS (Encapsulated PostScript)", "WMF", "DXF"];
 
 export const turnaroundOptions: TurnaroundOption[] = [
@@ -59,14 +127,28 @@ export const turnaroundOptions: TurnaroundOption[] = [
     label: "Standard",
     time: "24 hours",
     body: "Our standard package comes with a 24 hours turnaround time.",
+    hours: [24, 24],
   },
   {
     id: "rush",
     label: "Rush Job",
     time: "2 to 12 hours",
     body: "Our Rush Job package provides a turnaround time of 2 to 12 hours for a few extra bucks.",
+    hours: [2, 12],
   },
 ];
+
+export const globalBlock: GlobalBlock = {
+  type: "global",
+  eyebrow: "Worldwide",
+  title: "Night or day, we are always there.",
+  lead: "We mainly work with customers in the U.S.A, U.K, Australia and Canada, with support available 24 hours a day from our studios in India.",
+  markets: markets as Market[],
+  clockTitle: "Local time",
+  deliveryTitle: "Order now, ready by",
+  deliveryNote: "Shown in your own time zone. Turnaround depends on the complexity of the artwork.",
+  options: turnaroundOptions,
+};
 
 export const turnaroundBlock: TurnaroundBlock = {
   type: "turnaround",
@@ -174,7 +256,7 @@ export const digitizeCtaBlock: CtaBlock = {
   title: "Digitize your designs today.",
   lead: "Trusted by 5,000+ clients for precise and high-quality embroidery designs.",
   actions: [
-    { label: "Contact Us", href: routes.contact },
+    { label: "Get a Free Quote", href: routes.quote },
     { label: "Shop Now", href: routes.shop },
   ],
 };

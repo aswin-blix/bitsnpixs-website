@@ -5,6 +5,7 @@ import { Providers } from "@/components/layout/Providers";
 import { RouteCurtain } from "@/components/layout/RouteCurtain";
 import { ScrollThread } from "@/components/layout/ScrollThread";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { ThreadCursor } from "@/components/layout/ThreadCursor";
 import { fontVariables } from "@/lib/fonts";
 import { organizationJsonLd, rootMetadata } from "@/lib/seo";
 import { brand } from "@/lib/theme";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SkipLink />
           <RouteCurtain />
           <ScrollThread />
+          <ThreadCursor />
           <Header />
           <main id="main">{children}</main>
           <Footer />

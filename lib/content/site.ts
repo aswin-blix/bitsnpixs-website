@@ -22,6 +22,8 @@ export const routes = {
   blog: "/blog",
   shop: "/shop",
   stitchLab: "/stitch-lab",
+  formats: "/file-formats",
+  quote: "/get-a-quote",
 } as const;
 
 export const site = {
@@ -65,10 +67,11 @@ export const navigation = {
     { label: "About Us", href: routes.about },
     { label: "Services", href: routes.embroidery, children: serviceLinks },
     { label: "Portfolio", href: routes.portfolio },
-    { label: "Career", href: routes.career },
+    { label: "Stitch Lab", href: routes.stitchLab },
     { label: "Contact Us", href: routes.contact },
   ] satisfies NavItem[],
-  primaryAction: { label: "Shop", href: routes.shop } satisfies LinkRef,
+  primaryAction: { label: "Get a Quote", href: routes.quote } satisfies LinkRef,
+  secondaryAction: { label: "Shop", href: routes.shop } satisfies LinkRef,
   footer: [
     { title: "Services", links: serviceLinks },
     {
@@ -79,6 +82,15 @@ export const navigation = {
         { label: "Blogs", href: routes.blog },
         { label: "Career", href: routes.career },
         { label: "Contact Us", href: routes.contact },
+      ],
+    },
+    {
+      title: "Tools",
+      links: [
+        { label: "Get a Quote", href: routes.quote },
+        { label: "Stitch Lab", href: routes.stitchLab },
+        { label: "File Formats", href: routes.formats },
+        { label: "Shop", href: routes.shop },
       ],
     },
   ] satisfies { title: string; links: LinkRef[] }[],

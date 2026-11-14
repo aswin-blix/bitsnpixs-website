@@ -1,7 +1,10 @@
 "use client";
 
-import { useId, useState } from "react";
+import { animate, useInView, type AnimationPlaybackControls } from "framer-motion";
+import { useEffect, useId, useRef, useState } from "react";
 import type { ImageRef } from "@/lib/content";
+import { MEDIA, useMediaQuery } from "@/lib/hooks/use-media-query";
+import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { Icon } from "./Icon";
 import { SiteImage } from "./SiteImage";
@@ -17,14 +20,26 @@ interface CompareSliderProps {
 
 /**
  * Before/after comparison. A native range input covers the frame, so dragging,
- * tapping and arrow keys all work without custom pointer handling.
+ * tapping and arrow keys all work without custom pointer handling. The divider
+ * sweeps open once when the card first scrolls into view.
  */
 export function CompareSlider({ before, after, label, sizes, className }: CompareSliderProps) {
   const [position, setPosition] = useState(50);
   const id = useId();
+  const ref = useRef<HTMLDivElement>(null);
+  const wipe = useRef<AnimationPlaybackControls | null>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -20% 0px" });
+  const reduced = useMediaQuery(MEDIA.reducedMotion);
+
+  // The first time it scrolls into view, the divider sweeps open to show it can be dragged.
+  useEffect(() => {
+    if (!inView || reduced) return;
+    wipe.current = animate(14, 50, { duration: DURATION.slow, ease: EASE.out, onUpdate: setPosition });
+    return () => wipe.current?.stop();
+  }, [inView, reduced]);
 
   return (
-    <div className={cn("group/compare relative aspect-square overflow-hidden rounded-card border border-line bg-sunken", className)}>
+    <div ref={ref} className={cn("group/compare relative aspect-square overflow-hidden rounded-card border border-line bg-sunken", className)}>
       <SiteImage image={after} sizes={sizes} fill className="rounded-none" />
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
         <SiteImage image={before} sizes={sizes} fill className="rounded-none" />
@@ -46,7 +61,10 @@ export function CompareSlider({ before, after, label, sizes, className }: Compar
         min={0}
         max={100}
         value={position}
-        onChange={(event) => setPosition(Number(event.target.value))}
+        onChange={(event) => {
+          wipe.current?.stop();
+          setPosition(Number(event.target.value));
+        }}
         className="absolute inset-0 size-full cursor-ew-resize opacity-0"
       />
     </div>

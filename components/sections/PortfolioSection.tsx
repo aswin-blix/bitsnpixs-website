@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,6 +9,7 @@ import {
   type PortfolioBlock,
   type PortfolioItem,
 } from "@/lib/content";
+import { PortfolioExplorer } from "./PortfolioExplorer";
 import { ProjectCard } from "./ProjectCard";
 
 const categoryLabels = Object.fromEntries(portfolioCategories.map(({ id, label }) => [id, label]));
@@ -43,33 +43,16 @@ function SectionAction({ action }: { action?: LinkRef }) {
   );
 }
 
-/** Portfolio samples: a single grid, or one grid per category when `grouped`. */
+/** Portfolio samples: a preview grid, or every sample with a filter when `explorer` is set. */
 export function PortfolioSection({ block }: { block: PortfolioBlock }) {
-  if (block.grouped) {
-    return (
-      <>
-        {portfolioCategories.map((category, index) => (
-          <Section key={category.id} surface={index % 2 === 0 ? "light" : "tint"}>
-            <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-6">
-              <div className="flex flex-col gap-4">
-                <Eyebrow>Portfolio</Eyebrow>
-                <h2 className="text-3xl font-semibold sm:text-5xl">{category.label}</h2>
-              </div>
-              <Button href={category.action.href} variant="secondary" size="sm">
-                {category.action.label}
-              </Button>
-            </Reveal>
-            <ProjectGrid items={getPortfolioItems(category.id)} />
-          </Section>
-        ))}
-      </>
-    );
-  }
-
   return (
     <Section surface={block.surface}>
       <SectionHeading eyebrow={block.eyebrow} title={block.title} lead={block.lead} />
-      <ProjectGrid items={getPortfolioItems(block.category, block.limit)} />
+      {block.explorer ? (
+        <PortfolioExplorer items={getPortfolioItems()} categories={portfolioCategories} labels={block.explorer} />
+      ) : (
+        <ProjectGrid items={getPortfolioItems(block.category, block.limit)} />
+      )}
       <SectionAction action={block.action} />
     </Section>
   );

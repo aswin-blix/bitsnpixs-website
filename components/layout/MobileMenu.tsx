@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { navigation, site } from "@/lib/content";
+import { navigation } from "@/lib/content";
 import { DURATION, EASE, fadeUp, staggerContainer } from "@/lib/motion";
 import { NavLink } from "./NavLink";
 
@@ -65,8 +65,8 @@ export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
               <Button href={navigation.primaryAction.href} onClick={onClose} magnetic={false}>
                 {navigation.primaryAction.label}
               </Button>
-              <Button href={site.signIn.href} variant="secondary" magnetic={false}>
-                {site.signIn.label}
+              <Button href={navigation.secondaryAction.href} variant="secondary" onClick={onClose} magnetic={false}>
+                {navigation.secondaryAction.label}
               </Button>
             </div>
           </nav>

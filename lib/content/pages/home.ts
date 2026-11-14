@@ -1,5 +1,13 @@
 import { image } from "../images";
-import { digitizeCtaBlock, digitizerContent, embroideryFormats, whyBitsNPixsBlock } from "../shared";
+import {
+  audienceBlock,
+  digitizeCtaBlock,
+  digitizerContent,
+  embroideryFormatsBlock,
+  globalBlock,
+  trustFacts,
+  whyBitsNPixsBlock,
+} from "../shared";
 import { routes } from "../site";
 import type { PageContent } from "../types";
 
@@ -16,12 +24,13 @@ export const homePage: PageContent = {
     title: "The modern way of using threads & needle.",
     lead: "BitsNPixs ensures your artwork is professionally digitized so that it looks sharp and professional on any material.",
     actions: [
-      { label: "Digitize Your Design", href: routes.shop },
+      { label: "Get a Free Quote", href: routes.quote },
       { label: "Portfolio", href: routes.portfolio },
     ],
     digitizer: digitizerContent,
   },
   blocks: [
+    { type: "marquee", variant: "facts", items: trustFacts },
     {
       type: "statement",
       eyebrow: "BitsNPixs",
@@ -35,11 +44,8 @@ export const homePage: PageContent = {
       image: image("home-intro"),
     },
     {
-      type: "marquee",
-      items: embroideryFormats,
-    },
-    {
       type: "services",
+      layout: "index",
       eyebrow: "Services",
       title: "What we do",
       lead: "BitsNPixs is the reliable and professional embroidery digitizing service provider since 2011. When it comes to embroidery digitizing, we stand on top using the most advanced techniques.",
@@ -76,6 +82,7 @@ export const homePage: PageContent = {
         },
       ],
     },
+    embroideryFormatsBlock,
     {
       type: "portfolio",
       surface: "light",
@@ -84,6 +91,7 @@ export const homePage: PageContent = {
       limit: 3,
       action: { label: "View All", href: routes.portfolio },
     },
+    globalBlock,
     whyBitsNPixsBlock,
     {
       type: "stats",
@@ -139,6 +147,7 @@ export const homePage: PageContent = {
         },
       ],
     },
+    audienceBlock,
     digitizeCtaBlock,
   ],
 };

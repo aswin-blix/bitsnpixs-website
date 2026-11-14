@@ -1,8 +1,18 @@
-import { site, type ContactFieldName } from "@/lib/content";
+import { contactForm, site, type ContactFieldName } from "@/lib/content";
 
 export type ContactValues = Record<ContactFieldName, string>;
 
 export type ContactResult = { ok: true; via: "endpoint" | "email" } | { ok: false; message: string };
+
+export const emptyContactValues = Object.fromEntries(contactForm.fields.map((field) => [field.name, ""])) as ContactValues;
+
+/** What to tell the visitor after a submission. */
+export function statusMessage(result: ContactResult): string {
+  if (!result.ok) return result.message;
+  return result.via === "email"
+    ? "Your email app has opened with the message ready to send."
+    : "Thank you. Your message has been sent and we will get back to you.";
+}
 
 /**
  * Where contact form submissions go. Set NEXT_PUBLIC_CONTACT_ENDPOINT to a URL

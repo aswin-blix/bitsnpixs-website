@@ -71,6 +71,8 @@ export type PortfolioCategoryId = "coloreel" | "embroidery" | "vector";
 export interface PortfolioCategory {
   id: PortfolioCategoryId;
   label: string;
+  /** One-word label for the portfolio filter. */
+  shortLabel: string;
   action: LinkRef;
 }
 
@@ -123,6 +125,23 @@ export interface TurnaroundOption {
   label: string;
   time: string;
   body: string;
+  /** Fastest and slowest delivery in hours, used by the delivery clock. */
+  hours: [min: number, max: number];
+}
+
+export interface Market {
+  id: string;
+  country: string;
+  city: string;
+  timeZone: string;
+  lat: number;
+  lng: number;
+  hq?: boolean;
+}
+
+export interface MachineFormats {
+  brand: string;
+  formats: string[];
 }
 
 /** Labels and options for the live digitizer (components/sections/StitchPad). */
@@ -177,11 +196,15 @@ export interface ProseBlock extends BlockBase {
 
 export interface ServicesBlock extends BlockBase {
   type: "services";
+  /** "index" is the oversized list with a cursor-following preview; "cards" a grid. */
+  layout: "index" | "cards";
   serviceIds: ServiceId[];
 }
 
 export interface MarqueeBlock extends BlockBase {
   type: "marquee";
+  /** "display" for huge keywords, "facts" for a compact band of proof points. */
+  variant: "display" | "facts";
   items: string[];
 }
 
@@ -209,8 +232,51 @@ export interface PortfolioBlock extends BlockBase {
   type: "portfolio";
   category?: PortfolioCategoryId;
   limit?: number;
-  grouped?: boolean;
+  /** Show every sample with the category filter (the portfolio page). */
+  explorer?: { allLabel: string; filterLabel: string };
   action?: LinkRef;
+}
+
+export interface QuoteGroup {
+  id: string;
+  label: string;
+  options: string[];
+}
+
+export interface QuoteService {
+  id: string;
+  label: string;
+  /** Published online price for this service. */
+  from: string;
+  /** Option groups asked for this service, in order. */
+  groupIds: string[];
+  /** When the published price depends on one of the choices. */
+  fromBy?: { groupId: string; prices: Record<string, string> };
+}
+
+export interface QuoteConfig {
+  services: QuoteService[];
+  groups: QuoteGroup[];
+}
+
+export interface QuoteBlock extends BlockBase {
+  type: "quote";
+  config: QuoteConfig;
+  labels: {
+    steps: [service: string, options: string, details: string];
+    serviceTitle: string;
+    optionsTitle: string;
+    detailsTitle: string;
+    summaryTitle: string;
+    summaryEmpty: string;
+    fromLabel: string;
+    priceNote: string;
+    artworkNote: string;
+    notesLabel: string;
+    next: string;
+    back: string;
+    submit: string;
+  };
 }
 
 export interface TestimonialsBlock extends BlockBase {
@@ -222,6 +288,23 @@ export interface FormatsBlock extends BlockBase {
   type: "formats";
   standard?: string;
   formats: string[];
+  /** Adds the machine finder: pick a brand to highlight the formats it reads. */
+  finder?: {
+    prompt: string;
+    allLabel: string;
+    resultLabel: string;
+    note: string;
+    machines: MachineFormats[];
+  };
+}
+
+export interface GlobalBlock extends BlockBase {
+  type: "global";
+  markets: Market[];
+  clockTitle: string;
+  deliveryTitle: string;
+  deliveryNote: string;
+  options: TurnaroundOption[];
 }
 
 export interface SpecialtiesBlock extends BlockBase {
@@ -280,6 +363,7 @@ export type Block =
   | PortfolioBlock
   | TestimonialsBlock
   | FormatsBlock
+  | GlobalBlock
   | SpecialtiesBlock
   | TurnaroundBlock
   | FaqBlock
@@ -287,6 +371,7 @@ export type Block =
   | PricingBlock
   | PostsBlock
   | StitchLabBlock
+  | QuoteBlock
   | CtaBlock;
 
 export type BlockType = Block["type"];

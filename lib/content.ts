@@ -6,7 +6,7 @@ import { aboutPage } from "./content/pages/about";
 import { blogPage, careerPage, contactPage, portfolioPage, shopPage } from "./content/pages/company";
 import { homePage } from "./content/pages/home";
 import { servicePagesBySlug, softwarePage } from "./content/pages/services";
-import { stitchLabPage } from "./content/pages/tools";
+import { formatsPage, quotePage, stitchLabPage } from "./content/pages/tools";
 import type { PageContent } from "./content/types";
 
 export * from "./content/types";
@@ -26,6 +26,8 @@ export const pages = {
   blog: blogPage,
   shop: shopPage,
   stitchLab: stitchLabPage,
+  formats: formatsPage,
+  quote: quotePage,
 } satisfies Record<string, PageContent>;
 
 /** Every routable page, used by the sitemap and the content tests. */

@@ -6,16 +6,19 @@ export const portfolioCategories: PortfolioCategory[] = [
   {
     id: "coloreel",
     label: "Coloreel Embroidery Digitizing",
+    shortLabel: "Coloreel",
     action: { label: "View service", href: routes.coloreel },
   },
   {
     id: "embroidery",
     label: "Embroidery Digitizing",
+    shortLabel: "Embroidery",
     action: { label: "View service", href: routes.embroidery },
   },
   {
     id: "vector",
     label: "Vector Artwork Conversion",
+    shortLabel: "Vector",
     action: { label: "View service", href: routes.vector },
   },
 ];

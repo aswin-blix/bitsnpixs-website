@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { SmartLink } from "@/components/ui/SmartLink";
-import { navigation, routes, site } from "@/lib/content";
+import { navigation, routes } from "@/lib/content";
 import { useScrolled } from "@/lib/hooks/use-scrolled";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./MobileMenu";
@@ -73,9 +73,9 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <SmartLink href={site.signIn.href} className="link-stitch hidden text-[0.95rem] font-medium text-strong lg:inline-block">
-              {site.signIn.label}
-            </SmartLink>
+            <NavLink href={navigation.secondaryAction.href} className="hidden text-[0.95rem] font-medium text-strong lg:inline-block">
+              {navigation.secondaryAction.label}
+            </NavLink>
             <Button href={navigation.primaryAction.href} size="sm" className="hidden sm:inline-flex">
               {navigation.primaryAction.label}
             </Button>

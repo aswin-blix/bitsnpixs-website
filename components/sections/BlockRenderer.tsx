@@ -5,11 +5,13 @@ import { CTA } from "./CTA";
 import { FaqSection } from "./FaqSection";
 import { FeaturesSection } from "./FeaturesSection";
 import { FormatsSection } from "./FormatsSection";
+import { GlobalSection } from "./GlobalSection";
 import { MarqueeSection } from "./MarqueeSection";
 import { PortfolioSection } from "./PortfolioSection";
 import { PostsSection } from "./PostsSection";
 import { PricingSection } from "./PricingSection";
 import { ProseSection } from "./ProseSection";
+import { QuoteSection } from "./QuoteSection";
 import { ServicesSection } from "./ServicesSection";
 import { SpecialtiesSection } from "./SpecialtiesSection";
 import { StatementSection } from "./StatementSection";
@@ -37,6 +39,7 @@ const registry: { [T in BlockType]: SectionComponent<T> } = {
   portfolio: PortfolioSection,
   testimonials: TestimonialsSection,
   formats: FormatsSection,
+  global: GlobalSection,
   specialties: SpecialtiesSection,
   turnaround: TurnaroundSection,
   faq: FaqSection,
@@ -44,6 +47,7 @@ const registry: { [T in BlockType]: SectionComponent<T> } = {
   pricing: PricingSection,
   posts: PostsSection,
   stitchLab: StitchLabSection,
+  quote: QuoteSection,
   cta: CTA,
 };
 
