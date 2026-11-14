@@ -15,11 +15,12 @@ export interface GsapTools {
 /**
  * Runs GSAP code inside a gsap.context() scoped to `scope` and reverts it on
  * unmount or when `deps` change. Every scroll animation on the site goes
- * through this hook, so cleanup is never hand-written in a section.
+ * through this hook, so cleanup is never hand-written in a section. `setup`
+ * may return a function for anything GSAP cannot revert itself (listeners).
  */
 export function useGsap(
   scope: RefObject<HTMLElement | null>,
-  setup: (tools: GsapTools) => void,
+  setup: (tools: GsapTools) => void | (() => void),
   deps: DependencyList,
 ): void {
   useIsomorphicLayoutEffect(() => {

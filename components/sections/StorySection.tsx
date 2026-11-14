@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
@@ -12,8 +12,8 @@ import { cn, padIndex } from "@/lib/utils";
 
 /**
  * Scroll-told chapter: a set of steps the thread sews through.
- *   stack       pinned; steps swap in place while the thread fills
- *   horizontal  pinned; steps travel sideways along a (spectrum) thread
+ *   stack       held in place; steps swap as the thread fills
+ *   horizontal  held in place; steps travel sideways along a (spectrum) thread
  * Small screens and reduced-motion users get the same steps as a plain list.
  */
 export function StorySection({ block }: { block: StoryBlock }) {
@@ -21,7 +21,7 @@ export function StorySection({ block }: { block: StoryBlock }) {
   const Layout = !rich ? StaticStory : block.mode === "horizontal" ? HorizontalStory : StackStory;
 
   return (
-    <Section surface={block.surface ?? "dark"} bleed flush className="overflow-hidden">
+    <Section surface={block.surface ?? "dark"} bleed flush>
       <Layout block={block} />
     </Section>
   );
@@ -75,63 +75,86 @@ function ProgressThread({ thread, barRef }: { thread: StoryBlock["thread"]; barR
   );
 }
 
+/** Scroll distance each step gets in the stacked chapter, in viewport heights. */
+const STACK_STEP_VH = 60;
+/** Share of a step's scroll spent fading the previous step out, then the next one in. */
+const SWAP = 0.22;
+
+/*
+ * Both pinned layouts hold their place with CSS `position: sticky` rather than
+ * a JavaScript pin: the browser keeps the panel still on the compositor, so it
+ * cannot jitter against smooth scrolling. GSAP only scrubs a timeline against
+ * the wrapper's scroll progress, so every frame is a pure function of scroll
+ * position: nothing is triggered at thresholds and nothing re-renders.
+ */
+
 function StackStory({ block }: LayoutProps) {
   const root = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
-  const [active, setActive] = useState(0);
+  const counter = useRef<HTMLSpanElement>(null);
   const count = block.steps.length;
 
   useGsap(
     root,
-    ({ gsap, ScrollTrigger }) => {
-      const setBar = gsap.quickSetter(bar.current, "scaleX");
-      ScrollTrigger.create({
-        trigger: root.current,
-        start: "top top",
-        end: () => `+=${count * window.innerHeight * 0.55}`,
-        pin: true,
-        scrub: true,
-        onUpdate: (self) => {
-          setBar(self.progress);
-          setActive(Math.min(count - 1, Math.floor(self.progress * count)));
+    ({ gsap }) => {
+      const panels = gsap.utils.toArray<HTMLElement>(".js-step");
+      gsap.set(panels.slice(1), { opacity: 0, yPercent: 14 });
+
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true,
+          onUpdate: (self) => {
+            const label = padIndex(Math.min(count - 1, Math.floor(self.progress * count)));
+            if (counter.current && counter.current.textContent !== label) counter.current.textContent = label;
+          },
         },
       });
+
+      // One unit of timeline per step. The thread fills across the whole chapter.
+      timeline.to(bar.current, { scaleX: 1, duration: count }, 0);
+      // Steps swap one after the other (out, then in), so two are never half-visible at once.
+      for (let index = 1; index < count; index += 1) {
+        timeline
+          .to(panels[index - 1], { opacity: 0, yPercent: -14, duration: SWAP }, index - SWAP)
+          .to(panels[index], { opacity: 1, yPercent: 0, duration: SWAP }, index);
+      }
     },
     [count],
   );
 
   return (
-    <div ref={root} className="flex min-h-svh items-center pt-(--header-height)">
-      <div className="container-page grid items-center gap-16 py-16 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="flex flex-col items-start gap-10">
-          <StoryIntro block={block} />
-          <div className="flex w-full max-w-sm flex-col gap-3">
-            <p aria-hidden="true" className="font-mono text-sm tracking-widest text-muted">
-              <span className="text-strong">{padIndex(active)}</span> / {padIndex(count - 1)}
-            </p>
-            <ProgressThread thread={block.thread} barRef={bar} />
+    <div ref={root} style={{ height: `calc(100svh + ${count * STACK_STEP_VH}vh)` }}>
+      <div className="sticky top-0 flex h-svh items-center pt-(--header-height)">
+        <div className="container-page grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="flex flex-col items-start gap-10">
+            <StoryIntro block={block} />
+            <div className="flex w-full max-w-sm flex-col gap-3">
+              <p aria-hidden="true" className="font-mono text-sm tracking-widest text-muted">
+                <span ref={counter} className="text-strong">
+                  {padIndex(0)}
+                </span>{" "}
+                / {padIndex(count - 1)}
+              </p>
+              <ProgressThread thread={block.thread} barRef={bar} />
+            </div>
+            <StoryAction block={block} />
           </div>
-          <StoryAction block={block} />
-        </div>
 
-        <ol className="relative min-h-[24rem]">
-          {block.steps.map((step, index) => (
-            <li
-              key={step.body}
-              className={cn(
-                "absolute inset-0 flex flex-col justify-center transition-[opacity,transform] duration-500 ease-brand",
-                index === active && "translate-y-0 opacity-100",
-                index < active && "-translate-y-12 opacity-0",
-                index > active && "translate-y-12 opacity-0",
-              )}
-            >
-              <span aria-hidden="true" className="mb-6 font-display text-[clamp(5rem,12vw,11rem)] leading-none font-bold text-raised">
-                {padIndex(index)}
-              </span>
-              <StepContent step={step} index={index} />
-            </li>
-          ))}
-        </ol>
+          <ol className="relative min-h-[24rem]">
+            {block.steps.map((step, index) => (
+              <li key={step.body} className="js-step absolute inset-0 flex flex-col justify-center will-change-[transform,opacity]">
+                <span aria-hidden="true" className="mb-6 font-display text-[clamp(5rem,12vw,11rem)] leading-none font-bold text-raised">
+                  {padIndex(index)}
+                </span>
+                <StepContent step={step} index={index} />
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   );
@@ -145,49 +168,57 @@ function HorizontalStory({ block }: LayoutProps) {
 
   useGsap(
     root,
-    ({ gsap }) => {
+    ({ gsap, ScrollTrigger }) => {
+      const wrapper = root.current;
       const element = track.current;
-      if (!element) return;
+      if (!wrapper || !element) return;
       const distance = () => Math.max(0, element.scrollWidth - window.innerWidth);
-      const setBar = gsap.quickSetter(bar.current, "scaleX");
-      gsap.to(element, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: () => `+=${distance()}`,
-          pin: true,
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => setBar(self.progress),
-        },
-      });
+      // The wrapper is as tall as the sideways travel, so one pixel of scroll moves the track one pixel.
+      const sizeWrapper = () => {
+        wrapper.style.height = `${window.innerHeight + distance()}px`;
+      };
+      sizeWrapper();
+      ScrollTrigger.addEventListener("refreshInit", sizeWrapper);
+
+      gsap
+        .timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: { trigger: wrapper, start: "top top", end: "bottom bottom", scrub: true, invalidateOnRefresh: true },
+        })
+        .to(element, { x: () => -distance() }, 0)
+        .to(bar.current, { scaleX: 1 }, 0);
+
+      return () => {
+        ScrollTrigger.removeEventListener("refreshInit", sizeWrapper);
+        wrapper.style.height = "";
+      };
     },
     [count],
   );
 
   return (
-    <div ref={root} className="flex min-h-svh flex-col justify-center gap-14 overflow-hidden pt-(--header-height) pb-12">
-      <div className="container-page flex flex-wrap items-end justify-between gap-8">
-        <StoryIntro block={block} />
-        <div className="w-full max-w-xs">
-          <ProgressThread thread={block.thread} barRef={bar} />
+    <div ref={root}>
+      <div className="sticky top-0 flex h-svh flex-col justify-center gap-14 overflow-x-clip pt-(--header-height) pb-12">
+        <div className="container-page flex flex-wrap items-end justify-between gap-8">
+          <StoryIntro block={block} />
+          <div className="w-full max-w-xs">
+            <ProgressThread thread={block.thread} barRef={bar} />
+          </div>
         </div>
-      </div>
 
-      <div ref={track} className="relative w-max px-(--container-inset) will-change-transform">
-        <span aria-hidden="true" className={cn("absolute inset-x-0 top-3 h-1", threadClass[block.thread])} />
-        <ol className="flex gap-8">
-          {block.steps.map((step, index) => (
-            <li key={step.body} className="relative w-[min(78vw,25rem)] shrink-0 pt-14">
-              <span aria-hidden="true" className="absolute top-0 left-0 size-7 rotate-45 border-2 border-strong bg-surface" />
-              <div className="h-full rounded-card border border-line bg-raised p-8">
-                <StepContent step={step} index={index} compact />
-              </div>
-            </li>
-          ))}
-        </ol>
+        <div ref={track} className="relative w-max px-(--container-inset) will-change-transform">
+          <span aria-hidden="true" className={cn("absolute inset-x-0 top-3 h-1", threadClass[block.thread])} />
+          <ol className="flex gap-8">
+            {block.steps.map((step, index) => (
+              <li key={step.body} className="relative w-[min(78vw,25rem)] shrink-0 pt-14">
+                <span aria-hidden="true" className="absolute top-0 left-0 size-7 rotate-45 border-2 border-strong bg-surface" />
+                <div className="h-full rounded-card border border-line bg-raised p-8">
+                  <StepContent step={step} index={index} compact />
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   );
