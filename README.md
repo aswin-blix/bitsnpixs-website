@@ -80,10 +80,20 @@ Change the look in **one file**: `app/styles/tokens.css`.
 3. **Semantic** variables (`--surface`, `--ink`, `--accent`, `--accent-text` ...) are what
    components use, through Tailwind utilities such as `bg-surface` and `text-accent-text`.
 
-The site is dark by default; sections switch palette with
-`data-surface="dark | tint | light"`. To make the whole site light-led again, swap the
-values of the dark and light blocks in that file. The 3D field and the digitizer's
-thread colours read the same variables at runtime. Radii, section spacing, container width and the marquee
+There are two themes, dark and light, switched by the toggle in the header. Sections pick
+a surface with `data-surface="dark | tint | light"`, and each surface has a value in both
+themes (the table at the top of layer 3 in `tokens.css` shows the mapping). The 3D field
+and the digitizer's thread colours read the same variables at runtime.
+
+**Dark and light mode**
+
+- First visit: `DEFAULT_THEME` in `lib/theme.ts` decides. It is `"system"` (follow the
+  device setting); set it to `"dark"` or `"light"` to force one.
+- The visitor's choice from the toggle is saved in `localStorage` and always wins.
+- A tiny script in `<head>` (`themeInitScript`) sets `<html data-theme>` before the page
+  paints, so there is no flash of the wrong theme. It is unit tested.
+- Where the browser supports view transitions, the new theme spreads out in a circle from
+  the toggle; otherwise it switches instantly (and always instantly with reduced motion). Radii, section spacing, container width and the marquee
 speed are tokens in the same file. Fonts are set in `lib/fonts.ts`.
 
 `lib/theme.ts` mirrors five brand colours for places that cannot read CSS (the
@@ -125,9 +135,16 @@ Without it, submitting opens the visitor's email app with the message pre-filled
 - All GSAP code goes through `useGsap` (`gsap.context()` + `revert()`).
 
 Lighthouse on the production build (images disabled, headless Chrome): desktop
-100 / 100 / 100 / 100 on the home page; mobile performance 92 (home) to 99 on the
-pages audited, with accessibility, best practices and SEO at 100. Re-measure with real
-images on your hosting.
+100 / 100 / 100 / 100 on the home page in both themes; mobile performance 90 to 96 on the
+pages audited, with accessibility, best practices and SEO at 100 in both themes.
+Re-measure with real images on your hosting.
+
+## Responsive checks
+
+Every page (plus the 404) was loaded at 360, 390, 768, 1024 and 1280 px wide and checked
+for content wider than the screen and for tap targets under 24 px: none remain. On phones
+the header keeps the logo, theme toggle and menu (Get a Quote moves into the menu), and
+section spacing, eyebrows, the product gallery and quote cards are tightened.
 
 ## Shop and product pages
 
@@ -181,6 +198,10 @@ still taken from the old site.
   30 days). "Embroidery shops", "Apparel decorators" and "Distributors" come from your
   testimonials and vector page.
 - **Calls to action:** "Get a Free Quote" replaces "Digitize Your Design" as the primary button.
+- **Product page:** "Configure", "Your details", "Choose an option in each group to
+  continue", "Sample" in the gallery, and the proof-point row (4.7/5 rating, 130+
+  digitizers, 24/7 support: figures from your site). Gallery samples are your portfolio images.
+- **Theme toggle:** its label, "Switch to light theme" / "Switch to dark theme".
 
 ## Missing content and placeholders
 

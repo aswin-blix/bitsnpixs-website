@@ -32,6 +32,11 @@ interface ButtonProps {
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
+  /**
+   * Classes for the outer (magnetic) wrapper; replaces its default "inline-flex".
+   * Use it to hide the whole button at some breakpoints ("hidden sm:inline-flex").
+   */
+  wrapperClassName?: string;
 }
 
 export function Button({
@@ -45,6 +50,7 @@ export function Button({
   disabled,
   onClick,
   className,
+  wrapperClassName,
 }: ButtonProps) {
   const { rich } = useMotionProfile();
   const { style, handlers } = useMagnetic(magnetic && rich);
@@ -72,7 +78,7 @@ export function Button({
   );
 
   return (
-    <motion.span className="inline-flex" style={style} whileTap={{ scale: 0.97 }} {...handlers}>
+    <motion.span className={wrapperClassName ?? "inline-flex"} style={style} whileTap={{ scale: 0.97 }} {...handlers}>
       {href ? (
         <SmartLink href={href} className={classes} onClick={onClick}>
           {content}

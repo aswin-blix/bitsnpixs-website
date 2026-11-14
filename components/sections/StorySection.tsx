@@ -147,7 +147,7 @@ function StackStory({ block }: LayoutProps) {
           <ol className="relative min-h-[24rem]">
             {block.steps.map((step, index) => (
               <li key={step.body} className="js-step absolute inset-0 flex flex-col justify-center will-change-[transform,opacity]">
-                <span aria-hidden="true" className="mb-6 font-display text-[clamp(5rem,12vw,11rem)] leading-none font-bold text-raised">
+                <span aria-hidden="true" className="mb-6 font-display text-[clamp(5rem,12vw,11rem)] leading-none font-bold text-ghost">
                   {padIndex(index)}
                 </span>
                 <StepContent step={step} index={index} />

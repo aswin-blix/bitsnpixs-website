@@ -13,6 +13,7 @@
   --color-ink: var(--ink);
   --color-strong: var(--ink-strong);
   --color-muted: var(--ink-muted);
+  --color-ghost: var(--ink-ghost);
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
@@ -116,6 +117,13 @@
 
   .lenis.lenis-stopped {
     overflow: hidden;
+  }
+
+  /* Theme switch: the new theme is revealed in a circle from the toggle (see ThemeToggle). */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
   }
 
   @media (prefers-reduced-motion: reduce) {

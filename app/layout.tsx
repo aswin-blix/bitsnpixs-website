@@ -8,7 +8,7 @@ import { SkipLink } from "@/components/layout/SkipLink";
 import { ThreadCursor } from "@/components/layout/ThreadCursor";
 import { fontVariables } from "@/lib/fonts";
 import { organizationJsonLd, rootMetadata } from "@/lib/seo";
-import { brand } from "@/lib/theme";
+import { brand, themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = rootMetadata;
@@ -17,7 +17,11 @@ export const viewport: Viewport = { themeColor: brand.primary };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fontVariables} antialiased`}>
+    // data-theme is set by the head script before React hydrates, hence suppressHydrationWarning.
+    <html lang="en" className={`${fontVariables} antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <Providers>
           <SkipLink />

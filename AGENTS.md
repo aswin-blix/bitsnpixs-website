@@ -26,7 +26,8 @@ Read `README.md` (structure, theming, how pages are built) and `DESIGN_NOTES.md`
   `lib/quote.ts`; the shop has no cart or payment, orders are sent as quote requests.
 - **Theme by variables.** Colours, radii, spacing and motion tokens live in
   `app/styles/tokens.css`. Components use the semantic utilities (`bg-surface`,
-  `text-ink`, `text-accent-text` ...), never raw hex values.
+  `text-ink`, `text-accent-text` ...), never raw hex values, so they work in both the
+  dark and the light theme. Check new UI in both (the header toggle) and at 360 px.
 - **Motion.** Animate only transform and opacity. Framer variants and timings come from
   `lib/motion.ts`; GSAP goes through `useGsap`; scroll reveals through `Reveal`.
   Server HTML must stay visible without JavaScript. Respect `useMotionProfile`.

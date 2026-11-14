@@ -24,7 +24,7 @@ export function ProductGallery({ images, label, sampleLabel }: ProductGalleryPro
 
   return (
     <div role="group" aria-label={label} data-surface="light" className="rounded-card p-3 shadow-card sm:p-4">
-      <div className="relative aspect-[4/5] max-h-[calc(100svh-17rem)] w-full overflow-hidden rounded-media bg-sunken">
+      <div className="relative aspect-square max-h-[calc(100svh-17rem)] w-full sm:aspect-[4/5] overflow-hidden rounded-media bg-sunken">
         <AnimatePresence initial={false} mode="popLayout">
           <motion.div
             key={active}

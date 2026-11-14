@@ -83,7 +83,7 @@ export function Footer() {
       <div
         aria-hidden="true"
         data-text="bitsnpixs"
-        className="pointer-events-none -mb-[5vw] text-center font-display text-[19vw] leading-none font-bold tracking-tighter text-raised select-none before:content-[attr(data-text)]"
+        className="pointer-events-none -mb-[5vw] text-center font-display text-[19vw] leading-none font-bold tracking-tighter text-ghost select-none before:content-[attr(data-text)]"
       />
     </footer>
   );

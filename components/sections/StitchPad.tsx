@@ -164,7 +164,7 @@ export function StitchPad({ content, size = "compact", className }: StitchPadPro
               aria-pressed={spool.token === thread}
               onClick={() => setThread(spool.token)}
               style={{ backgroundColor: `var(${spool.token})` }}
-              className="size-8 rounded-full border-2 border-surface outline-2 outline-transparent transition-[outline-color,transform] duration-200 hover:scale-110 aria-pressed:outline-(--accent-text)"
+              className="size-8 rounded-full border-2 border-surface shadow-[0_0_0_1px_var(--line)] outline-2 outline-transparent transition-[outline-color,transform] duration-200 hover:scale-110 aria-pressed:outline-(--accent-text)"
             />
           ))}
         </div>

@@ -11,6 +11,7 @@ import { useScrolled } from "@/lib/hooks/use-scrolled";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./MobileMenu";
 import { NavLink } from "./NavLink";
+import { ThemeToggle } from "./ThemeToggle";
 
 const MOBILE_MENU_ID = "mobile-menu";
 
@@ -93,19 +94,21 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <NavLink href={navigation.secondaryAction.href} className="hidden text-[0.95rem] font-medium text-strong lg:inline-block">
               {navigation.secondaryAction.label}
             </NavLink>
-            <Button href={navigation.primaryAction.href} size="sm">
+            {/* On phones the primary action lives in the menu, leaving room for the logo and controls. */}
+            <Button href={navigation.primaryAction.href} size="sm" wrapperClassName="hidden sm:inline-flex">
               {navigation.primaryAction.label}
             </Button>
+            <ThemeToggle />
             <button
               type="button"
               aria-expanded={menuOpen}
               aria-controls={MOBILE_MENU_ID}
               onClick={() => setMenuPath(menuOpen ? null : pathname)}
-              className="grid size-11 place-items-center rounded-control border border-line bg-surface text-strong lg:hidden"
+              className="grid size-10 place-items-center rounded-control border border-line bg-surface text-strong sm:size-11 lg:hidden"
             >
               <Icon name={menuOpen ? "cross" : "menu"} />
               <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>

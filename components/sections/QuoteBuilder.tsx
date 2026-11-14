@@ -31,7 +31,7 @@ export function QuoteBuilder({ labels }: { labels: QuoteLabels }) {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-12">
-      <div className="rounded-card border border-line bg-raised p-6 sm:p-10">
+      <div className="rounded-card border border-line bg-raised p-5 sm:p-10">
         <ol className="mb-10 flex items-center gap-3">
           {labels.steps.map((label, index) => (
             <li key={label} aria-current={index === step ? "step" : undefined} className="flex flex-1 items-center gap-3">
@@ -67,9 +67,9 @@ export function QuoteBuilder({ labels }: { labels: QuoteLabels }) {
                     key={product.slug}
                     selected={product.slug === request.selection.productSlug}
                     onSelect={() => request.chooseProduct(product.slug)}
-                    className="flex flex-col gap-2 p-6"
+                    className="flex flex-col gap-2 p-5 sm:p-6"
                   >
-                    <span className="font-display text-2xl">{product.name}</span>
+                    <span className="font-display text-xl sm:text-2xl">{product.name}</span>
                     <span className="font-mono text-xs tracking-widest uppercase opacity-80">
                       {labels.priceLabel} {formatPrice(product.price, request.currency)}
                     </span>

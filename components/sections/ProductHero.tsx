@@ -19,7 +19,7 @@ export function ProductHero({ product }: { product: Product }) {
   const gallery = [product.image, ...getPortfolioItems(product.portfolioCategory, GALLERY_SAMPLES).map((item) => item.after)];
 
   return (
-    <section data-surface="dark" className="relative pt-(--header-height)">
+    <section data-surface="dark" className="relative overflow-x-clip pt-(--header-height)">
       <div aria-hidden="true" className="brand-glow pointer-events-none absolute top-0 left-0 size-[48rem] -translate-x-1/3 -translate-y-1/4 opacity-40" />
       <div className="container-page relative py-10 lg:py-14">
         <Rise>

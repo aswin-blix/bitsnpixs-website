@@ -64,6 +64,9 @@ is dark-led and built around tools a buyer can play with, informed by what leadi
 digitizing services worldwide put in front of customers (free quotes, format and
 machine support, turnaround promises, proof points) but drawn in its own language.
 
+- **Themes.** Dark ("machine room") and light ("fabric"), switched from the header with a
+  circular reveal; first visits follow the device setting. Both palettes come from the
+  same brand values, so the identity holds in either.
 - **Surfaces.** A dark "machine room" is the default. `tint` is the same surface with
   thread colour bleeding in; `light` is the "fabric" surface, used only for contrast
   (portfolio, testimonials). The whole flip lives in `app/styles/tokens.css`.

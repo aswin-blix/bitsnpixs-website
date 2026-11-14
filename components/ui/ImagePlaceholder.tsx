@@ -22,14 +22,14 @@ export function ImagePlaceholder({ alt, ratio = 4 / 3, fill, showLabel = true, c
       aria-label={alt}
       style={fill ? undefined : { aspectRatio: ratio }}
       className={cn(
-        "placeholder-surface flex items-end overflow-hidden rounded-media text-accent-text",
+        "placeholder-surface @container flex items-end overflow-hidden rounded-media text-accent-text",
         fill ? "absolute inset-0" : "relative w-full",
         className,
       )}
     >
       <span aria-hidden="true" className="absolute inset-x-6 top-1/2 stitch-x opacity-40" />
       {showLabel ? (
-        <span className="m-3 rounded-control bg-surface/80 px-3 py-1 font-mono text-[0.65rem] tracking-widest uppercase">
+        <span className="m-3 hidden rounded-control bg-surface/80 px-3 py-1 font-mono text-[0.65rem] tracking-widest uppercase @[12rem]:inline">
           Image placeholder
         </span>
       ) : null}

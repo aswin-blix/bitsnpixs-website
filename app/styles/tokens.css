@@ -7,8 +7,8 @@
  *
  * Components only ever use layer 3 (through the Tailwind utilities mapped in
  * globals.css), so changing a brand value here re-themes every page, the
- * marquee, the story chapters, the live digitizer and the 3D hero. The site is
- * dark by default; sections switch palette with data-surface="dark | tint | light".
+ * marquee, the story chapters, the live digitizer and the 3D hero, in both
+ * the dark and the light theme.
  */
 
 :root {
@@ -53,7 +53,7 @@
   --shape-card: 1.5rem;
   --shape-media: 1.25rem;
   --shape-control: 999px;
-  --space-section: clamp(4.5rem, 9vw, 8.5rem);
+  --space-section: clamp(3.75rem, 9vw, 8.5rem);
   --container-max: 80rem;
   --container-gutter: clamp(1.25rem, 4vw, 3rem);
   /* Left/right inset that lines full-bleed scrollers up with the page column. */
@@ -66,16 +66,31 @@
   --marquee-duration: 38s;
 }
 
-/* ── Layer 3: semantic (the dark "machine room" is the default) ───── */
+/*
+ * ── Layer 3: semantic ────────────────────────────────────────────────
+ * Two palettes, chosen by <html data-theme="dark | light"> (see lib/theme.ts
+ * and components/layout/ThemeToggle.tsx). Inside each, sections pick a
+ * surface with data-surface:
+ *
+ *   surface   dark theme (default)            light theme
+ *   dark      machine room (abyss)            paper
+ *   tint      abyss with thread colour        green wash
+ *   light     fabric (mist): contrast slabs   mist: contrast slabs
+ */
+
+/* Dark palette: the default, and every "dark" section in the dark theme. */
 :root,
 [data-surface="dark"],
 [data-surface="tint"] {
+  color-scheme: dark;
   --surface: var(--brand-abyss);
   --surface-raised: color-mix(in oklab, var(--brand-night) 55%, var(--brand-abyss));
   --surface-sunken: color-mix(in oklab, var(--brand-abyss) 70%, black);
   --ink: color-mix(in oklab, var(--brand-paper) 80%, var(--brand-abyss));
   --ink-strong: var(--brand-paper);
   --ink-muted: color-mix(in oklab, var(--brand-paper) 62%, var(--brand-abyss));
+  /* Oversized decorative type (step numerals, footer wordmark). */
+  --ink-ghost: color-mix(in oklab, var(--brand-paper) 9%, var(--brand-abyss));
   --line: color-mix(in oklab, var(--brand-paper) 13%, transparent);
   --accent: var(--brand-primary);
   --on-accent: var(--brand-ink);
@@ -85,23 +100,28 @@
   --elevation-card: 0 24px 60px -30px rgb(0 0 0 / 0.75);
 }
 
-/* Tint: the dark surface with thread colour bleeding into it. */
 [data-surface="tint"] {
   --surface: color-mix(in oklab, var(--brand-primary) 9%, var(--brand-abyss));
   --surface-raised: color-mix(in oklab, var(--brand-primary) 15%, var(--brand-abyss));
   --surface-sunken: color-mix(in oklab, var(--brand-primary) 5%, var(--brand-abyss));
+  --ink-ghost: color-mix(in oklab, var(--brand-tint) 12%, var(--brand-abyss));
   --line: color-mix(in oklab, var(--brand-tint) 20%, transparent);
   --accent-soft: color-mix(in oklab, var(--brand-primary) 26%, transparent);
 }
 
-/* Light: the "fabric" surface, used sparingly for contrast. */
-[data-surface="light"] {
+/* Light palette: "light" sections in both themes, and every section in the light theme. */
+[data-surface="light"],
+:root[data-theme="light"],
+[data-theme="light"] [data-surface="dark"],
+[data-theme="light"] [data-surface="tint"] {
+  color-scheme: light;
   --surface: var(--brand-mist);
   --surface-raised: var(--brand-paper);
   --surface-sunken: var(--brand-line);
   --ink: var(--brand-slate);
   --ink-strong: var(--brand-ink);
   --ink-muted: color-mix(in oklab, var(--brand-slate) 82%, var(--brand-paper));
+  --ink-ghost: color-mix(in oklab, var(--brand-slate) 10%, var(--brand-paper));
   --line: color-mix(in oklab, var(--brand-slate) 16%, var(--brand-paper));
   --accent: var(--brand-primary);
   --on-accent: var(--brand-ink);
@@ -109,6 +129,21 @@
   --accent-soft: var(--brand-wash);
   --focus-ring: var(--brand-primary-darkest);
   --elevation-card: 0 1px 2px rgb(33 37 41 / 0.04), 0 18px 40px -24px rgb(33 37 41 / 0.28);
+}
+
+/* Light theme: the page itself is paper, so the mist "light" slabs still stand out. */
+:root[data-theme="light"],
+[data-theme="light"] [data-surface="dark"] {
+  --surface: var(--brand-paper);
+  --surface-raised: var(--brand-mist);
+}
+
+[data-theme="light"] [data-surface="tint"] {
+  --surface: var(--brand-wash);
+  --surface-raised: var(--brand-paper);
+  --surface-sunken: color-mix(in oklab, var(--brand-tint) 32%, var(--brand-paper));
+  --line: color-mix(in oklab, var(--brand-primary) 22%, var(--brand-paper));
+  --accent-soft: var(--brand-lime);
 }
 
 /* In the base layer so Tailwind utilities (bg-transparent, bg-surface/80 ...) can override it. */
