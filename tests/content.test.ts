@@ -86,6 +86,14 @@ describe("portfolio", () => {
     }
   });
 
+  it("names both views of every category's samples", () => {
+    for (const { views } of portfolioCategories) {
+      expect(views.before.trim()).not.toBe("");
+      expect(views.after.trim()).not.toBe("");
+      expect(views.before).not.toBe(views.after);
+    }
+  });
+
   it("filters and limits", () => {
     expect(getPortfolioItems("vector").every((item) => item.category === "vector")).toBe(true);
     expect(getPortfolioItems(undefined, 3)).toHaveLength(3);

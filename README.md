@@ -174,6 +174,7 @@ as the contact form (`NEXT_PUBLIC_CONTACT_ENDPOINT`, or the visitor's email app)
 | Quote builder | `/get-a-quote` | Starts from the same catalog as the shop (`lib/content/products.json`); the brief is sent through `lib/contact.ts` |
 | Product configurator | `/shop/<slug>` | Options, quantity and live price, then contact details; sends the order as a quote request |
 | Client reviews | Home, About | Each client is an embroidered patch (initials, its own thread colour); choosing one stitches the quote into the hoop. Advances on its own with a progress thread, pauses on hover, keyboard focus or the pause button, never with reduced motion; arrow keys and swipe work. `components/sections/TestimonialShowcase.tsx` |
+| Portfolio samples | Home, service pages, `/portfolio` | Each before/after pair is one piece of work being made: the artwork is sewn into the result row by row when the card scrolls into view. An "Artwork / Stitched" switch (or a click or tap on the image) runs it either way, and on devices with a mouse an embroidery hoop follows the pointer and shows the other view through it. With reduced motion nothing plays on its own and the switch changes the view instantly. `components/ui/StitchReveal.tsx`; row order and timing are in `lib/stitch/reveal.ts`; the switch names are `views` on each category in `lib/content/portfolio.ts` |
 | Machine and format finder | Home, Embroidery, `/file-formats` | Brand-to-format table is `machineFormats` in `lib/content/shared.ts` |
 | Worldwide map and clocks | Home | Markets are in `lib/content/markets.json`; run `npm run map:build` after editing |
 
@@ -202,6 +203,8 @@ still taken from the old site.
 - **Product page:** "Configure", "Your details", "Choose an option in each group to
   continue", "Sample" in the gallery, and the proof-point row (4.7/5 rating, 130+
   digitizers, 24/7 support: figures from your site). Gallery samples are your portfolio images.
+- **Portfolio samples:** the switch names "Artwork" / "Stitched", and "Original" /
+  "Vector" for vector samples.
 - **Theme toggle:** its label, "Switch to light theme" / "Switch to dark theme".
 - **Clients section:** "Client rating" under the 4.7/5 score, and the control labels
   ("Choose a client review", "Previous review", "Next review", "Pause reviews",

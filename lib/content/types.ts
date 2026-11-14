@@ -73,6 +73,8 @@ export interface PortfolioCategory {
   label: string;
   /** One-word label for the portfolio filter. */
   shortLabel: string;
+  /** Names of the two states of a sample: the artwork we receive and the result we deliver. */
+  views: { before: string; after: string };
   action: LinkRef;
 }
 

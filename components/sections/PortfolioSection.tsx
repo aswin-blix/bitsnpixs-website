@@ -12,7 +12,7 @@ import {
 import { PortfolioExplorer } from "./PortfolioExplorer";
 import { ProjectCard } from "./ProjectCard";
 
-const categoryLabels = Object.fromEntries(portfolioCategories.map(({ id, label }) => [id, label]));
+const categoryById = Object.fromEntries(portfolioCategories.map((category) => [category.id, category]));
 
 function ProjectGrid({ items }: { items: PortfolioItem[] }) {
   // Number samples within their own category, not across the whole grid.
@@ -24,7 +24,7 @@ function ProjectGrid({ items }: { items: PortfolioItem[] }) {
         seen.set(item.category, index + 1);
         return (
           <RevealItem as="li" key={item.id}>
-            <ProjectCard item={item} categoryLabel={categoryLabels[item.category]} index={index} />
+            <ProjectCard item={item} category={categoryById[item.category]} index={index} />
           </RevealItem>
         );
       })}

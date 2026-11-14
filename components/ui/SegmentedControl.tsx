@@ -5,17 +5,24 @@ import { useId } from "react";
 import { SPRING } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
+const sizes = {
+  md: "px-5 py-2.5 text-sm",
+  sm: "px-3.5 py-1.5 text-xs",
+} as const;
+
 interface SegmentedControlProps<T extends string> {
   /** Accessible name for the group (visually hidden). */
   legend: string;
   options: readonly { id: T; label: string }[];
   value: T;
   onChange: (value: T) => void;
+  /** "sm" for a switch that sits inside a card. */
+  size?: keyof typeof sizes;
   className?: string;
 }
 
 /** Radio group styled as a pill switch; the highlight slides between options. */
-export function SegmentedControl<T extends string>({ legend, options, value, onChange, className }: SegmentedControlProps<T>) {
+export function SegmentedControl<T extends string>({ legend, options, value, onChange, size = "md", className }: SegmentedControlProps<T>) {
   const groupName = useId();
 
   return (
@@ -28,7 +35,8 @@ export function SegmentedControl<T extends string>({ legend, options, value, onC
             <label
               key={option.id}
               className={cn(
-                "relative cursor-pointer rounded-control px-5 py-2.5 text-sm font-semibold transition-colors duration-300 has-focus-visible:outline-2 has-focus-visible:outline-(--focus-ring)",
+                "relative cursor-pointer rounded-control font-semibold transition-colors duration-300 has-focus-visible:outline-2 has-focus-visible:outline-(--focus-ring)",
+                sizes[size],
                 selected ? "text-on-accent" : "text-strong",
               )}
             >

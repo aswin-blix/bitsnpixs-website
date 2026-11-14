@@ -1,25 +1,29 @@
-import { CompareSlider } from "@/components/ui/CompareSlider";
-import type { PortfolioItem } from "@/lib/content";
+import { StitchReveal } from "@/components/ui/StitchReveal";
+import type { PortfolioCategory, PortfolioItem } from "@/lib/content";
 import { padIndex } from "@/lib/utils";
 
 interface ProjectCardProps {
   item: PortfolioItem;
-  categoryLabel: string;
+  category: PortfolioCategory;
   index: number;
 }
 
-/** One portfolio sample: a before/after comparison with a caption. */
-export function ProjectCard({ item, categoryLabel, index }: ProjectCardProps) {
-  const label = `${categoryLabel} sample ${index + 1}`;
+/** One portfolio sample: the artwork being made into the result, with its category and number. */
+export function ProjectCard({ item, category, index }: ProjectCardProps) {
   return (
-    <figure className="flex flex-col gap-4">
-      <CompareSlider before={item.before} after={item.after} label={label} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" />
-      <figcaption className="flex items-center justify-between gap-4 font-mono text-xs tracking-widest text-muted uppercase">
-        <span>{categoryLabel}</span>
+    <StitchReveal
+      before={item.before}
+      after={item.after}
+      labels={category.views}
+      name={`${category.label} sample ${index + 1}`}
+      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
+    >
+      <p className="flex items-baseline gap-3 text-right font-mono text-xs tracking-widest text-muted uppercase">
+        <span>{category.shortLabel}</span>
         <span aria-hidden="true" className="text-accent-text">
           {padIndex(index)}
         </span>
-      </figcaption>
-    </figure>
+      </p>
+    </StitchReveal>
   );
 }

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { shadeHex } from "@/lib/stitch/color";
 import { countStitches, generateStitches, SEGMENT_SIZE, type StitchMask } from "@/lib/stitch/engine";
+import { revealDuration, revealRows } from "@/lib/stitch/reveal";
 
 /** A mask with one filled rectangle. */
 function rectMask(width: number, height: number, rect: { x: number; y: number; w: number; h: number }): StitchMask {
@@ -87,5 +88,39 @@ describe("shadeHex", () => {
 
   it("returns unparseable input unchanged", () => {
     expect(shadeHex("rebeccapurple", 0.2)).toBe("rebeccapurple");
+  });
+});
+
+describe("row reveal", () => {
+  it("alternates direction like a fill stitch and starts from the top", () => {
+    const rows = revealRows(4, 0.1);
+    expect(rows.map((row) => row.direction)).toEqual([1, -1, 1, -1]);
+    expect(rows.map((row) => row.delay)).toEqual([0, 0.1, 0.2, 0.3].map((delay) => expect.closeTo(delay)));
+  });
+
+  it("undoes the rows from the bottom up, keeping each row's direction", () => {
+    const forward = revealRows(4, 0.1);
+    const back = revealRows(4, 0.1, true);
+    expect(back.map((row) => row.direction)).toEqual(forward.map((row) => row.direction));
+    expect(back.map((row) => row.delay)).toEqual([0.3, 0.2, 0.1, 0].map((delay) => expect.closeTo(delay)));
+  });
+
+  it("moves every row at once when there is no stagger (reduced motion)", () => {
+    expect(revealRows(5, 0).every((row) => row.delay === 0)).toBe(true);
+    expect(revealRows(5, -1).every((row) => row.delay === 0)).toBe(true);
+    expect(revealDuration(5, 0, 0.7)).toBe(0.7);
+  });
+
+  it("handles empty, negative and fractional row counts", () => {
+    expect(revealRows(0, 0.1)).toEqual([]);
+    expect(revealRows(-3, 0.1)).toEqual([]);
+    expect(revealRows(2.9, 0.1)).toHaveLength(2);
+    expect(revealDuration(0, 0.1, 0.7)).toBe(0);
+    expect(revealDuration(-3, 0.1, 0.7)).toBe(0);
+  });
+
+  it("lasts until the last row has finished", () => {
+    expect(revealDuration(6, 0.08, 0.7)).toBeCloseTo(1.1);
+    expect(revealDuration(1, 0.08, 0.7)).toBeCloseTo(0.7);
   });
 });

@@ -89,7 +89,7 @@ machine support, turnaround promises, proof points) but drawn in its own languag
 | Home | Worldwide: dotted map with stitched arcs, live market clocks, "order now, ready by" in the visitor's time zone | Markets, 24/7 support, 24 h and 2 to 12 h turnaround |
 | Get a Quote | Three-step quote builder with a live brief | Products, sizes, embroidery types, published prices |
 | Product pages | Configurator: options, quantity and a live price, then the order goes out as a quote request | The shop catalog |
-| Portfolio | Category filter with layout animation; sliders sweep open on first view | Before / after pairs |
+| Portfolio | Category filter with layout animation; each sample is sewn from artwork to result row by row on first view, an embroidery hoop under the pointer shows the other view, and a switch or a click runs it back | Before / after pairs |
 | Coloreel | Horizontal pinned chapter; the thread shifts through the spectrum | The 8 Coloreel steps |
 | Software | Pinned method chapter | The 7 "How do we work" points |
 | Embroidery | Placement picker on line-drawn garments | Cap, left chest, jacket back |
