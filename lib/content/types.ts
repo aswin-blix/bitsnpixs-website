@@ -298,9 +298,26 @@ export interface QuoteBlock extends BlockBase {
   labels: QuoteLabels;
 }
 
+export interface Rating {
+  score: number;
+  outOf: number;
+  label: string;
+}
+
+/** Control labels for the testimonial showcase. */
+export interface TestimonialLabels {
+  listLabel: string;
+  previous: string;
+  next: string;
+  pause: string;
+  play: string;
+}
+
 export interface TestimonialsBlock extends BlockBase {
   type: "testimonials";
   items: Testimonial[];
+  rating?: Rating;
+  labels: TestimonialLabels;
 }
 
 export interface FormatsBlock extends BlockBase {

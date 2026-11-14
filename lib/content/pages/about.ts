@@ -1,5 +1,5 @@
 import { image } from "../images";
-import { digitizeCtaBlock, whyBitsNPixsBlock } from "../shared";
+import { clientRating, digitizeCtaBlock, testimonialLabels, whyBitsNPixsBlock } from "../shared";
 import { routes } from "../site";
 import type { PageContent } from "../types";
 
@@ -64,9 +64,10 @@ export const aboutPage: PageContent = {
     whyBitsNPixsBlock,
     {
       type: "testimonials",
-      surface: "light",
       eyebrow: "Clients",
       title: "Listen to real reviews about our service.",
+      rating: clientRating,
+      labels: testimonialLabels,
       items: [
         {
           quote:

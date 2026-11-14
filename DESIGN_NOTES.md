@@ -94,6 +94,7 @@ machine support, turnaround promises, proof points) but drawn in its own languag
 | Software | Pinned method chapter | The 7 "How do we work" points |
 | Embroidery | Placement picker on line-drawn garments | Cap, left chest, jacket back |
 | Services | Standard / Rush turnaround toggle | 24 h vs 2 to 12 h |
+| Home, About | Client reviews as embroidered patches: pick one and its quote stitches into the hoop; auto-advance with a progress thread; 4.7/5 rating with stars filled to the exact fraction | Testimonials, client rating |
 | Cards | Cursor spotlight | |
 
 ### Pages added in version 2

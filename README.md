@@ -173,6 +173,7 @@ as the contact form (`NEXT_PUBLIC_CONTACT_ENDPOINT`, or the visitor's email app)
 | Live digitizer | Home hero, `/stitch-lab` | `components/sections/StitchPad.tsx` draws on a canvas; stitch geometry is in `lib/stitch/engine.ts`. It is a visual simulation, and says so on the page. Thread colours are listed in `lib/stitch/threads.ts` |
 | Quote builder | `/get-a-quote` | Starts from the same catalog as the shop (`lib/content/products.json`); the brief is sent through `lib/contact.ts` |
 | Product configurator | `/shop/<slug>` | Options, quantity and live price, then contact details; sends the order as a quote request |
+| Client reviews | Home, About | Each client is an embroidered patch (initials, its own thread colour); choosing one stitches the quote into the hoop. Advances on its own with a progress thread, pauses on hover, keyboard focus or the pause button, never with reduced motion; arrow keys and swipe work. `components/sections/TestimonialShowcase.tsx` |
 | Machine and format finder | Home, Embroidery, `/file-formats` | Brand-to-format table is `machineFormats` in `lib/content/shared.ts` |
 | Worldwide map and clocks | Home | Markets are in `lib/content/markets.json`; run `npm run map:build` after editing |
 
@@ -202,6 +203,9 @@ still taken from the old site.
   continue", "Sample" in the gallery, and the proof-point row (4.7/5 rating, 130+
   digitizers, 24/7 support: figures from your site). Gallery samples are your portfolio images.
 - **Theme toggle:** its label, "Switch to light theme" / "Switch to dark theme".
+- **Clients section:** "Client rating" under the 4.7/5 score, and the control labels
+  ("Choose a client review", "Previous review", "Next review", "Pause reviews",
+  "Play reviews"). Quotes, names and companies are unchanged from your site.
 
 ## Missing content and placeholders
 

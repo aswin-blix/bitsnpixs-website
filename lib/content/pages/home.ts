@@ -1,11 +1,13 @@
 import { image } from "../images";
 import {
   audienceBlock,
+  clientRating,
   digitizeCtaBlock,
   digitizerContent,
   embroideryFormatsBlock,
   globalBlock,
   orderStepsBlock,
+  testimonialLabels,
   trustFacts,
   whyBitsNPixsBlock,
 } from "../shared";
@@ -78,9 +80,11 @@ export const homePage: PageContent = {
     },
     {
       type: "testimonials",
-      surface: "light",
+      surface: "tint",
       eyebrow: "Clients",
       title: "Listen to real reviews about our service.",
+      rating: clientRating,
+      labels: testimonialLabels,
       items: [
         {
           quote:

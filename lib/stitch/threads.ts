@@ -12,3 +12,6 @@ export const STITCH_THREADS = [
 ] as const;
 
 export type ThreadToken = (typeof STITCH_THREADS)[number]["token"];
+
+/** The coloured threads only (no white), used for embroidered patch rings. */
+export const COLOR_THREADS = STITCH_THREADS.filter((thread) => thread.token !== "--brand-paper");

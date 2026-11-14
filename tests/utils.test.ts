@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp, cn, formatDate, isExternalHref, padIndex } from "@/lib/utils";
+import { clamp, cn, formatDate, initials, isExternalHref, padIndex } from "@/lib/utils";
 
 describe("utils", () => {
   it("cn joins truthy class names only", () => {
@@ -26,5 +26,13 @@ describe("utils", () => {
     expect(clamp(5, 0, 1)).toBe(1);
     expect(clamp(-5, 0, 1)).toBe(0);
     expect(clamp(0.4, 0, 1)).toBe(0.4);
+  });
+
+  it("initials takes the first and last word, skipping roman numerals", () => {
+    expect(initials("David Gitman")).toBe("DG");
+    expect(initials("Emil Del Rosario III")).toBe("ER");
+    expect(initials("Julie")).toBe("J");
+    expect(initials("  kathleen  ")).toBe("K");
+    expect(initials("")).toBe("");
   });
 });

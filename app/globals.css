@@ -36,6 +36,8 @@
   --animate-rise: rise 0.9s var(--motion-ease-out) both;
   --animate-slide: slide-up 0.9s var(--motion-ease-out) both;
   --animate-word: word-rise 1.1s var(--motion-ease-out) both;
+  /* Fills a bar over --progress-duration (autoplay timers). */
+  --animate-progress: progress var(--progress-duration, 7s) linear forwards;
 
   @keyframes marquee {
     to {
@@ -54,6 +56,15 @@
   @keyframes slide-up {
     from {
       transform: translate3d(0, 28px, 0);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
     }
   }
 
@@ -241,6 +252,14 @@
   &:hover::before {
     opacity: 1;
   }
+}
+
+/* Satin-stitch ring for embroidered patches: alternating thread and shadow. Set --patch to a colour. */
+@utility satin-ring {
+  background: repeating-conic-gradient(
+    var(--patch, var(--accent)) 0deg 5deg,
+    color-mix(in oklab, var(--patch, var(--accent)) 68%, black) 5deg 8deg
+  );
 }
 
 /* Outlined display text (marquee alternates, oversized numerals). */

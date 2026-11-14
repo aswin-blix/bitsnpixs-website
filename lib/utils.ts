@@ -30,3 +30,14 @@ export function padIndex(index: number): string {
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
+
+/**
+ * Up to two initials for a name: "David Gitman" -> "DG". Roman-numeral
+ * suffixes are skipped ("Emil Del Rosario III" -> "ER"); one word gives one letter.
+ */
+export function initials(name: string): string {
+  const words = name.trim().split(/\s+/).filter((word) => word && !/^[IVX]+$/.test(word));
+  if (words.length === 0) return "";
+  const first = words[0][0];
+  return (words.length > 1 ? first + words[words.length - 1][0] : first).toUpperCase();
+}

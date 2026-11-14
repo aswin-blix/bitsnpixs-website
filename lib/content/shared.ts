@@ -8,7 +8,9 @@ import type {
   MachineFormats,
   Market,
   QuoteLabels,
+  Rating,
   StoryBlock,
+  TestimonialLabels,
   Faq,
   FaqBlock,
   FeaturesBlock,
@@ -304,6 +306,17 @@ export const quoteLabels: QuoteLabels = {
   back: "Back",
   request: "Request a Quote",
   submit: "Send My Quote Request",
+};
+
+/** From the old site: "4.7/5 Rating. Listen to real reviews about our service from our clientele." */
+export const clientRating: Rating = { score: 4.7, outOf: 5, label: "Client rating" };
+
+export const testimonialLabels: TestimonialLabels = {
+  listLabel: "Choose a client review",
+  previous: "Previous review",
+  next: "Next review",
+  pause: "Pause reviews",
+  play: "Play reviews",
 };
 
 export const digitizeCtaBlock: CtaBlock = {
