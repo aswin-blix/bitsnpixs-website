@@ -15,7 +15,7 @@ export function ProductCard({ product, actionLabel }: { product: Product; action
         <SiteImage
           image={product.image}
           ratio={4 / 3}
-          sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 92vw"
+          sizes="(min-width: 1600px) 740px, (min-width: 640px) 46vw, 92vw"
           className="rounded-none transition-transform duration-700 ease-brand group-hover/card:scale-105"
         />
       </div>

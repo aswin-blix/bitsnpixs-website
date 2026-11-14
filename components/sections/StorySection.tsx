@@ -86,10 +86,23 @@ const SWAP = 0.22;
  * cannot jitter against smooth scrolling. GSAP only scrubs a timeline against
  * the wrapper's scroll progress, so every frame is a pure function of scroll
  * position: nothing is triggered at thresholds and nothing re-renders.
+ *
+ * The held panel is only as tall as its content (not a full viewport), and its
+ * padding matches the page's section rhythm, so a chapter never opens or closes
+ * with a screen of empty space. The extra scroll distance lives below the panel
+ * (a spacer, or the wrapper's height), and the timeline runs exactly while the
+ * panel is held: from the wrapper's top at the viewport top until the wrapper's
+ * bottom meets the panel's bottom.
  */
+
+const stageClass = "sticky top-0 pt-[max(var(--space-section),calc(var(--header-height)+2rem))] pb-(--space-section)";
+
+/** Scroll position at which a held panel lets go: the wrapper's bottom reaches the panel's bottom. */
+const heldEnd = (stage: HTMLElement | null) => () => `bottom ${stage?.offsetHeight ?? 0}px`;
 
 function StackStory({ block }: LayoutProps) {
   const root = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
   const counter = useRef<HTMLSpanElement>(null);
   const count = block.steps.length;
@@ -105,8 +118,9 @@ function StackStory({ block }: LayoutProps) {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "bottom bottom",
+          end: heldEnd(stage.current),
           scrub: true,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
             const label = padIndex(Math.min(count - 1, Math.floor(self.progress * count)));
             if (counter.current && counter.current.textContent !== label) counter.current.textContent = label;
@@ -127,8 +141,8 @@ function StackStory({ block }: LayoutProps) {
   );
 
   return (
-    <div ref={root} style={{ height: `calc(100svh + ${count * STACK_STEP_VH}vh)` }}>
-      <div className="sticky top-0 flex h-svh items-center pt-(--header-height)">
+    <div ref={root}>
+      <div ref={stage} className={stageClass}>
         <div className="container-page grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="flex flex-col items-start gap-10">
             <StoryIntro block={block} />
@@ -156,12 +170,14 @@ function StackStory({ block }: LayoutProps) {
           </ol>
         </div>
       </div>
+      <div aria-hidden="true" style={{ height: `${count * STACK_STEP_VH}vh` }} />
     </div>
   );
 }
 
 function HorizontalStory({ block }: LayoutProps) {
   const root = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
   const count = block.steps.length;
@@ -173,9 +189,9 @@ function HorizontalStory({ block }: LayoutProps) {
       const element = track.current;
       if (!wrapper || !element) return;
       const distance = () => Math.max(0, element.scrollWidth - window.innerWidth);
-      // The wrapper is as tall as the sideways travel, so one pixel of scroll moves the track one pixel.
+      // The wrapper is the panel plus the sideways travel, so one pixel of scroll moves the track one pixel.
       const sizeWrapper = () => {
-        wrapper.style.height = `${window.innerHeight + distance()}px`;
+        wrapper.style.height = `${(stage.current?.offsetHeight ?? 0) + distance()}px`;
       };
       sizeWrapper();
       ScrollTrigger.addEventListener("refreshInit", sizeWrapper);
@@ -183,7 +199,7 @@ function HorizontalStory({ block }: LayoutProps) {
       gsap
         .timeline({
           defaults: { ease: "none" },
-          scrollTrigger: { trigger: wrapper, start: "top top", end: "bottom bottom", scrub: true, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: wrapper, start: "top top", end: heldEnd(stage.current), scrub: true, invalidateOnRefresh: true },
         })
         .to(element, { x: () => -distance() }, 0)
         .to(bar.current, { scaleX: 1 }, 0);
@@ -198,7 +214,7 @@ function HorizontalStory({ block }: LayoutProps) {
 
   return (
     <div ref={root}>
-      <div className="sticky top-0 flex h-svh flex-col justify-center gap-14 overflow-x-clip pt-(--header-height) pb-12">
+      <div ref={stage} className={cn(stageClass, "flex flex-col gap-14 overflow-x-clip")}>
         <div className="container-page flex flex-wrap items-end justify-between gap-8">
           <StoryIntro block={block} />
           <div className="w-full max-w-xs">
