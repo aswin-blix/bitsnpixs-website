@@ -16,7 +16,8 @@ export function Hero({ hero }: { hero: PageHeroContent }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  // Fade only in the second half of the scroll, so the stacked mobile hero stays readable.
+  const contentOpacity = useTransform(scrollYProgress, [0.55, 1], [1, 0]);
 
   return (
     <section ref={ref} data-surface="dark" className="relative flex min-h-svh items-center overflow-hidden pt-(--header-height)">

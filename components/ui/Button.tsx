@@ -50,7 +50,7 @@ export function Button({
   const { style, handlers } = useMagnetic(magnetic && rich);
 
   const classes = cn(
-    "group/button inline-flex items-center justify-center gap-2.5 rounded-control font-semibold",
+    "group/button inline-flex items-center justify-center gap-2.5 rounded-control font-semibold whitespace-nowrap",
     "transition-[box-shadow,border-color,opacity] duration-300 ease-brand",
     "disabled:cursor-not-allowed disabled:opacity-60",
     variants[variant],

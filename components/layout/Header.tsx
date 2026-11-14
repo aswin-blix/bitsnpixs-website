@@ -76,7 +76,7 @@ export function Header() {
             <NavLink href={navigation.secondaryAction.href} className="hidden text-[0.95rem] font-medium text-strong lg:inline-block">
               {navigation.secondaryAction.label}
             </NavLink>
-            <Button href={navigation.primaryAction.href} size="sm" className="hidden sm:inline-flex">
+            <Button href={navigation.primaryAction.href} size="sm">
               {navigation.primaryAction.label}
             </Button>
             <button

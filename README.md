@@ -1,7 +1,8 @@
 # BitsNPixs website
 
-Redesign of [bitsnpixs.com](https://www.bitsnpixs.com) as a Next.js site with its own
-visual identity: **"Pixels → Stitches"**, one thread that runs through every page.
+Redesign of [bitsnpixs.com](https://www.bitsnpixs.com) as a dark, interactive Next.js
+site with its own visual identity: **"Pixels → Stitches"**, one glowing thread that runs
+through every page, and a live digitizer that embroiders whatever the visitor types.
 The concept, palette, sitemap and fonts are documented in [DESIGN_NOTES.md](./DESIGN_NOTES.md).
 
 - Next.js 16 (App Router) · TypeScript · Tailwind CSS v4
@@ -27,6 +28,7 @@ npm run dev        # http://localhost:3000
 | `npm test` | Vitest: content integrity, theme sync, utilities, contact form |
 | `npm run verify` | typecheck + lint + test + build. Run before every commit |
 | `npm run assets:pull` | Copies the old site's images into `public/images` |
+| `npm run map:build` | Regenerates the dotted world map after editing `lib/content/markets.json` |
 
 ## Project structure
 
@@ -43,8 +45,10 @@ components/
 lib/
   content.ts            Single entry point for ALL site content (typed)
   content/              ...split by domain: site, services, portfolio, pages/*
+  stitch/               Stitch simulation behind the live digitizer (pure, tested)
   motion.ts             Framer Motion timings and variants
-  hooks/                useGsap, useMagnetic, useRevealPhase, media/motion profile ...
+  hooks/                useGsap, useMagnetic, useRevealPhase, useNow, media/motion profile ...
+  quote.ts, time.ts     Quote builder and delivery-clock logic (pure, tested)
   seo.ts, contact.ts, theme.ts, utils.ts
 tests/                  Vitest suites
 scripts/pull-assets.mjs Image download script
@@ -76,8 +80,10 @@ Change the look in **one file**: `app/styles/tokens.css`.
 3. **Semantic** variables (`--surface`, `--ink`, `--accent`, `--accent-text` ...) are what
    components use, through Tailwind utilities such as `bg-surface` and `text-accent-text`.
 
-Sections switch palette with `data-surface="light | tint | dark"`. The 3D field reads
-`--brand-primary` at runtime. Radii, section spacing, container width and the marquee
+The site is dark by default; sections switch palette with
+`data-surface="dark | tint | light"`. To make the whole site light-led again, swap the
+values of the dark and light blocks in that file. The 3D field and the digitizer's
+thread colours read the same variables at runtime. Radii, section spacing, container width and the marquee
 speed are tokens in the same file. Fonts are set in `lib/fonts.ts`.
 
 `lib/theme.ts` mirrors five brand colours for places that cannot read CSS (the
@@ -119,8 +125,39 @@ Without it, submitting opens the visitor's email app with the message pre-filled
 - All GSAP code goes through `useGsap` (`gsap.context()` + `revert()`).
 
 Lighthouse on the production build (images disabled, headless Chrome): desktop
-100 / 100 / 100 / 100; mobile performance 96 to 100 across pages, accessibility,
-best practices and SEO 100. Re-measure with real images on your hosting.
+100 / 100 / 100 / 100 on the home page; mobile performance 92 (home) to 99 on the
+pages audited, with accessibility, best practices and SEO at 100. Re-measure with real
+images on your hosting.
+
+## Interactive tools
+
+| Tool | Where | Notes |
+|---|---|---|
+| Live digitizer | Home hero, `/stitch-lab` | `components/sections/StitchPad.tsx` draws on a canvas; stitch geometry is in `lib/stitch/engine.ts`. It is a visual simulation, and says so on the page. Thread colours are listed in `lib/stitch/threads.ts` |
+| Quote builder | `/get-a-quote` | Services, option groups and published prices are configured in `lib/content/pages/tools.ts`; the brief is sent through `lib/contact.ts` |
+| Machine and format finder | Home, Embroidery, `/file-formats` | Brand-to-format table is `machineFormats` in `lib/content/shared.ts` |
+| Worldwide map and clocks | Home | Markets are in `lib/content/markets.json`; run `npm run map:build` after editing |
+
+## New wording added in version 2 (please review)
+
+The old site has no copy for the new tools, so these lines are new. Everything else is
+still taken from the old site.
+
+- **Live digitizer and Stitch Lab:** the input label, the note that it is a simulation
+  and that real files are digitized by hand, the Stitch Lab headline and lead, and the
+  three stitch-type descriptions (satin, fill, run).
+- **Machine and format finder:** "Which machine do you run?", the helper line about DST,
+  and the brand-to-format table. The table is general industry reference (Wilcom and
+  Embird format lists), not a claim from your site. `T09` is not assigned to a brand.
+- **Worldwide:** "Order now, ready by", "Local time" and the time-zone note. One
+  representative city is shown for each market you name (New York, Toronto, London, Sydney).
+- **Quote builder:** step names, questions and button labels. "Online price from" uses
+  your shop prices; "Patch" and "Other" were added as placement choices.
+- **Trust band and audience band:** assembled from figures already on your site
+  (since 2011, 4.7/5, 5,000+ clients, free quotes in 2 to 24 hours, free edits within
+  30 days). "Embroidery shops", "Apparel decorators" and "Distributors" come from your
+  testimonials and vector page.
+- **Calls to action:** "Get a Free Quote" replaces "Digitize Your Design" as the primary button.
 
 ## Missing content and placeholders
 
@@ -151,6 +188,7 @@ Content decisions made during the rebuild:
 - "Why our vector artwork service?" appeared on the embroidery page by mistake and is shown only on the vector page.
 - Three home slider images, the footer banner and two small decorative images from the old site are not used.
 - Short section labels (for example "Clients", "Offices", "Perks", "Method") were added as eyebrows; some long headings were lightly rephrased.
+- Career moved from the header to the footer to make room for Stitch Lab; Sign in is in the footer.
 
 Old URLs that need redirects at launch: `/embroidery-digitizing-portfolio` → `/portfolio`,
 `/jobs` → `/career`, and `/shop/cart`, `/web/login`, `/blog/*` → the Odoo address.

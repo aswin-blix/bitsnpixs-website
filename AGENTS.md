@@ -15,7 +15,9 @@ Read `README.md` (structure, theming, how pages are built) and `DESIGN_NOTES.md`
 
 - **Content is data.** All copy lives in `lib/content/` and is imported only through
   `@/lib/content`. Never hard-code site copy in a component. Use only content from
-  the client's site; do not invent copy, stats or testimonials.
+  the client's site; do not invent facts, stats or testimonials. Wording added for the
+  interactive tools is listed in README ("New wording added in version 2"); keep that
+  list current.
 - **Layers.** `components/ui` (primitives) → `components/sections` (compose primitives,
   take a content block as props) → `app/*` (routes only render `PageView`).
   New page sections are registered in `components/sections/BlockRenderer.tsx`.

@@ -24,7 +24,7 @@ Rules built on it:
 - Primary green is the dominant accent: fills, the thread motif, the 3D field, and
   text on dark surfaces. It is about 2.7:1 on white, so it is never used for small
   text on light surfaces; `--accent-text` (a darkened deep green) is used there.
-- Washes, the dark "abyss" surface, glows and gradients are derived with
+- The dark "abyss" surface, tinted surfaces, glows and gradients are derived with
   `color-mix()` from the brand values, so one edit re-themes everything.
 - The only non-brand colours are the six `--spectrum-*` thread colours, used
   solely in the Coloreel chapter, where "every colour on one thread" is the story.
@@ -46,39 +46,55 @@ All of this lives in `app/styles/tokens.css`.
 | `/contact-us` | Contact Us | 4 locations + form |
 | `/blog` | Blogs (footer link) | index of the 12 posts, linking to the existing articles |
 | `/shop` | Shop | pricing page for the 4 products, linking to the existing checkout |
+| `/stitch-lab` | new | live digitizer playground |
+| `/file-formats` | new | machine and format finder, accepted artwork types |
+| `/get-a-quote` | new | three-step quote builder |
 
 Not rebuilt (Odoo functionality, linked out instead): `/shop/cart`, `/web/login`,
 individual blog posts, `/jobs`.
 
-## 3. Concept: "Pixels → Stitches"
+## 3. Concept: "Pixels → Stitches" (version 2: dark and interactive)
 
-BitsNPixs turns pixels into stitches, so the site tells that story with one motif:
-**a single thread that runs through everything.**
+BitsNPixs turns pixels into stitches, so the site lets visitors **do** that instead of
+reading about it. One motif runs through everything: **a single glowing thread.**
 
-- **Surfaces.** Light, airy "fabric" pages (paper, mist and the green wash) carry
-  most content. The story chapters (process, Coloreel, software method) drop into a
-  dark "machine room" surface so the green thread glows.
-- **The thread.** A dashed running-stitch line is the recurring graphic: section
-  dividers, link underlines, the scroll-progress thread at the page edge, the route
-  between studios, and the progress line inside pinned chapters.
-- **Pixels.** A faint pixel grid sits behind heroes and image placeholders; labels
-  use a mono face, like stitch counts and file extensions on a machine readout.
+The first version was light and layout-led and read as an ordinary agency site. Version 2
+is dark-led and built around tools a buyer can play with, informed by what leading
+digitizing services worldwide put in front of customers (free quotes, format and
+machine support, turnaround promises, proof points) but drawn in its own language.
+
+- **Surfaces.** A dark "machine room" is the default. `tint` is the same surface with
+  thread colour bleeding in; `light` is the "fabric" surface, used only for contrast
+  (portfolio, testimonials). The whole flip lives in `app/styles/tokens.css`.
+- **The thread.** Dashed running-stitch lines: dividers, link underlines, the scroll
+  thread, the cursor trail, map arcs, progress lines in pinned chapters.
+- **Pixels.** A faint pixel grid behind heroes and placeholders; mono labels like a
+  machine readout.
 - **Type.** Very large, tight display headlines against small mono eyebrows.
 
-### Storytelling interactions (each tied to real content)
+### Interactions (each tied to real content)
 
 | Where | Interaction | Content it carries |
 |---|---|---|
-| Home hero | One Three.js point field: a pixel grid that re-forms into stitched waves on scroll and leans toward the cursor | Hero headline |
-| Home | Pinned "How we do it" chapter; the thread sews from step to step | The 5 ordering steps |
+| Home hero, Stitch Lab | **Live digitizer**: type a word and it is embroidered stitch by stitch (satin, fill or run; six thread colours; live stitch count) | The core idea of the business |
+| Home hero | One Three.js point field: pixels that re-form into stitches on scroll | Background to the headline |
+| Everywhere (desktop) | Thread cursor: a stitched trail that reels in when the pointer stops | |
+| Home | Services index: oversized rows, preview image follows the cursor | The four services |
+| Home | Pinned "how we do it" chapter | The 5 ordering steps |
+| Home, Embroidery, File Formats | Machine and format finder: pick a machine brand, matching formats light up | The format list |
+| Home | Worldwide: dotted map with stitched arcs, live market clocks, "order now, ready by" in the visitor's time zone | Markets, 24/7 support, 24 h and 2 to 12 h turnaround |
+| Get a Quote | Three-step quote builder with a live brief | Services, sizes, embroidery types, published prices |
+| Portfolio | Category filter with layout animation; sliders sweep open on first view | Before / after pairs |
 | Coloreel | Horizontal pinned chapter; the thread shifts through the spectrum | The 8 Coloreel steps |
-| Software | Same chapter component, numbered method | The 7 "How do we work" points |
-| Portfolio | Drag (or arrow-key) compare slider | Before / after pairs |
-| Embroidery | Placement picker on a line-drawn garment | Cap, left chest, jacket back + technique list |
+| Software | Pinned method chapter | The 7 "How do we work" points |
+| Embroidery | Placement picker on line-drawn garments | Cap, left chest, jacket back |
 | Services | Standard / Rush turnaround toggle | 24 h vs 2 to 12 h |
-| Home, services | Marquee of machine formats | DST, PES, JEF ... |
-| Contact | Studio route: four nodes joined by a stitched line | The 4 addresses |
-| Everywhere | Staggered reveals, magnetic buttons, stitched underlines, route curtain | |
+| Cards | Cursor spotlight | |
+
+### Pages added in version 2
+
+`/stitch-lab`, `/file-formats` and `/get-a-quote` are new (the old site has no
+equivalent). The header's primary action is now "Get a Quote"; Shop stays one click away.
 
 ## 4. Fonts
 
