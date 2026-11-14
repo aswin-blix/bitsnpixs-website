@@ -3,13 +3,15 @@ import { Chip } from "@/components/ui/Chip";
 import { Icon } from "@/components/ui/Icon";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
+import { SpotlightArea } from "@/components/ui/SpotlightArea";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Feature, FeaturesBlock } from "@/lib/content";
 import { cn, padIndex } from "@/lib/utils";
 
 function FeatureGrid({ items }: { items: Feature[] }) {
   return (
-    <RevealGroup as="ul" className={cn("grid gap-5 sm:grid-cols-2", items.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-4")}>
+    <SpotlightArea>
+      <RevealGroup as="ul" className={cn("grid gap-5 sm:grid-cols-2", items.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-4")}>
       {items.map((item, index) => (
         <RevealItem as="li" key={item.title}>
           <Card interactive className="flex flex-col gap-4">
@@ -21,7 +23,8 @@ function FeatureGrid({ items }: { items: Feature[] }) {
           </Card>
         </RevealItem>
       ))}
-    </RevealGroup>
+      </RevealGroup>
+    </SpotlightArea>
   );
 }
 

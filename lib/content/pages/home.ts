@@ -77,6 +77,7 @@ export const homePage: PageContent = {
     },
     {
       type: "portfolio",
+      surface: "light",
       eyebrow: "Portfolio",
       title: "We create beautiful design that makes a difference.",
       limit: 3,
@@ -97,6 +98,7 @@ export const homePage: PageContent = {
     },
     {
       type: "testimonials",
+      surface: "light",
       eyebrow: "Clients",
       title: "Listen to real reviews about our service.",
       items: [

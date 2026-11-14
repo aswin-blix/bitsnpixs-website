@@ -12,8 +12,10 @@ interface CardProps {
 export function Card({ children, interactive, className }: CardProps) {
   return (
     <div
+      data-spotlight={interactive || undefined}
       className={cn(
         "relative h-full rounded-card border border-line bg-raised p-7 sm:p-8",
+        interactive && "spotlight",
         interactive &&
           "transition-[transform,box-shadow,border-color] duration-500 ease-brand hover:-translate-y-1.5 hover:border-accent hover:shadow-card",
         className,

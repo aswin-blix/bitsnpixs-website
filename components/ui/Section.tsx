@@ -14,7 +14,7 @@ interface SectionProps {
 }
 
 /** Page section: sets the surface palette, vertical rhythm and container. */
-export function Section({ children, surface = "light", id, bleed, flush, className }: SectionProps) {
+export function Section({ children, surface = "dark", id, bleed, flush, className }: SectionProps) {
   return (
     <section id={id} data-surface={surface} className={cn("relative", !flush && "section-y", className)}>
       {bleed ? children : <div className="container-page">{children}</div>}

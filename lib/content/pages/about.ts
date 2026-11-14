@@ -64,6 +64,7 @@ export const aboutPage: PageContent = {
     whyBitsNPixsBlock,
     {
       type: "testimonials",
+      surface: "light",
       eyebrow: "Clients",
       title: "Listen to real reviews about our service.",
       items: [

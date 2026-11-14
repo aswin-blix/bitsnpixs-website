@@ -72,7 +72,6 @@ export const careerPage: PageContent = {
     },
     {
       type: "cta",
-      surface: "dark",
       eyebrow: "Our job offers",
       title: "Let's grow together.",
       lead: "There are currently no open job opportunities, but feel free to contact us for a spontaneous application.",

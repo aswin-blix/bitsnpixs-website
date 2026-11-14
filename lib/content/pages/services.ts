@@ -95,6 +95,7 @@ const embroideryPage: PageContent = {
     },
     {
       type: "portfolio",
+      surface: "light",
       eyebrow: "Portfolio",
       title: "We create beautiful design that makes a difference.",
       category: "embroidery",
@@ -229,6 +230,7 @@ const coloreelPage: PageContent = {
     },
     {
       type: "portfolio",
+      surface: "light",
       eyebrow: "Why BitsNPixs?",
       title: "We create beautiful design that makes a difference.",
       category: "coloreel",
@@ -316,6 +318,7 @@ const vectorPage: PageContent = {
     },
     {
       type: "portfolio",
+      surface: "light",
       eyebrow: "Portfolio",
       title: "We create beautiful design that makes a difference.",
       category: "vector",
@@ -423,7 +426,6 @@ const softwarePage: PageContent = {
     },
     {
       type: "cta",
-      surface: "dark",
       title: "Get exactly the system you want.",
       lead: "Reach out through our contact form and we will get back to you.",
       actions: [{ label: "Contact Us", href: routes.contact }],

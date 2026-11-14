@@ -7,8 +7,8 @@
  *
  * Components only ever use layer 3 (through the Tailwind utilities mapped in
  * globals.css), so changing a brand value here re-themes every page, the
- * marquee, the story chapters and the 3D hero. Sections switch palette by
- * setting data-surface="light | tint | dark" on a wrapper.
+ * marquee, the story chapters, the live digitizer and the 3D hero. The site is
+ * dark by default; sections switch palette with data-surface="dark | tint | light".
  */
 
 :root {
@@ -38,7 +38,6 @@
   --brand-abyss: color-mix(in oklab, var(--brand-ink) 72%, black);
   --brand-glow: color-mix(in oklab, var(--brand-primary) 32%, transparent);
   --gradient-brand: linear-gradient(135deg, var(--brand-primary), var(--brand-tint));
-  --gradient-wash: linear-gradient(180deg, var(--brand-wash), var(--brand-paper));
   --gradient-spectrum: linear-gradient(
     90deg,
     var(--spectrum-1),
@@ -67,46 +66,49 @@
   --marquee-duration: 38s;
 }
 
-/* ── Layer 3: semantic (light is the default) ─────────────────────── */
+/* ── Layer 3: semantic (the dark "machine room" is the default) ───── */
 :root,
+[data-surface="dark"],
+[data-surface="tint"] {
+  --surface: var(--brand-abyss);
+  --surface-raised: color-mix(in oklab, var(--brand-night) 55%, var(--brand-abyss));
+  --surface-sunken: color-mix(in oklab, var(--brand-abyss) 70%, black);
+  --ink: color-mix(in oklab, var(--brand-paper) 80%, var(--brand-abyss));
+  --ink-strong: var(--brand-paper);
+  --ink-muted: color-mix(in oklab, var(--brand-paper) 62%, var(--brand-abyss));
+  --line: color-mix(in oklab, var(--brand-paper) 13%, transparent);
+  --accent: var(--brand-primary);
+  --on-accent: var(--brand-ink);
+  --accent-text: var(--brand-tint);
+  --accent-soft: color-mix(in oklab, var(--brand-primary) 18%, transparent);
+  --focus-ring: var(--brand-tint);
+  --elevation-card: 0 24px 60px -30px rgb(0 0 0 / 0.75);
+}
+
+/* Tint: the dark surface with thread colour bleeding into it. */
+[data-surface="tint"] {
+  --surface: color-mix(in oklab, var(--brand-primary) 9%, var(--brand-abyss));
+  --surface-raised: color-mix(in oklab, var(--brand-primary) 15%, var(--brand-abyss));
+  --surface-sunken: color-mix(in oklab, var(--brand-primary) 5%, var(--brand-abyss));
+  --line: color-mix(in oklab, var(--brand-tint) 20%, transparent);
+  --accent-soft: color-mix(in oklab, var(--brand-primary) 26%, transparent);
+}
+
+/* Light: the "fabric" surface, used sparingly for contrast. */
 [data-surface="light"] {
-  --surface: var(--brand-paper);
-  --surface-raised: var(--brand-mist);
+  --surface: var(--brand-mist);
+  --surface-raised: var(--brand-paper);
   --surface-sunken: var(--brand-line);
   --ink: var(--brand-slate);
   --ink-strong: var(--brand-ink);
   --ink-muted: color-mix(in oklab, var(--brand-slate) 82%, var(--brand-paper));
-  --line: var(--brand-line);
+  --line: color-mix(in oklab, var(--brand-slate) 16%, var(--brand-paper));
   --accent: var(--brand-primary);
   --on-accent: var(--brand-ink);
   --accent-text: color-mix(in oklab, var(--brand-primary-deep) 78%, black);
   --accent-soft: var(--brand-wash);
   --focus-ring: var(--brand-primary-darkest);
   --elevation-card: 0 1px 2px rgb(33 37 41 / 0.04), 0 18px 40px -24px rgb(33 37 41 / 0.28);
-}
-
-[data-surface="tint"] {
-  --surface: var(--brand-wash);
-  --surface-raised: var(--brand-paper);
-  --surface-sunken: color-mix(in oklab, var(--brand-tint) 32%, var(--brand-paper));
-  --line: color-mix(in oklab, var(--brand-primary) 22%, var(--brand-paper));
-  --accent-soft: var(--brand-lime);
-}
-
-[data-surface="dark"] {
-  --surface: var(--brand-abyss);
-  --surface-raised: var(--brand-night);
-  --surface-sunken: color-mix(in oklab, var(--brand-abyss) 70%, black);
-  --ink: color-mix(in oklab, var(--brand-paper) 82%, var(--brand-abyss));
-  --ink-strong: var(--brand-paper);
-  --ink-muted: color-mix(in oklab, var(--brand-paper) 62%, var(--brand-abyss));
-  --line: color-mix(in oklab, var(--brand-paper) 14%, transparent);
-  --accent: var(--brand-primary);
-  --on-accent: var(--brand-ink);
-  --accent-text: var(--brand-tint);
-  --accent-soft: color-mix(in oklab, var(--brand-primary) 16%, transparent);
-  --focus-ring: var(--brand-tint);
-  --elevation-card: 0 24px 60px -30px rgb(0 0 0 / 0.7);
 }
 
 /* In the base layer so Tailwind utilities (bg-transparent, bg-surface/80 ...) can override it. */

@@ -4,7 +4,7 @@ import type { MarqueeBlock } from "@/lib/content";
 
 export function MarqueeSection({ block }: { block: MarqueeBlock }) {
   return (
-    <Section surface={block.surface ?? "dark"} bleed flush className="py-8 sm:py-10">
+    <Section surface={block.surface ?? "tint"} bleed flush className="border-y border-line py-8 sm:py-10">
       <Marquee items={block.items} label={block.title ?? "Available file formats"} className="text-strong" />
     </Section>
   );

@@ -17,7 +17,7 @@ export function Hero({ hero }: { hero: PageHeroContent }) {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section ref={ref} data-surface="tint" className="relative flex min-h-svh items-center overflow-hidden pt-(--header-height)">
+    <section ref={ref} data-surface="dark" className="relative flex min-h-svh items-center overflow-hidden pt-(--header-height)">
       <HeroCanvas
         progress={scrollYProgress}
         className="[mask-image:radial-gradient(110%_90%_at_80%_55%,black_30%,transparent_74%)]"

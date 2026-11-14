@@ -10,7 +10,7 @@ export function Footer() {
   const office = studios[0];
 
   return (
-    <footer data-surface="dark" className="relative overflow-hidden">
+    <footer data-surface="dark" className="relative overflow-hidden border-t border-line">
       <div className="container-page grid gap-14 pt-20 pb-14 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
         <div className="flex flex-col items-start gap-6">
           <SmartLink href={routes.home} className="rounded-control">

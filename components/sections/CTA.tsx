@@ -7,9 +7,9 @@ import type { CtaBlock } from "@/lib/content";
 /** Closing call to action used at the bottom of most pages. */
 export function CTA({ block }: { block: CtaBlock }) {
   return (
-    <Section surface={block.surface ?? "dark"} className="overflow-hidden">
+    <Section surface={block.surface ?? "tint"} className="overflow-hidden">
       <div aria-hidden="true" className="pixel-grid absolute inset-0 [mask-image:radial-gradient(60%_70%_at_50%_50%,black,transparent)] opacity-60" />
-      <div aria-hidden="true" className="absolute top-1/2 left-1/2 size-[42rem] -translate-1/2 rounded-full bg-(--brand-glow) opacity-40 blur-3xl" />
+      <div aria-hidden="true" className="brand-glow absolute top-1/2 left-1/2 size-[46rem] -translate-1/2 opacity-70" />
       <Reveal className="relative mx-auto flex max-w-4xl flex-col items-center gap-8 text-center">
         {block.eyebrow ? <Eyebrow>{block.eyebrow}</Eyebrow> : null}
         {block.title ? (

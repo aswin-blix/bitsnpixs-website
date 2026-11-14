@@ -191,16 +191,52 @@
   background-size: 28px 28px;
 }
 
-/* Image placeholder fill: pixel grid over the brand wash (layered, so sizes do not clash). */
+/* Image placeholder fill: pixel grid over the surface (layered, so sizes do not clash). */
 @utility placeholder-surface {
   background-image:
     linear-gradient(to right, var(--line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--line) 1px, transparent 1px),
-    var(--gradient-wash);
+    linear-gradient(180deg, var(--surface-raised), var(--surface));
   background-size:
     28px 28px,
     28px 28px,
     100% 100%;
+}
+
+/*
+ * Cursor spotlight for cards. A SpotlightArea ancestor writes --mx/--my on the
+ * hovered [data-spotlight] element; the glow itself is only an opacity fade.
+ */
+@utility spotlight {
+  isolation: isolate;
+  position: relative;
+
+  &::before {
+    background: radial-gradient(20rem circle at var(--mx, 50%) var(--my, 0%), var(--accent-soft), transparent 70%);
+    border-radius: inherit;
+    content: "";
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 0.4s var(--motion-ease-out);
+    z-index: -1;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Outlined display text (marquee alternates, oversized numerals). */
+@utility text-outline {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+/* Soft glow behind hero and call-to-action content. */
+@utility brand-glow {
+  background: radial-gradient(closest-side, var(--brand-glow), transparent);
 }
 
 @utility bg-brand-gradient {

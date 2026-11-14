@@ -155,7 +155,6 @@ export const coloreelFaqBlock: FaqBlock = {
 
 export const digitizeCtaBlock: CtaBlock = {
   type: "cta",
-  surface: "dark",
   title: "Digitize your designs today.",
   lead: "Trusted by 5,000+ clients for precise and high-quality embroidery designs.",
   actions: [

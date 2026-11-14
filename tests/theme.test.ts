@@ -13,9 +13,12 @@ describe("theme", () => {
     expect(readToken(`brand-${key}`)).toBe(brand[key]);
   });
 
-  it("defines every semantic token for the dark surface", () => {
-    const dark = tokens.slice(tokens.indexOf('[data-surface="dark"]'));
-    for (const token of ["--surface", "--ink", "--ink-strong", "--line", "--accent", "--accent-text", "--focus-ring"]) {
+  it("defines every semantic token for the light surface as well as the dark default", () => {
+    const required = ["--surface", "--surface-raised", "--ink", "--ink-strong", "--ink-muted", "--line", "--accent", "--on-accent", "--accent-text", "--focus-ring"];
+    const light = tokens.slice(tokens.indexOf('[data-surface="light"] {'));
+    const dark = tokens.slice(tokens.indexOf(":root,\n[data-surface=\"dark\"]"), tokens.indexOf('[data-surface="light"] {'));
+    for (const token of required) {
+      expect(light, `light surface is missing ${token}`).toContain(`${token}:`);
       expect(dark, `dark surface is missing ${token}`).toContain(`${token}:`);
     }
   });
