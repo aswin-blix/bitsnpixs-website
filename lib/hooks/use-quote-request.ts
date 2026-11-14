@@ -37,6 +37,7 @@ export function useQuoteRequest(initialSlug: string | null, labels: QuoteLabels)
     lines: quoteLines(catalog, selection, labels.quantityLabel),
     price: quotePrice(catalog, selection),
     complete: isQuoteComplete(catalog, selection),
+    answered: quoteGroups(catalog, selection).filter((group) => group.id in selection.choices).length,
     setNotes,
     setValue: (name: keyof ContactValues, value: string) => setValues((current) => ({ ...current, [name]: value })),
     chooseProduct: (slug: string) => setSelection(emptyQuote(slug)),

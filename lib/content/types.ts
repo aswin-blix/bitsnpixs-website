@@ -122,6 +122,8 @@ export interface Product {
   groupIds: string[];
   /** Which format list applies to this product. */
   formats: "embroidery" | "vector";
+  /** Portfolio samples of this category join the product image in the gallery. */
+  portfolioCategory: PortfolioCategoryId;
   image: ImageRef;
   path: string;
 }
@@ -281,6 +283,8 @@ export interface QuoteLabels {
   priceLabel: string;
   quantityLabel: string;
   priceNote: string;
+  /** Shown in the action bar until every option group is answered. */
+  chooseAll: string;
   artworkNote: string;
   notesLabel: string;
   next: string;

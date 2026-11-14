@@ -5,13 +5,14 @@ interface ChoiceChipProps {
   children: ReactNode;
   selected: boolean;
   onSelect: () => void;
-  /** "lg" for primary choices (products, options), "sm" for dense filters. */
-  size?: "sm" | "lg";
+  /** "lg" for big cards (products), "md" for option chips, "sm" for dense filters. */
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
 const sizes = {
   sm: "rounded-control px-4 py-2 text-sm",
+  md: "rounded-xl px-4 py-2.5 text-[0.95rem]",
   lg: "rounded-2xl px-5 py-3 text-left",
 } as const;
 

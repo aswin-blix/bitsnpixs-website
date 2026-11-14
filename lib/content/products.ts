@@ -22,6 +22,7 @@ const turnaroundGroup: QuoteGroup = {
 export const products: Product[] = data.products.map((entry) => ({
   ...entry,
   formats: entry.formats as Product["formats"],
+  portfolioCategory: entry.portfolioCategory as Product["portfolioCategory"],
   image: image(entry.image as ImageId),
   path: productPath(entry.slug),
 }));

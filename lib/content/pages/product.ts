@@ -22,6 +22,12 @@ export const productsLabels = {
   moreTitle: "More from the shop",
   viewLabel: "View Details",
   fromLabel: "From",
+  galleryLabel: "Product images",
+  sampleLabel: "Sample",
+  configureStep: "Configure",
+  detailsStep: "Your details",
+  /** Proof points shown under the product title (figures from the old site). */
+  highlights: ["4.7/5 rating", "130+ digitizers", "24/7 support"],
 } as const;
 
 export function productMeta(product: Product): PageMeta {

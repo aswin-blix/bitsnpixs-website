@@ -14,6 +14,8 @@ interface SiteImageProps {
   ratio?: number;
   /** Fill a positioned parent instead of sizing by ratio. */
   fill?: boolean;
+  /** "contain" shows the whole image (letterboxed); "cover" crops to fill. */
+  fit?: "cover" | "contain";
   /** Load eagerly with high priority (above-the-fold images only). */
   eager?: boolean;
   className?: string;
@@ -24,7 +26,7 @@ interface SiteImageProps {
  * or fails to load. The placeholder also sits underneath while loading, so the
  * box never changes size (no layout shift).
  */
-export function SiteImage({ image, sizes, ratio, fill, eager, className }: SiteImageProps) {
+export function SiteImage({ image, sizes, ratio, fill, fit = "cover", eager, className }: SiteImageProps) {
   const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading");
   const usable = Boolean(image.src) && status !== "failed";
 
@@ -45,7 +47,8 @@ export function SiteImage({ image, sizes, ratio, fill, eager, className }: SiteI
           onLoad={() => setStatus("loaded")}
           onError={() => setStatus("failed")}
           className={cn(
-            "object-cover transition-opacity duration-700 ease-brand",
+            fit === "contain" ? "object-contain" : "object-cover",
+            "transition-opacity duration-700 ease-brand",
             status === "loaded" ? "opacity-100" : "opacity-0",
           )}
         />

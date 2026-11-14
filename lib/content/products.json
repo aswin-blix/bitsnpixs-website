@@ -4,27 +4,88 @@
     {
       "id": "format",
       "label": "Format",
-      "options": [{ "label": "Flat Embroidery" }, { "label": "3D Puff" }, { "label": "Partial 3D" }]
+      "options": [
+        {
+          "label": "Flat Embroidery"
+        },
+        {
+          "label": "3D Puff"
+        },
+        {
+          "label": "Partial 3D"
+        }
+      ]
     },
     {
       "id": "size",
       "label": "Size",
       "options": [
-        { "label": "Upto 4 inch", "extra": 0, "hint": "Small logos, chest placements" },
-        { "label": "Upto 8 inch", "extra": 10, "hint": "Medium designs, back logos" },
-        { "label": "Upto 12 inch", "extra": 20, "hint": "Large back designs, jackets" },
-        { "label": "Upto 16 inch", "extra": 30, "hint": "Extra-large layouts" }
+        {
+          "label": "Upto 4 inch",
+          "extra": 0,
+          "hint": "Small logos, chest placements"
+        },
+        {
+          "label": "Upto 8 inch",
+          "extra": 10,
+          "hint": "Medium designs, back logos"
+        },
+        {
+          "label": "Upto 12 inch",
+          "extra": 20,
+          "hint": "Large back designs, jackets"
+        },
+        {
+          "label": "Upto 16 inch",
+          "extra": 30,
+          "hint": "Extra-large layouts"
+        }
       ]
     },
     {
       "id": "fileFormat",
       "label": "File format",
-      "options": [{ "label": "DST" }, { "label": "PES" }, { "label": "EMB" }, { "label": "EXP" }, { "label": "JEF" }, { "label": "Other" }]
+      "options": [
+        {
+          "label": "DST"
+        },
+        {
+          "label": "PES"
+        },
+        {
+          "label": "EMB"
+        },
+        {
+          "label": "EXP"
+        },
+        {
+          "label": "JEF"
+        },
+        {
+          "label": "Other"
+        }
+      ]
     },
     {
       "id": "vectorFormat",
       "label": "File format",
-      "options": [{ "label": "AI" }, { "label": "CDR" }, { "label": "PDF" }, { "label": "EPS" }, { "label": "Other" }]
+      "options": [
+        {
+          "label": "AI"
+        },
+        {
+          "label": "CDR"
+        },
+        {
+          "label": "PDF"
+        },
+        {
+          "label": "EPS"
+        },
+        {
+          "label": "Other"
+        }
+      ]
     }
   ],
   "products": [
@@ -50,12 +111,24 @@
         "Secure design backup for reuse"
       ],
       "specs": [
-        { "label": "Recommended spacing, flat embroidery", "value": "0.30 to 0.45" },
-        { "label": "Recommended spacing, 3D puff", "value": "0.18 to 0.22" }
+        {
+          "label": "Recommended spacing, flat embroidery",
+          "value": "0.30 to 0.45"
+        },
+        {
+          "label": "Recommended spacing, 3D puff",
+          "value": "0.18 to 0.22"
+        }
       ],
-      "groupIds": ["format", "size", "fileFormat", "turnaround"],
+      "groupIds": [
+        "format",
+        "size",
+        "fileFormat",
+        "turnaround"
+      ],
       "formats": "embroidery",
-      "image": "product-standard-embroidery"
+      "image": "product-standard-embroidery",
+      "portfolioCategory": "embroidery"
     },
     {
       "slug": "coloreel-embroidery",
@@ -78,10 +151,19 @@
         "100% free revisions",
         "Secure design backup for reuse"
       ],
-      "specs": [{ "label": "Recommended spacing, flat embroidery", "value": "0.30 to 0.45" }],
-      "groupIds": ["size", "turnaround"],
+      "specs": [
+        {
+          "label": "Recommended spacing, flat embroidery",
+          "value": "0.30 to 0.45"
+        }
+      ],
+      "groupIds": [
+        "size",
+        "turnaround"
+      ],
       "formats": "embroidery",
-      "image": "product-coloreel-embroidery"
+      "image": "product-coloreel-embroidery",
+      "portfolioCategory": "coloreel"
     },
     {
       "slug": "vector-conversion-simple",
@@ -102,9 +184,13 @@
         "Free edits, if not different from the original order"
       ],
       "specs": [],
-      "groupIds": ["vectorFormat", "turnaround"],
+      "groupIds": [
+        "vectorFormat",
+        "turnaround"
+      ],
       "formats": "vector",
-      "image": "product-vector-conversion-simple"
+      "image": "product-vector-conversion-simple",
+      "portfolioCategory": "vector"
     },
     {
       "slug": "vector-conversion-complex",
@@ -125,9 +211,13 @@
         "Free edits, if not different from the original order"
       ],
       "specs": [],
-      "groupIds": ["vectorFormat", "turnaround"],
+      "groupIds": [
+        "vectorFormat",
+        "turnaround"
+      ],
       "formats": "vector",
-      "image": "product-vector-conversion-complex"
+      "image": "product-vector-conversion-complex",
+      "portfolioCategory": "vector"
     }
   ]
 }

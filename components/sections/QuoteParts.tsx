@@ -5,6 +5,7 @@ import { contactForm, type QuoteLabels } from "@/lib/content";
 import { statusMessage } from "@/lib/contact";
 import type { QuoteRequest } from "@/lib/hooks/use-quote-request";
 import { formatPrice, MAX_QUANTITY, MIN_QUANTITY } from "@/lib/quote";
+import { cn } from "@/lib/utils";
 
 /**
  * Building blocks shared by the quote builder and the product configurator.
@@ -24,25 +25,25 @@ const detailFields = contactForm.fields.filter((field) => field.name !== "subjec
 /** Option groups for the chosen product, plus quantity. */
 export function QuoteOptions({ request, labels, idPrefix }: PartProps) {
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-6">
       {request.groups.map((group) => {
         const chosen = group.options.find((option) => option.label === request.selection.choices[group.id]);
         return (
           <div key={group.id} role="group" aria-label={group.label}>
-            <p className="mb-3 font-mono text-xs tracking-[0.18em] text-muted uppercase">{group.label}</p>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="mb-3 flex items-baseline justify-between gap-4">
+              <p className="font-mono text-xs tracking-[0.18em] text-muted uppercase">{group.label}</p>
+              <p aria-live="polite" className="truncate text-right text-sm text-ink">
+                {chosen ? (chosen.hint ?? chosen.label) : null}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
               {group.options.map((option) => (
-                <ChoiceChip key={option.label} selected={option === chosen} onSelect={() => request.choose(group.id, option.label)}>
+                <ChoiceChip key={option.label} size="md" selected={option === chosen} onSelect={() => request.choose(group.id, option.label)}>
                   {option.label}
-                  {option.extra ? <span className="ml-2 font-mono text-xs opacity-75">+{formatPrice(option.extra, request.currency)}</span> : null}
+                  {option.extra ? <span className="ml-1.5 font-mono text-xs opacity-75">+{formatPrice(option.extra, request.currency)}</span> : null}
                 </ChoiceChip>
               ))}
             </div>
-            {group.options.some((option) => option.hint) ? (
-              <p aria-live="polite" className="mt-2 min-h-5 text-sm text-muted">
-                {chosen?.hint}
-              </p>
-            ) : null}
           </div>
         );
       })}
@@ -90,13 +91,13 @@ export function QuoteDetails({ request, labels, idPrefix }: PartProps) {
 }
 
 /** Price for the current selection, with the crossed-out price when there is one. */
-export function QuotePriceTag({ request, labels }: Pick<PartProps, "request" | "labels">) {
+export function QuotePriceTag({ request, labels, compact }: Pick<PartProps, "request" | "labels"> & { compact?: boolean }) {
   if (!request.price) return null;
   return (
     <div>
-      <p className="text-sm text-muted">{labels.priceLabel}</p>
-      <p aria-live="polite" className="flex flex-wrap items-baseline gap-3">
-        <span className="font-display text-5xl font-semibold tracking-tight text-strong tabular-nums">
+      <p className={cn("text-muted", compact ? "text-xs" : "text-sm")}>{labels.priceLabel}</p>
+      <p aria-live="polite" className="flex flex-wrap items-baseline gap-x-3">
+        <span className={cn("font-display font-semibold tracking-tight text-strong tabular-nums", compact ? "text-2xl sm:text-3xl" : "text-5xl")}>
           {formatPrice(request.price.total, request.currency)}
         </span>
         {request.price.compareTotal ? (

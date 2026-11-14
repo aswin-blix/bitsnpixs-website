@@ -1,23 +1,29 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Icon } from "@/components/ui/Icon";
 import { Rise } from "@/components/ui/Rise";
-import { SiteImage } from "@/components/ui/SiteImage";
 import { SmartLink } from "@/components/ui/SmartLink";
-import { productsLabels, quoteLabels, routes, type Product } from "@/lib/content";
+import { catalog, getPortfolioItems, productsLabels, quoteLabels, routes, type Product } from "@/lib/content";
+import { formatPrice } from "@/lib/quote";
 import { ProductConfigurator } from "./ProductConfigurator";
+import { ProductGallery } from "./ProductGallery";
 
-/** Top of a product page: image, summary and the ordering panel. */
+/** Portfolio samples shown after the product shot. */
+const GALLERY_SAMPLES = 3;
+
+/** Top of a product page: gallery, summary and the ordering panel. */
 export function ProductHero({ product }: { product: Product }) {
   const crumbs = [
     { label: "Home", href: routes.home },
     { label: productsLabels.shopCrumb, href: routes.shop },
   ];
+  const gallery = [product.image, ...getPortfolioItems(product.portfolioCategory, GALLERY_SAMPLES).map((item) => item.after)];
 
   return (
-    <section data-surface="tint" className="relative overflow-hidden pt-(--header-height)">
-      <div aria-hidden="true" className="pixel-grid absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_70%)] opacity-60" />
-      <div className="container-page relative py-12 lg:py-16">
+    <section data-surface="dark" className="relative pt-(--header-height)">
+      <div aria-hidden="true" className="brand-glow pointer-events-none absolute top-0 left-0 size-[48rem] -translate-x-1/3 -translate-y-1/4 opacity-40" />
+      <div className="container-page relative py-10 lg:py-14">
         <Rise>
-          <nav aria-label="Breadcrumb" className="mb-10 font-mono text-xs tracking-widest text-muted uppercase">
+          <nav aria-label="Breadcrumb" className="mb-8 font-mono text-xs tracking-widest text-muted uppercase">
             <ol className="flex flex-wrap items-center gap-2">
               {crumbs.map((crumb) => (
                 <li key={crumb.href} className="flex items-center gap-2">
@@ -34,27 +40,43 @@ export function ProductHero({ product }: { product: Product }) {
           </nav>
         </Rise>
 
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <Rise index={1} className="relative mx-auto w-full max-w-md lg:sticky lg:top-28 lg:self-start">
-            <span aria-hidden="true" className="absolute -inset-3 rounded-card border border-dashed border-accent" />
-            <SiteImage image={product.image} sizes="(min-width: 1024px) 34vw, 90vw" eager className="rounded-card" />
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          <Rise index={1} className="lg:sticky lg:top-24">
+            <ProductGallery images={gallery} label={productsLabels.galleryLabel} sampleLabel={productsLabels.sampleLabel} />
           </Rise>
 
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col items-start gap-5">
+          <div className="flex flex-col gap-7">
+            <div className="flex flex-col items-start gap-4">
               <Rise index={1}>
                 <Eyebrow>{product.category}</Eyebrow>
               </Rise>
               <Rise index={2} solid>
-                <h1 className="text-[clamp(2.4rem,5vw,4.5rem)] leading-none font-semibold tracking-[-0.03em]">{product.name}</h1>
+                <h1 className="text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.02] font-semibold tracking-[-0.03em]">{product.name}</h1>
               </Rise>
               <Rise index={3}>
-                <p className="rounded-control border border-line px-4 py-1.5 font-mono text-xs tracking-widest text-accent-text uppercase">
-                  {product.tagline}
+                <p className="flex flex-wrap items-baseline gap-3">
+                  <span className="text-sm text-muted">{productsLabels.fromLabel}</span>
+                  <span className="font-display text-3xl font-semibold text-strong">{formatPrice(product.price, catalog.currency)}</span>
+                  {product.compareAt ? (
+                    <s className="text-muted">
+                      <span className="sr-only">Previously </span>
+                      {formatPrice(product.compareAt, catalog.currency)}
+                    </s>
+                  ) : null}
                 </p>
               </Rise>
-              <Rise index={4} solid>
-                <p className="max-w-2xl text-lg text-ink">{product.summary}</p>
+              <Rise index={3} solid>
+                <p className="max-w-xl text-lg text-ink">{product.summary}</p>
+              </Rise>
+              <Rise index={4}>
+                <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink">
+                  {[product.tagline, ...productsLabels.highlights].map((highlight) => (
+                    <li key={highlight} className="flex items-center gap-2">
+                      <Icon name="check" size={15} className="text-accent-text" />
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
               </Rise>
             </div>
             <Rise index={5}>
@@ -63,7 +85,7 @@ export function ProductHero({ product }: { product: Product }) {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="stitch-x w-full text-accent opacity-60" />
+      <div aria-hidden="true" className="stitch-x w-full text-accent opacity-40" />
     </section>
   );
 }

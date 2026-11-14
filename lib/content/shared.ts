@@ -296,6 +296,7 @@ export const quoteLabels: QuoteLabels = {
   priceLabel: "Online price",
   quantityLabel: "Quantity",
   priceNote: "Rush jobs and bulk orders are quoted individually. Quotations are always free.",
+  chooseAll: "Choose an option in each group to continue",
   artworkNote:
     "Have your artwork ready: .jpg, .gif, .bmp, .tif, .ai or .eps. Attach it to the email, or send it when we reply.",
   notesLabel: "Anything else we should know?",
