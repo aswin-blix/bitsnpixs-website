@@ -7,7 +7,7 @@ export function QuoteSection({ block }: { block: QuoteBlock }) {
   return (
     <Section surface={block.surface}>
       <SectionHeading eyebrow={block.eyebrow} title={block.title} lead={block.lead} />
-      <QuoteBuilder config={block.config} labels={block.labels} />
+      <QuoteBuilder labels={block.labels} />
     </Section>
   );
 }

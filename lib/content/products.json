@@ -1,0 +1,133 @@
+{
+  "currency": "USD",
+  "optionGroups": [
+    {
+      "id": "format",
+      "label": "Format",
+      "options": [{ "label": "Flat Embroidery" }, { "label": "3D Puff" }, { "label": "Partial 3D" }]
+    },
+    {
+      "id": "size",
+      "label": "Size",
+      "options": [
+        { "label": "Upto 4 inch", "extra": 0, "hint": "Small logos, chest placements" },
+        { "label": "Upto 8 inch", "extra": 10, "hint": "Medium designs, back logos" },
+        { "label": "Upto 12 inch", "extra": 20, "hint": "Large back designs, jackets" },
+        { "label": "Upto 16 inch", "extra": 30, "hint": "Extra-large layouts" }
+      ]
+    },
+    {
+      "id": "fileFormat",
+      "label": "File format",
+      "options": [{ "label": "DST" }, { "label": "PES" }, { "label": "EMB" }, { "label": "EXP" }, { "label": "JEF" }, { "label": "Other" }]
+    },
+    {
+      "id": "vectorFormat",
+      "label": "File format",
+      "options": [{ "label": "AI" }, { "label": "CDR" }, { "label": "PDF" }, { "label": "EPS" }, { "label": "Other" }]
+    }
+  ],
+  "products": [
+    {
+      "slug": "standard-embroidery",
+      "name": "Standard Embroidery",
+      "category": "Digitizing",
+      "price": 9,
+      "compareAt": 10,
+      "tagline": "Quick 2 to 24 hr turnaround and free revisions",
+      "summary": "Standard embroidery digitizing for logos, text and intricate designs, with clean lines, smooth curves and flawless detailing on any fabric.",
+      "description": [
+        "Every stitch is carefully planned to reflect your original artwork with unmatched accuracy. Our digitized files ensure consistent, professional stitching for a truly polished finish.",
+        "Our digitized files are engineered to run seamlessly on all major embroidery machines. This minimizes thread breaks and reduces machine downtime, ensuring faster and more efficient production.",
+        "We carefully optimize stitch counts without compromising design quality, and whether it is a single piece or a bulk order, our digitizing ensures uniform stitching across all your garments and products."
+      ],
+      "includes": [
+        "Digitized file by email, in your preferred format",
+        "All popular file formats, ready for any machine",
+        "Test run on our machines before delivery",
+        "Quality check by our QA team",
+        "100% free revisions",
+        "Secure design backup for reuse"
+      ],
+      "specs": [
+        { "label": "Recommended spacing, flat embroidery", "value": "0.30 to 0.45" },
+        { "label": "Recommended spacing, 3D puff", "value": "0.18 to 0.22" }
+      ],
+      "groupIds": ["format", "size", "fileFormat", "turnaround"],
+      "formats": "embroidery",
+      "image": "product-standard-embroidery"
+    },
+    {
+      "slug": "coloreel-embroidery",
+      "name": "Coloreel Embroidery",
+      "category": "Digitizing",
+      "price": 18,
+      "compareAt": 20,
+      "tagline": "Quick 2 to 24 hr turnaround and free revisions",
+      "summary": "Bring your designs to life with vibrant, full-color digitized embroidery files that capture every shade, gradient and detail.",
+      "description": [
+        "Our digitized files ensure flawless stitch placement and consistency. Each design is optimized for precision, giving your embroidery a high-quality, polished and professional finish every time.",
+        "Easily combine multiple design elements in a single digitized file. Our files allow smooth execution of complex, colorful designs without losing clarity or detail.",
+        "Our embroidery process allows for rich blends and smooth gradients, giving even the most detailed artwork depth, clarity and strong visual impact."
+      ],
+      "includes": [
+        "Digitized file by email, in your preferred format",
+        "All popular file formats, ready for any machine",
+        "Test run on our machines before delivery",
+        "Quality check by our QA team",
+        "100% free revisions",
+        "Secure design backup for reuse"
+      ],
+      "specs": [{ "label": "Recommended spacing, flat embroidery", "value": "0.30 to 0.45" }],
+      "groupIds": ["size", "turnaround"],
+      "formats": "embroidery",
+      "image": "product-coloreel-embroidery"
+    },
+    {
+      "slug": "vector-conversion-simple",
+      "name": "Vector Conversion (Simple)",
+      "category": "Vector Conversion",
+      "price": 9,
+      "compareAt": 10,
+      "tagline": "Quick 2 to 24 hr turnaround and free revisions",
+      "summary": "Quality raster to vector art conversion for simple artwork, such as a simple logo, ready to print on any product without losing quality.",
+      "description": [
+        "Our designers convert the images you send, mostly raster, to vector format so they can be printed on any product without losing quality.",
+        "Our group has numerous experts, so orders are processed rapidly, with our standard 24 hours turnaround process."
+      ],
+      "includes": [
+        "Vector file by email, in your chosen format",
+        "Manual tracing by experienced designers",
+        "Internal quality check",
+        "Free edits, if not different from the original order"
+      ],
+      "specs": [],
+      "groupIds": ["vectorFormat", "turnaround"],
+      "formats": "vector",
+      "image": "product-vector-conversion-simple"
+    },
+    {
+      "slug": "vector-conversion-complex",
+      "name": "Vector Conversion (Complex)",
+      "category": "Vector Conversion",
+      "price": 18,
+      "compareAt": 20,
+      "tagline": "Quick 2 to 24 hr turnaround and free revisions",
+      "summary": "Raster to vector art conversion for intricate artwork. The rate may vary depending on the intricacies of the design.",
+      "description": [
+        "Our designers convert the images you send, mostly raster, to vector format so they can be printed on any product without losing quality.",
+        "You can ask for a quotation before placing an order, and our group of experts processes orders rapidly, with our standard 24 hours turnaround process."
+      ],
+      "includes": [
+        "Vector file by email, in your chosen format",
+        "Manual tracing by experienced designers",
+        "Internal quality check",
+        "Free edits, if not different from the original order"
+      ],
+      "specs": [],
+      "groupIds": ["vectorFormat", "turnaround"],
+      "formats": "vector",
+      "image": "product-vector-conversion-complex"
+    }
+  ]
+}

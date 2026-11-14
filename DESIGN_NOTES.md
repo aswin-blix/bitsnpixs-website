@@ -45,7 +45,8 @@ All of this lives in `app/styles/tokens.css`.
 | `/career` | Career | "Apply" goes to Contact (the old /jobs page lists no openings) |
 | `/contact-us` | Contact Us | 4 locations + form |
 | `/blog` | Blogs (footer link) | index of the 12 posts, linking to the existing articles |
-| `/shop` | Shop | pricing page for the 4 products, linking to the existing checkout |
+| `/shop` | Shop | product grid from `products.json` |
+| `/shop/<slug>` | Shop product pages | product details with a configurator; orders are sent as quote requests |
 | `/stitch-lab` | new | live digitizer playground |
 | `/file-formats` | new | machine and format finder, accepted artwork types |
 | `/get-a-quote` | new | three-step quote builder |
@@ -83,7 +84,8 @@ machine support, turnaround promises, proof points) but drawn in its own languag
 | Home | Pinned "how we do it" chapter | The 5 ordering steps |
 | Home, Embroidery, File Formats | Machine and format finder: pick a machine brand, matching formats light up | The format list |
 | Home | Worldwide: dotted map with stitched arcs, live market clocks, "order now, ready by" in the visitor's time zone | Markets, 24/7 support, 24 h and 2 to 12 h turnaround |
-| Get a Quote | Three-step quote builder with a live brief | Services, sizes, embroidery types, published prices |
+| Get a Quote | Three-step quote builder with a live brief | Products, sizes, embroidery types, published prices |
+| Product pages | Configurator: options, quantity and a live price, then the order goes out as a quote request | The shop catalog |
 | Portfolio | Category filter with layout animation; sliders sweep open on first view | Before / after pairs |
 | Coloreel | Horizontal pinned chapter; the thread shifts through the spectrum | The 8 Coloreel steps |
 | Software | Pinned method chapter | The 7 "How do we work" points |

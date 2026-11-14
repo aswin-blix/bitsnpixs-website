@@ -5,6 +5,7 @@ import {
   digitizerContent,
   embroideryFormatsBlock,
   globalBlock,
+  orderStepsBlock,
   trustFacts,
   whyBitsNPixsBlock,
 } from "../shared";
@@ -51,37 +52,7 @@ export const homePage: PageContent = {
       lead: "BitsNPixs is the reliable and professional embroidery digitizing service provider since 2011. When it comes to embroidery digitizing, we stand on top using the most advanced techniques.",
       serviceIds: ["embroidery", "vector", "coloreel", "software"],
     },
-    {
-      type: "story",
-      mode: "stack",
-      thread: "brand",
-      surface: "dark",
-      eyebrow: "How we do it",
-      title: "Steps to follow for placing the order.",
-      action: { label: "Shop Now", href: routes.shop },
-      steps: [
-        {
-          title: "Sign up & share your design",
-          body: "Sign up, fill in your embroidery requirements, upload your design at checkout, and make a quick, secure payment to get your digitizing journey started seamlessly.",
-        },
-        {
-          title: "We digitize your artwork",
-          body: "Once we receive your request, our expert team carefully analyzes your artwork and digitizes it according to your embroidery specifications. We ensure precision at every stage to eliminate thread breakage during production.",
-        },
-        {
-          title: "Tested for perfection",
-          body: "After digitizing, we run your design on our machines to ensure smooth stitching with zero thread breakage. This extra step saves you time and guarantees flawless results before delivery.",
-        },
-        {
-          title: "Quality check",
-          body: "Our quality assurance team thoroughly reviews the digitized file to ensure it meets your exact requirements. Only after it passes our strict quality standards is it approved for delivery.",
-        },
-        {
-          title: "Order delivery",
-          body: "Once the quality check is complete, we'll deliver the final digitized files straight to your inbox in your preferred format. Plus, we offer 100% free revisions to make any adjustments you need.",
-        },
-      ],
-    },
+    orderStepsBlock,
     embroideryFormatsBlock,
     {
       type: "portfolio",

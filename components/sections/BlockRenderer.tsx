@@ -9,7 +9,7 @@ import { GlobalSection } from "./GlobalSection";
 import { MarqueeSection } from "./MarqueeSection";
 import { PortfolioSection } from "./PortfolioSection";
 import { PostsSection } from "./PostsSection";
-import { PricingSection } from "./PricingSection";
+import { ProductsSection } from "./ProductsSection";
 import { ProseSection } from "./ProseSection";
 import { QuoteSection } from "./QuoteSection";
 import { ServicesSection } from "./ServicesSection";
@@ -44,7 +44,7 @@ const registry: { [T in BlockType]: SectionComponent<T> } = {
   turnaround: TurnaroundSection,
   faq: FaqSection,
   contact: ContactSection,
-  pricing: PricingSection,
+  products: ProductsSection,
   posts: PostsSection,
   stitchLab: StitchLabSection,
   quote: QuoteSection,

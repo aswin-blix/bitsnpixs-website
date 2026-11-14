@@ -3,7 +3,7 @@ import {
   digitizerContent,
   digitizingFaqBlock,
   embroideryFormatsBlock,
-  turnaroundOptions,
+  quoteLabels,
   vectorFormats,
   whyBitsNPixsBlock,
 } from "../shared";
@@ -109,58 +109,7 @@ export const quotePage: PageContent = {
     lead: "You will receive the price estimate and stitch count within 2 to 24 hours after requesting a quote.",
   },
   blocks: [
-    {
-      type: "quote",
-      config: {
-        services: [
-          {
-            id: "embroidery",
-            label: "Embroidery Digitizing",
-            from: "$9.00",
-            groupIds: ["placement", "size", "style", "format", "turnaround"],
-          },
-          {
-            id: "coloreel",
-            label: "Coloreel Embroidery Digitizing",
-            from: "$18.00",
-            groupIds: ["placement", "size", "turnaround"],
-          },
-          {
-            id: "vector",
-            label: "Vector Artwork Conversion",
-            from: "$9.00",
-            groupIds: ["complexity", "vectorFormat", "turnaround"],
-            fromBy: { groupId: "complexity", prices: { Simple: "$9.00", Complex: "$18.00" } },
-          },
-        ],
-        groups: [
-          { id: "placement", label: "Placement", options: ["Left chest", "Cap", "Jacket back", "Patch", "Other"] },
-          { id: "size", label: "Size", options: ["Upto 4 inch", "Upto 8 inch", "Upto 12 inch", "Upto 16 inch"] },
-          { id: "style", label: "Embroidery type", options: ["Flat Embroidery", "3D Puff", "Partial 3D"] },
-          { id: "format", label: "File format", options: ["DST", "PES", "EMB", "EXP", "JEF", "Other"] },
-          { id: "complexity", label: "Artwork", options: ["Simple", "Complex"] },
-          { id: "vectorFormat", label: "File format", options: ["AI", "CDR", "PDF", "EPS", "Other"] },
-          { id: "turnaround", label: "Turnaround", options: turnaroundOptions.map((option) => `${option.label} (${option.time})`) },
-        ],
-      },
-      labels: {
-        steps: ["Service", "Design", "Your details"],
-        serviceTitle: "What do you need?",
-        optionsTitle: "Tell us about the design.",
-        detailsTitle: "Where should we send the quote?",
-        summaryTitle: "Your brief",
-        summaryEmpty: "Pick a service to start your brief.",
-        fromLabel: "Online price from",
-        priceNote:
-          "Final pricing is based on the order quantity and stitch count. Quotations are always free.",
-        artworkNote:
-          "Have your artwork ready: .jpg, .gif, .bmp, .tif, .ai or .eps. Attach it to the email, or send it when we reply.",
-        notesLabel: "Anything else we should know?",
-        next: "Continue",
-        back: "Back",
-        submit: "Request My Free Quote",
-      },
-    },
+    { type: "quote", labels: quoteLabels },
     whyBitsNPixsBlock,
   ],
 };

@@ -44,7 +44,7 @@ components/
   three/                The hero's pixel-to-stitch field
 lib/
   content.ts            Single entry point for ALL site content (typed)
-  content/              ...split by domain: site, services, portfolio, pages/*
+  content/              ...split by domain: site, services, portfolio, products.json, pages/*
   stitch/               Stitch simulation behind the live digitizer (pure, tested)
   motion.ts             Framer Motion timings and variants
   hooks/                useGsap, useMagnetic, useRevealPhase, useNow, media/motion profile ...
@@ -129,12 +129,33 @@ Lighthouse on the production build (images disabled, headless Chrome): desktop
 pages audited, with accessibility, best practices and SEO at 100. Re-measure with real
 images on your hosting.
 
+## Shop and product pages
+
+The shop is frontend-only: there is no cart, checkout or payment. A visitor configures a
+product and **sends the order as a quote request**, which goes through the same delivery
+as the contact form (`NEXT_PUBLIC_CONTACT_ENDPOINT`, or the visitor's email app).
+
+- **Data:** `lib/content/products.json` holds the products, their prices and the option
+  groups (format, size and so on, with any price extras). `lib/content/products.ts` is the
+  only file that reads it, so the JSON can later be replaced by an API or CMS response of
+  the same shape.
+- **Pages:** `/shop` lists the catalog; every product gets `/shop/<slug>` from
+  `app/shop/[slug]/page.tsx`, with metadata, a sitemap entry and Product structured data.
+- **Add a product:** add an entry to `products.json` (and its image to
+  `image-manifest.json`). The shop grid, product page, quote builder and sitemap pick it up.
+- **Price:** (base price + extras of the chosen options) x quantity, computed in
+  `lib/quote.ts` (tested). Rush turnaround has no published surcharge, so it adds nothing
+  to the shown price; the note under the price says rush and bulk are quoted individually.
+- **Shared ordering UI:** the product page and `/get-a-quote` use the same hook
+  (`useQuoteRequest`) and parts (`components/sections/QuoteParts.tsx`).
+
 ## Interactive tools
 
 | Tool | Where | Notes |
 |---|---|---|
 | Live digitizer | Home hero, `/stitch-lab` | `components/sections/StitchPad.tsx` draws on a canvas; stitch geometry is in `lib/stitch/engine.ts`. It is a visual simulation, and says so on the page. Thread colours are listed in `lib/stitch/threads.ts` |
-| Quote builder | `/get-a-quote` | Services, option groups and published prices are configured in `lib/content/pages/tools.ts`; the brief is sent through `lib/contact.ts` |
+| Quote builder | `/get-a-quote` | Starts from the same catalog as the shop (`lib/content/products.json`); the brief is sent through `lib/contact.ts` |
+| Product configurator | `/shop/<slug>` | Options, quantity and live price, then contact details; sends the order as a quote request |
 | Machine and format finder | Home, Embroidery, `/file-formats` | Brand-to-format table is `machineFormats` in `lib/content/shared.ts` |
 | Worldwide map and clocks | Home | Markets are in `lib/content/markets.json`; run `npm run map:build` after editing |
 
@@ -151,8 +172,10 @@ still taken from the old site.
   Embird format lists), not a claim from your site. `T09` is not assigned to a brand.
 - **Worldwide:** "Order now, ready by", "Local time" and the time-zone note. One
   representative city is shown for each market you name (New York, Toronto, London, Sydney).
-- **Quote builder:** step names, questions and button labels. "Online price from" uses
-  your shop prices; "Patch" and "Other" were added as placement choices.
+- **Quote builder and product pages:** step names, questions and button labels
+  ("Request a Quote", "Send My Quote Request"), the price note about rush and bulk
+  orders, and the "File format" choice with an "Other" option. Product names, prices,
+  size extras, size guidance, spacing values and "what you get" lists are from your shop.
 - **Trust band and audience band:** assembled from figures already on your site
   (since 2011, 4.7/5, 5,000+ clients, free quotes in 2 to 24 hours, free edits within
   30 days). "Embroidery shops", "Apparel decorators" and "Distributors" come from your
@@ -169,7 +192,8 @@ Nothing was invented. These items were not available on the old site, or need a 
 | Images | Loaded from the live site | `npm run assets:pull`, then `NEXT_PUBLIC_ASSET_SOURCE=local` |
 | Social profile URLs | Old-site redirect links (`/website/social/...`) | Put the real profile URLs in `site.social` |
 | Contact form delivery | Opens the email app | Set `NEXT_PUBLIC_CONTACT_ENDPOINT` |
-| Shop checkout, cart, sign-in | Link to the existing Odoo site via `LEGACY_BASE` in `lib/content/site.ts` | Point `LEGACY_BASE` at Odoo's new address after the domain switch |
+| Shop checkout and cart | Replaced: products are ordered as quote requests from their own pages | Add payment later if wanted; the catalog JSON already has the prices |
+| Sign-in and blog articles | Link to the existing Odoo site via `LEGACY_BASE` in `lib/content/site.ts` | Point `LEGACY_BASE` at Odoo's new address after the domain switch |
 | Blog articles | `/blog` lists the 12 posts and links to the existing articles; bodies and cover images are not migrated | Migrate posts or keep the links |
 | Live chat | Not included, but one FAQ answer still mentions it | Embed the chat widget or edit the answer in `lib/content/shared.ts` |
 | Google Tag Manager (`GTM-5Z6NRWC`) | Not added | Add with `@next/third-parties` if wanted |
@@ -181,6 +205,11 @@ Nothing was invented. These items were not available on the old site, or need a 
 Content decisions made during the rebuild:
 
 - The header phone number `+1 555-555-5556` was a placeholder and is dropped.
+- Coloreel Embroidery lists two different sets of size extras on the old shop: the option
+  selector (+$10 / +$20 / +$30 for 8 / 12 / 16 inch) and a table in the description
+  (+$12 / +$15 / +$25 for 8 / 10 / 18 inch). The selector values are used. Please confirm.
+- The two vector products have no description on the old shop; theirs is taken from the
+  vector service page.
 - The home stats keep "13+ Years in Business"; body copy that says "10+ years" is kept as written. Pick one figure.
 - "One of the biggest paymasters in the country" was removed from the Experienced Team blurb.
 - Coloreel FAQ: the question whose answer did not match it was paired with the right
@@ -191,7 +220,8 @@ Content decisions made during the rebuild:
 - Career moved from the header to the footer to make room for Stitch Lab; Sign in is in the footer.
 
 Old URLs that need redirects at launch: `/embroidery-digitizing-portfolio` → `/portfolio`,
-`/jobs` → `/career`, and `/shop/cart`, `/web/login`, `/blog/*` → the Odoo address.
+`/jobs` → `/career`, the old product URLs (for example `/shop/standard-embroidery-3` →
+`/shop/standard-embroidery`), and `/web/login`, `/blog/*` → the Odoo address.
 
 ## Fonts
 

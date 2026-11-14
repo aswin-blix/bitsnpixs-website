@@ -1,5 +1,5 @@
 import { image } from "../images";
-import { digitizeCtaBlock } from "../shared";
+import { digitizeCtaBlock, orderStepsBlock } from "../shared";
 import { legacyUrl, routes } from "../site";
 import type { PageContent } from "../types";
 
@@ -204,48 +204,11 @@ export const shopPage: PageContent = {
     eyebrow: "Shop",
     title: "All products",
     breadcrumb: "Shop",
-    lead: "Sign up, fill in your embroidery requirements, upload your design at checkout, and make a quick, secure payment to get your digitizing journey started.",
+    lead: "Choose a product, set your options and request your order as a quote. Quotations are always free.",
   },
   blocks: [
-    {
-      type: "pricing",
-      orderLabel: "Order",
-      optionsNote: "Options",
-      products: [
-        {
-          name: "Standard Embroidery",
-          category: "Digitizing",
-          price: "$9.00",
-          compareAt: "$10.00",
-          href: legacyUrl("/shop/standard-embroidery-3"),
-        },
-        {
-          name: "Coloreel Embroidery",
-          category: "Digitizing",
-          price: "$18.00",
-          compareAt: "$20.00",
-          href: legacyUrl("/shop/coloreel-embroidery-4"),
-        },
-        {
-          name: "Vector Conversion (Simple)",
-          category: "Vector Conversion",
-          price: "$9.00",
-          compareAt: "$10.00",
-          href: legacyUrl("/shop/vector-conversion-simple-5"),
-        },
-        {
-          name: "Vector Conversion (Complex)",
-          category: "Vector Conversion",
-          price: "$18.00",
-          compareAt: "$20.00",
-          href: legacyUrl("/shop/vector-conversion-complex-6"),
-        },
-      ],
-      optionGroups: [
-        { label: "Format", options: ["Flat Embroidery", "3D Puff", "Partial 3D"] },
-        { label: "Size", options: ["Upto 4 inch", "Upto 8 inch", "Upto 12 inch", "Upto 16 inch"] },
-      ],
-    },
+    { type: "products", eyebrow: "Catalog", title: "Digitizing and vector conversion", actionLabel: "View Details" },
+    orderStepsBlock,
     digitizeCtaBlock,
   ],
 };

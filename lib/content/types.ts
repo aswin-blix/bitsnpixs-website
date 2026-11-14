@@ -100,17 +100,30 @@ export interface Studio {
   lng: number;
 }
 
-export interface Product {
-  name: string;
-  category: string;
-  price: string;
-  compareAt?: string;
-  href: string;
+export interface ProductSpec {
+  label: string;
+  value: string;
 }
 
-export interface OptionGroup {
-  label: string;
-  options: string[];
+/** A shop item. Data lives in lib/content/products.json. */
+export interface Product {
+  slug: string;
+  name: string;
+  category: string;
+  /** Base price in the catalog currency, before option extras. */
+  price: number;
+  compareAt?: number;
+  tagline: string;
+  summary: string;
+  description: string[];
+  includes: string[];
+  specs: ProductSpec[];
+  /** Option groups asked when ordering, in order. */
+  groupIds: string[];
+  /** Which format list applies to this product. */
+  formats: "embroidery" | "vector";
+  image: ImageRef;
+  path: string;
 }
 
 export interface Post {
@@ -237,46 +250,48 @@ export interface PortfolioBlock extends BlockBase {
   action?: LinkRef;
 }
 
+export interface QuoteOption {
+  label: string;
+  /** Added to the product's base price when chosen. */
+  extra?: number;
+  hint?: string;
+}
+
 export interface QuoteGroup {
   id: string;
   label: string;
-  options: string[];
+  options: QuoteOption[];
 }
 
-export interface QuoteService {
-  id: string;
-  label: string;
-  /** Published online price for this service. */
-  from: string;
-  /** Option groups asked for this service, in order. */
-  groupIds: string[];
-  /** When the published price depends on one of the choices. */
-  fromBy?: { groupId: string; prices: Record<string, string> };
-}
-
-export interface QuoteConfig {
-  services: QuoteService[];
+/** Everything the quote builder and product pages order from. */
+export interface Catalog {
+  currency: string;
+  products: Product[];
   groups: QuoteGroup[];
+}
+
+/** Wording shared by the quote builder and the product configurator. */
+export interface QuoteLabels {
+  steps: [product: string, options: string, details: string];
+  productTitle: string;
+  optionsTitle: string;
+  detailsTitle: string;
+  summaryTitle: string;
+  summaryEmpty: string;
+  priceLabel: string;
+  quantityLabel: string;
+  priceNote: string;
+  artworkNote: string;
+  notesLabel: string;
+  next: string;
+  back: string;
+  request: string;
+  submit: string;
 }
 
 export interface QuoteBlock extends BlockBase {
   type: "quote";
-  config: QuoteConfig;
-  labels: {
-    steps: [service: string, options: string, details: string];
-    serviceTitle: string;
-    optionsTitle: string;
-    detailsTitle: string;
-    summaryTitle: string;
-    summaryEmpty: string;
-    fromLabel: string;
-    priceNote: string;
-    artworkNote: string;
-    notesLabel: string;
-    next: string;
-    back: string;
-    submit: string;
-  };
+  labels: QuoteLabels;
 }
 
 export interface TestimonialsBlock extends BlockBase {
@@ -329,12 +344,11 @@ export interface ContactBlock extends BlockBase {
   image?: ImageRef;
 }
 
-export interface PricingBlock extends BlockBase {
-  type: "pricing";
-  products: Product[];
-  optionGroups: OptionGroup[];
-  optionsNote: string;
-  orderLabel: string;
+export interface ProductsBlock extends BlockBase {
+  type: "products";
+  /** Leave one product out (used for "more products" on a product page). */
+  excludeSlug?: string;
+  actionLabel: string;
 }
 
 export interface PostsBlock extends BlockBase {
@@ -368,7 +382,7 @@ export type Block =
   | TurnaroundBlock
   | FaqBlock
   | ContactBlock
-  | PricingBlock
+  | ProductsBlock
   | PostsBlock
   | StitchLabBlock
   | QuoteBlock

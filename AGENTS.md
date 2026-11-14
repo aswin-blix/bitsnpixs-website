@@ -21,6 +21,9 @@ Read `README.md` (structure, theming, how pages are built) and `DESIGN_NOTES.md`
 - **Layers.** `components/ui` (primitives) → `components/sections` (compose primitives,
   take a content block as props) → `app/*` (routes only render `PageView`).
   New page sections are registered in `components/sections/BlockRenderer.tsx`.
+- **Catalog.** Products, prices and option groups live in `lib/content/products.json`,
+  read only through `lib/content/products.ts`. Pricing and ordering logic is in
+  `lib/quote.ts`; the shop has no cart or payment, orders are sent as quote requests.
 - **Theme by variables.** Colours, radii, spacing and motion tokens live in
   `app/styles/tokens.css`. Components use the semantic utilities (`bg-surface`,
   `text-ink`, `text-accent-text` ...), never raw hex values.

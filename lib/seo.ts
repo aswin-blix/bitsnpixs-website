@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site, studios, type PageMeta } from "@/lib/content";
+import { catalog, site, studios, type PageMeta, type Product } from "@/lib/content";
 
 /** Site-wide defaults, applied once in the root layout. */
 export const rootMetadata: Metadata = {
@@ -31,6 +31,27 @@ export function organizationJsonLd(): Record<string, unknown> {
       contactType: "customer support",
       areaServed: phone.region,
     })),
+  };
+}
+
+/** schema.org Product data for a product details page. */
+export function productJsonLd(product: Product): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.summary,
+    category: product.category,
+    brand: { "@type": "Brand", name: site.name },
+    url: new URL(product.path, site.url).toString(),
+    ...(product.image.src ? { image: new URL(product.image.src, site.url).toString() } : {}),
+    offers: {
+      "@type": "Offer",
+      price: product.price.toFixed(2),
+      priceCurrency: catalog.currency,
+      availability: "https://schema.org/InStock",
+      url: new URL(product.path, site.url).toString(),
+    },
   };
 }
 

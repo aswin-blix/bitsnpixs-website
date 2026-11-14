@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   allPages,
+  allPaths,
+  products,
   imageIds,
   navigation,
   portfolioCategories,
@@ -58,7 +60,12 @@ describe("links", () => {
   it("points every internal link at a page that exists", () => {
     const internal = hrefs.filter((href) => !isExternalHref(href));
     expect(internal.length).toBeGreaterThan(10);
-    for (const href of internal) expect(pagePaths, `broken internal link: ${href}`).toContain(href);
+    for (const href of internal) expect(allPaths, `broken internal link: ${href}`).toContain(href);
+  });
+
+  it("gives every product its own path under the shop", () => {
+    expect(new Set(allPaths).size).toBe(allPaths.length);
+    for (const product of products) expect(product.path).toBe(`${routes.shop}/${product.slug}`);
   });
 
   it("uses absolute https URLs for external links", () => {

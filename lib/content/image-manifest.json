@@ -271,5 +271,33 @@
     "width": 578,
     "height": 578,
     "alt": "Vector conversion sample 3: vector result"
+  },
+  "product-standard-embroidery": {
+    "remote": "product.template/3/image_1024",
+    "file": "product-standard-embroidery.webp",
+    "width": 700,
+    "height": 1000,
+    "alt": "Standard embroidery digitizing sample"
+  },
+  "product-coloreel-embroidery": {
+    "remote": "product.template/4/image_1024",
+    "file": "product-coloreel-embroidery.webp",
+    "width": 700,
+    "height": 1000,
+    "alt": "Coloreel embroidery digitizing sample"
+  },
+  "product-vector-conversion-simple": {
+    "remote": "product.template/5/image_1024",
+    "file": "product-vector-conversion-simple.webp",
+    "width": 673,
+    "height": 962,
+    "alt": "Simple vector conversion sample"
+  },
+  "product-vector-conversion-complex": {
+    "remote": "product.template/6/image_1024",
+    "file": "product-vector-conversion-complex.webp",
+    "width": 673,
+    "height": 962,
+    "alt": "Complex vector conversion sample"
   }
 }

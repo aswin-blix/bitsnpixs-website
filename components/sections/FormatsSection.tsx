@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChoiceChip } from "@/components/ui/ChoiceChip";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -17,12 +18,6 @@ export function FormatsSection({ block }: { block: FormatsBlock }) {
   const machine = finder?.machines.find((entry) => entry.brand === brand);
   const matches = (format: string) => !machine || machine.formats.includes(format);
 
-  const chipClass = (active: boolean) =>
-    cn(
-      "rounded-control border px-4 py-2 text-sm font-semibold transition-colors duration-300",
-      active ? "border-accent bg-accent text-on-accent" : "border-line bg-raised text-strong hover:border-accent",
-    );
-
   return (
     <Section surface={block.surface}>
       <SectionHeading eyebrow={block.eyebrow} title={block.title} lead={block.lead} />
@@ -31,19 +26,13 @@ export function FormatsSection({ block }: { block: FormatsBlock }) {
         <div className="mb-10 flex flex-col gap-4">
           <p className="font-mono text-xs tracking-[0.18em] text-muted uppercase">{finder.prompt}</p>
           <div role="group" aria-label={finder.prompt} className="flex flex-wrap gap-2.5">
-            <button type="button" aria-pressed={brand === null} onClick={() => setBrand(null)} className={chipClass(brand === null)}>
+            <ChoiceChip size="sm" selected={brand === null} onSelect={() => setBrand(null)}>
               {finder.allLabel}
-            </button>
+            </ChoiceChip>
             {finder.machines.map((entry) => (
-              <button
-                key={entry.brand}
-                type="button"
-                aria-pressed={entry.brand === brand}
-                onClick={() => setBrand(entry.brand)}
-                className={chipClass(entry.brand === brand)}
-              >
+              <ChoiceChip key={entry.brand} size="sm" selected={entry.brand === brand} onSelect={() => setBrand(entry.brand)}>
                 {entry.brand}
-              </button>
+              </ChoiceChip>
             ))}
           </div>
           <p aria-live="polite" className="min-h-7 text-lg text-ink">

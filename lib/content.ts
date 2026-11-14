@@ -7,6 +7,7 @@ import { blogPage, careerPage, contactPage, portfolioPage, shopPage } from "./co
 import { homePage } from "./content/pages/home";
 import { servicePagesBySlug, softwarePage } from "./content/pages/services";
 import { formatsPage, quotePage, stitchLabPage } from "./content/pages/tools";
+import { products } from "./content/products";
 import type { PageContent } from "./content/types";
 
 export * from "./content/types";
@@ -14,6 +15,9 @@ export * from "./content/site";
 export * from "./content/images";
 export * from "./content/services";
 export * from "./content/portfolio";
+export * from "./content/products";
+export { productBlocks, productMeta, productsLabels } from "./content/pages/product";
+export { quoteLabels } from "./content/shared";
 export { servicePagesBySlug, type ServiceSlug } from "./content/pages/services";
 
 export const pages = {
@@ -30,5 +34,8 @@ export const pages = {
   quote: quotePage,
 } satisfies Record<string, PageContent>;
 
-/** Every routable page, used by the sitemap and the content tests. */
+/** Every content-block page, used by the content tests. */
 export const allPages: PageContent[] = [...Object.values(pages), ...Object.values(servicePagesBySlug)];
+
+/** Every routable path (block pages plus product pages), used by the sitemap and link tests. */
+export const allPaths: string[] = [...allPages.map((page) => page.meta.path), ...products.map((product) => product.path)];

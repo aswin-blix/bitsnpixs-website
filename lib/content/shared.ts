@@ -7,6 +7,8 @@ import type {
   GlobalBlock,
   MachineFormats,
   Market,
+  QuoteLabels,
+  StoryBlock,
   Faq,
   FaqBlock,
   FeaturesBlock,
@@ -249,6 +251,58 @@ export const coloreelFaqBlock: FaqBlock = {
         "You can reach our customer support team by emailing info@bitsnpixs.com, calling +91 808 670 0015, or using the live chat on our website. Our dedicated team is available 24/7 to assist with any inquiries or issues.",
     },
   ],
+};
+
+/** The five ordering steps, told as a pinned chapter on the home and product pages. */
+export const orderStepsBlock: StoryBlock = {
+  type: "story",
+  mode: "stack",
+  thread: "brand",
+  surface: "dark",
+  eyebrow: "How we do it",
+  title: "Steps to follow for placing the order.",
+  action: { label: "Shop Now", href: routes.shop },
+  steps: [
+    {
+      title: "Sign up & share your design",
+      body: "Sign up, fill in your embroidery requirements, upload your design at checkout, and make a quick, secure payment to get your digitizing journey started seamlessly.",
+    },
+    {
+      title: "We digitize your artwork",
+      body: "Once we receive your request, our expert team carefully analyzes your artwork and digitizes it according to your embroidery specifications. We ensure precision at every stage to eliminate thread breakage during production.",
+    },
+    {
+      title: "Tested for perfection",
+      body: "After digitizing, we run your design on our machines to ensure smooth stitching with zero thread breakage. This extra step saves you time and guarantees flawless results before delivery.",
+    },
+    {
+      title: "Quality check",
+      body: "Our quality assurance team thoroughly reviews the digitized file to ensure it meets your exact requirements. Only after it passes our strict quality standards is it approved for delivery.",
+    },
+    {
+      title: "Order delivery",
+      body: "Once the quality check is complete, we'll deliver the final digitized files straight to your inbox in your preferred format. Plus, we offer 100% free revisions to make any adjustments you need.",
+    },
+  ],
+};
+
+export const quoteLabels: QuoteLabels = {
+  steps: ["Product", "Design", "Your details"],
+  productTitle: "What do you need?",
+  optionsTitle: "Tell us about the design.",
+  detailsTitle: "Where should we send the quote?",
+  summaryTitle: "Your brief",
+  summaryEmpty: "Pick a product to start your brief.",
+  priceLabel: "Online price",
+  quantityLabel: "Quantity",
+  priceNote: "Rush jobs and bulk orders are quoted individually. Quotations are always free.",
+  artworkNote:
+    "Have your artwork ready: .jpg, .gif, .bmp, .tif, .ai or .eps. Attach it to the email, or send it when we reply.",
+  notesLabel: "Anything else we should know?",
+  next: "Continue",
+  back: "Back",
+  request: "Request a Quote",
+  submit: "Send My Quote Request",
 };
 
 export const digitizeCtaBlock: CtaBlock = {
